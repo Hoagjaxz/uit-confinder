@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>UIT ConFinder | Lịch hội nghị khoa học và kiến thức hội thảo</title>
+    <meta name="description" content="Hạn nộp bài của các hội nghị khoa học, ghi giờ AoE kèm giờ Việt Nam, cùng các bài viết kiến thức về hội thảo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;1,6..72,400;1,6..72,500&display=swap">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/conference.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3"/>
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/>
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"/>
+        </symbol>
+        <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+        </symbol>
+        <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"/>
+        </symbol>
+        <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+        </symbol>
+        <symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>
+        </symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/>
+            <path d="M12 9v4M12 17h.01"/>
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+        </symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18"/>
+        </symbol>
+        <symbol id="i-calplus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18M12 13v6M9 16h6"/>
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"/>
+        </symbol>
+        <symbol id="i-okc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m9 12 2 2 4-4"/>
+        </symbol>
+        <symbol id="i-xc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m15 9-6 6M9 9l6 6"/>
+        </symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+            <circle cx="12" cy="10" r="3"/>
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/>
+        </symbol>
+        <symbol id="i-nores" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3M8.5 8.5l5 5M13.5 8.5l-5 5"/>
+        </symbol>
+        <symbol id="i-dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/>
+        </symbol>
+        <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+        </symbol>
+        <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </symbol>
+        <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+        </symbol>
+    </defs>
+</svg>
+<header class="masthead"><div class="container masthead-in">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">C</span><span>UIT <em>ConFinder</em></span></a>
+    
+    <nav class="nav" aria-label="Điều hướng chính"><a href="lich-hoi-nghi.html">Lịch hội nghị</a><a href="blog.html">Bài viết</a></nav>
+</div></header>
+<main>
+<section class="lp-hero" aria-labelledby="lp-h1"><div class="container lp-hero-in">
+    <div class="lp-copy">
+        <p class="eyebrow">Lịch hội nghị khoa học</p>
+        <h1 id="lp-h1" class="rise"><em>Mọi hạn nộp bài</em> hội nghị, trong một trang.</h1>
+        <p class="lp-sub rise" style="--i:3">UIT ConFinder liệt kê hạn chót của các hội nghị khoa học, ghi giờ AoE kèm giờ Việt Nam và đếm ngược thời gian còn lại.</p>
+        <div class="lp-cta rise" style="--i:5"><a class="btn pri lg" href="lich-hoi-nghi.html">Xem lịch hội nghị</a><a class="btn lg" href="blog.html">Đọc bài viết</a></div>
+        <p class="lp-note rise" style="--i:6">Dữ liệu hội nghị trên trang này là dữ liệu mẫu.</p>
+    </div>
+    <div class="lp-art" aria-hidden="true">
+        <svg class="lp-dial" viewBox="0 0 400 400" fill="none" stroke="currentColor" aria-hidden="true">
+    <circle cx="200" cy="200" r="192" stroke-width="1.5"/><circle cx="200" cy="200" r="150" stroke-width="1" stroke-dasharray="2 7"/><circle cx="200" cy="200" r="96" stroke-width="1"/>
+    <line x1="200" y1="8" x2="200" y2="28" stroke-width="3" transform="rotate(0 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(15 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(30 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(45 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(60 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(75 200 200)"/><line x1="200" y1="8" x2="200" y2="28" stroke-width="3" transform="rotate(90 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(105 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(120 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(135 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(150 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(165 200 200)"/><line x1="200" y1="8" x2="200" y2="28" stroke-width="3" transform="rotate(180 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(195 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(210 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(225 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(240 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(255 200 200)"/><line x1="200" y1="8" x2="200" y2="28" stroke-width="3" transform="rotate(270 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(285 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(300 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(315 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(330 200 200)"/><line x1="200" y1="8" x2="200" y2="18" stroke-width="1.5" transform="rotate(345 200 200)"/>
+    <g class="hand-a"><line x1="200" y1="200" x2="200" y2="40" stroke="#b8892b" stroke-width="3" stroke-linecap="round"/><circle cx="200" cy="40" r="7" fill="#b8892b" stroke="none"/></g>
+    <circle cx="200" cy="200" r="7" fill="currentColor" stroke="none"/>
+</svg>
+        <div class="stamp"><span>AoE<b>UTC−12</b>→ GMT+7</span></div>
+        <div class="mini a"><div class="ub u-c"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-alert"/></svg><b>Gấp</b><i class="sep">·</i><span class="mono">Còn 2 ngày 04:12</span></div><h3>ICSE <span>2027</span></h3><p>IEEE/ACM International Conference on Software Engineering</p><div class="tm mono"><div>23:59 10/10/2026 AoE (UTC−12)</div><div class="cv">= 18:59 11/10/2026 (GMT+7)</div></div></div><div class="mini b"><div class="ub u-s"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-clock"/></svg><b>Trong tuần</b><i class="sep">·</i><span class="mono">Còn 5 ngày 11:30</span></div><h3>FSE <span>2027</span></h3><p>ACM International Conference on the Foundations of Software Engineering</p><div class="tm mono"><div>23:59 13/10/2026 AoE (UTC−12)</div><div class="cv">= 18:59 14/10/2026 (GMT+7)</div></div></div><div class="mini c"><div class="ub u-u"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-calendar"/></svg><b>Trong tháng</b><i class="sep">·</i><span class="mono">Còn 18 ngày</span></div><h3>ACL <span>2027</span></h3><p>Annual Meeting of the Association for Computational Linguistics</p><div class="tm mono"><div>23:59 26/10/2026 AoE (UTC−12)</div><div class="cv">= 18:59 27/10/2026 (GMT+7)</div></div></div>
+    </div>
+</div></section>
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>ICSE</span><span>FSE</span><span>ACL</span><span>ASE</span><span>ICLR</span><span>NeurIPS</span><span>ICSE</span><span>FSE</span><span>ACL</span><span>ASE</span><span>ICLR</span><span>NeurIPS</span></div></div>
+
+<section class="lp-sec" aria-label="Số liệu"><div class="container">
+    <div class="facts">
+        <div class="fact"><b>29</b><span>bài viết kiến thức về hội thảo</span></div>
+        <div class="fact"><b>5</b><span>mức khẩn cấp, mỗi mức có biểu tượng riêng</span></div>
+        <div class="fact"><b>2</b><span>múi giờ hiển thị trên mỗi hạn chót (AoE và GMT+7)</span></div>
+        <div class="fact"><b>6</b><span>nhóm lĩnh vực khoa học</span></div>
+    </div>
+</div></section>
+
+<section class="lp-sec" aria-labelledby="how-h"><div class="container">
+    <header><span class="eyebrow">Cách hoạt động</span><h2 id="how-h">Cách <em>sử dụng</em>.</h2></header>
+    <div class="steps">
+        <article class="step"><div class="pic"><span class="chip">Lĩnh vực: Kỹ thuật phần mềm</span><span class="badge">CORE A*</span></div><h3>Tìm đúng hội nghị</h3><p>Lọc theo lĩnh vực, rank CORE, rank CCF và hình thức tham dự để thu hẹp danh sách.</p></article>
+        <article class="step"><div class="pic"><span class="ub u-c"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-alert"/></svg><b>Gấp</b><i class="sep">·</i><span class="mono">Còn 2 ngày</span></span></div><h3>Biết hạn còn bao lâu</h3><p>Mỗi thẻ có đồng hồ đếm ngược, giờ AoE và giờ Việt Nam tương ứng, bạn không cần tự quy đổi múi giờ.</p></article>
+        <article class="step"><div class="pic"><span class="badge"><svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-calplus"/></svg>Lịch</span><span class="badge soft">.ics</span></div><h3>Thêm vào lịch cá nhân</h3><p>Đưa các mốc quan trọng vào Google Calendar hoặc tải file .ics để được nhắc việc.</p></article>
+    </div>
+</div></section>
+
+<section class="lp-sec" aria-labelledby="spec-h"><div class="container two">
+    <div><span class="eyebrow">Mức độ khẩn cấp</span><h2 id="spec-h">Năm mức <em>khẩn cấp</em>.</h2>
+        <p class="lp-sub" style="margin-top:14px;font-size:16px">Mỗi mức có biểu tượng, nhãn chữ và số đếm riêng, nên người khó phân biệt màu vẫn đọc được.</p></div>
+    <ol class="spec"><li class="d1"><span class="ub u-c"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-alert"/></svg><b>Gấp</b></span><span class="mono">dưới 3 ngày</span><span class="r">Thẻ viền đỏ, thời gian còn lại tính đến phút.</span></li><li class="d2"><span class="ub u-s"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-clock"/></svg><b>Trong tuần</b></span><span class="mono">dưới 7 ngày</span><span class="r">Hiển thị cả giờ và phút còn lại.</span></li><li class="d3"><span class="ub u-u"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-calendar"/></svg><b>Trong tháng</b></span><span class="mono">dưới 30 ngày</span><span class="r">Còn thời gian, nên bắt đầu lên kế hoạch.</span></li><li class="d4"><span class="ub u-o"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-okc"/></svg><b>Còn rộng</b></span><span class="mono">từ 30 ngày</span><span class="r">Chưa cần vội.</span></li><li class="d5"><span class="ub u-x"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-xc"/></svg><b>Đã hết hạn</b></span><span class="mono">đã qua</span><span class="r">Thẻ chuyển sang màu xám.</span></li></ol>
+</div></section>
+
+<section class="lp-sec" aria-labelledby="soon-h"><div class="container">
+    <header><span class="eyebrow">Sắp đến hạn</span><h2 id="soon-h">Hạn chót <em>gần nhất</em>.</h2><p>Dữ liệu mẫu, dùng để minh hoạ giao diện.</p></header>
+    <div class="lp-grid3">
+<article class="cd lc rise" style="--i:0">
+    <div class="ch"><h3><a href="hoi-nghi.html">ICSE <span>2027</span></a></h3><button type="button" class="iconbtn" aria-pressed="true" aria-label="Bỏ lưu hội nghị"><svg class="ic fill" width="20" height="20" aria-hidden="true"><use href="#i-star"/></svg></button></div>
+    <p class="nm">IEEE/ACM International Conference on Software Engineering</p>
+    <div class="ms"><svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-calendar"/></svg>Nộp toàn văn</div>
+    <span class="ub u-c"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-alert"/></svg><b>Gấp</b><i class="sep">·</i><span class="mono">Còn 2 ngày 04:12</span></span>
+    <div class="tm mono"><div>23:59 10/10/2026 AoE (UTC−12)</div><div class="cv">= 18:59 11/10/2026 (GMT+7)</div></div>
+    <div class="loc"><span class="t"><svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-pin"/></svg>Lisbon, Bồ Đào Nha</span><span class="badge fmt">Hybrid</span></div>
+    <div class="rk"><span class="badge">CORE A*</span><span class="badge">CCF A</span></div>
+    <div class="fl"><span class="chipbtn"><span class="chip">Kỹ thuật phần mềm</span></span></div>
+</article>
+<article class="cd ls rise" style="--i:1">
+    <div class="ch"><h3>FSE <span>2027</span></h3><button type="button" class="iconbtn" aria-pressed="false" aria-label="Lưu hội nghị"><svg class="ic" width="20" height="20" aria-hidden="true"><use href="#i-star"/></svg></button></div>
+    <p class="nm">ACM International Conference on the Foundations of Software Engineering</p>
+    <div class="ms"><svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-calendar"/></svg>Nộp toàn văn (đợt 2)</div>
+    <span class="ub u-s"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-clock"/></svg><b>Trong tuần</b><i class="sep">·</i><span class="mono">Còn 5 ngày 11:30</span></span>
+    <div class="tm mono"><div>23:59 13/10/2026 AoE (UTC−12)</div><div class="cv">= 18:59 14/10/2026 (GMT+7)</div></div>
+    <div class="loc"><span class="t"><svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-pin"/></svg>Singapore</span><span class="badge fmt">Offline</span></div>
+    <div class="rk"><span class="badge">CORE A*</span><span class="badge">CCF A</span></div>
+    <div class="fl"><span class="chipbtn"><span class="chip">Kỹ thuật phần mềm</span></span></div>
+</article>
+<article class="cd lu rise" style="--i:2">
+    <div class="ch"><h3>ACL <span>2027</span></h3><button type="button" class="iconbtn" aria-pressed="true" aria-label="Bỏ lưu hội nghị"><svg class="ic fill" width="20" height="20" aria-hidden="true"><use href="#i-star"/></svg></button></div>
+    <p class="nm">Annual Meeting of the Association for Computational Linguistics</p>
+    <div class="ms"><svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-calendar"/></svg>Nộp bài (ARR)</div>
+    <span class="ub u-u"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-calendar"/></svg><b>Trong tháng</b><i class="sep">·</i><span class="mono">Còn 18 ngày</span></span>
+    <div class="tm mono"><div>23:59 26/10/2026 AoE (UTC−12)</div><div class="cv">= 18:59 27/10/2026 (GMT+7)</div></div>
+    <div class="loc"><span class="t"><svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-pin"/></svg>Trực tuyến</span><span class="badge fmt">Online</span></div>
+    <div class="rk"><span class="badge">CORE A*</span><span class="badge">CCF A</span></div>
+    <div class="fl"><span class="chipbtn"><span class="chip">Trí tuệ nhân tạo</span></span><span class="chipbtn"><span class="chip">Xử lý ngôn ngữ</span></span></div>
+</article>
+    </div>
+    <a class="sec-link" href="lich-hoi-nghi.html">Xem toàn bộ lịch hội nghị <svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-right"/></svg></a>
+</div></section>
+
+<section class="lp-sec" aria-labelledby="field-h"><div class="container">
+    <header><span class="eyebrow">Lĩnh vực khoa học</span><h2 id="field-h">Sáu nhóm <em>lĩnh vực</em>.</h2></header>
+    <div class="fields">
+<div class="field-t"><i aria-hidden="true">T</i><b>Khoa học tự nhiên</b></div>
+<div class="field-t"><i aria-hidden="true">K</i><b>Khoa học kỹ thuật và công nghệ</b></div>
+<div class="field-t"><i aria-hidden="true">Y</i><b>Khoa học y, dược</b></div>
+<div class="field-t"><i aria-hidden="true">N</i><b>Khoa học nông nghiệp</b></div>
+<div class="field-t"><i aria-hidden="true">X</i><b>Khoa học xã hội</b></div>
+<div class="field-t"><i aria-hidden="true">N</i><b>Khoa học nhân văn</b></div>
+    </div>
+</div></section>
+
+<section class="lp-sec" aria-labelledby="blog-h"><div class="container">
+    <header><span class="eyebrow">Kiến thức hội thảo</span><h2 id="blog-h">Bài viết <em>mới nhất</em>.</h2><p>Các bài viết mới nhất về hội thảo khoa học.</p></header>
+    <div class="lp-grid3">
+<article class="bcard rise" style="--i:8" data-slug="hoi-thao-khoa-hoc-co-tinh-diem-nghien-cuu-khoa-hoc-khong" data-title="Hội thảo khoa học có tính điểm nghiên cứu khoa học không?" data-desc="Hội thảo khoa học có tính điểm NCKH không tùy bạn là sinh viên, nghiên cứu sinh hay giảng viên xét chức danh. Phân biệt từng trường hợp và cách tự kiểm tra." data-iso="2026-09-09T09:41:33.457Z" data-cat="kien-thuc"><span class="badge k">Kiến thức</span><h3><a class="blink" href="blog/hoi-thao-khoa-hoc-co-tinh-diem-nghien-cuu-khoa-hoc-khong.html">Hội thảo khoa học có tính điểm nghiên cứu khoa học không?</a></h3><p>Hội thảo khoa học có tính điểm NCKH không tùy bạn là sinh viên, nghiên cứu sinh hay giảng viên xét chức danh. Phân biệt từng trường hợp và cách tự kiểm tra.</p><div class="ft"><span>Conference.io.vn</span><time datetime="2026-09-09T09:41:33.457Z">09/09/2026</time></div></article>
+<article class="bcard rise" style="--i:8" data-slug="networking-hieu-qua-tai-hoi-thao-khoa-hoc-truoc-trong-va-sau-su-kien" data-title="Networking tại hội thảo khoa học: Chiến thuật hiệu quả" data-desc="Networking tại hội thảo khoa học hiệu quả cần chiến thuật theo 3 giai đoạn: chuẩn bị trước, chủ động trong giờ giải lao, và follow-up sau sự kiện. Xem chi tiết." data-iso="2026-09-09T09:41:24.974Z" data-cat="kien-thuc"><span class="badge k">Kiến thức</span><h3><a class="blink" href="blog/networking-hieu-qua-tai-hoi-thao-khoa-hoc-truoc-trong-va-sau-su-kien.html">Networking tại hội thảo khoa học: Chiến thuật hiệu quả</a></h3><p>Networking tại hội thảo khoa học hiệu quả cần chiến thuật theo 3 giai đoạn: chuẩn bị trước, chủ động trong giờ giải lao, và follow-up sau sự kiện. Xem chi tiết.</p><div class="ft"><span>Conference.io.vn</span><time datetime="2026-09-09T09:41:24.974Z">09/09/2026</time></div></article>
+<article class="bcard rise" style="--i:8" data-slug="giay-chung-nhan-tham-du-hoi-thao-khoa-hoc-gia-tri-va-cach-xin-cap" data-title="Giấy chứng nhận hội thảo khoa học: giá trị, cách xin cấp" data-desc="Giấy chứng nhận hội thảo khoa học có mấy loại, dùng làm minh chứng hồ sơ thế nào? Quy trình xin cấp, cách xử lý khi sai tên hoặc bị mất giấy. Xem ngay." data-iso="2026-09-09T09:41:16.114Z" data-cat="kien-thuc"><span class="badge k">Kiến thức</span><h3><a class="blink" href="blog/giay-chung-nhan-tham-du-hoi-thao-khoa-hoc-gia-tri-va-cach-xin-cap.html">Giấy chứng nhận hội thảo khoa học: giá trị, cách xin cấp</a></h3><p>Giấy chứng nhận hội thảo khoa học có mấy loại, dùng làm minh chứng hồ sơ thế nào? Quy trình xin cấp, cách xử lý khi sai tên hoặc bị mất giấy. Xem ngay.</p><div class="ft"><span>Conference.io.vn</span><time datetime="2026-09-09T09:41:16.114Z">09/09/2026</time></div></article>
+    </div>
+    <a class="sec-link" href="blog.html">Xem tất cả 29 bài viết <svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-right"/></svg></a>
+</div></section>
+<div class="cta"><section class="news" aria-labelledby="news-h"><div class="container">
+    <form id="news-form" novalidate>
+        <h2 id="news-h">Đăng ký nhận tin</h2>
+        <p class="lead">Nhận thông tin về các hội thảo khoa học mới qua email.</p>
+        <div class="news-row">
+            <label class="field" id="news-field"><span class="vh">Email</span>
+                <input id="news-email" type="email" placeholder="ten@truong.edu.vn" autocomplete="email" aria-describedby="news-msg"></label>
+            <button type="submit" class="btn pri">Đăng ký</button>
+        </div>
+        <p class="msg" id="news-msg" role="status" aria-live="polite"></p>
+    </form>
+</div></section>
+</div>
+</main>
+<footer class="foot"><div class="container">
+    <div class="foot-grid">
+        <div><a class="brand" href="index.html" style="padding:0"><span class="brand-mark" aria-hidden="true">C</span><span>UIT <em>ConFinder</em></span></a>
+            <p style="margin-top:10px;max-width:42ch">Tra cứu hạn nộp bài hội nghị khoa học và đọc kiến thức về hội thảo.</p></div>
+        <div><h2>Trang</h2><a href="index.html">Trang chủ</a><a href="lich-hoi-nghi.html">Lịch hội nghị</a><a href="blog.html">Bài viết</a></div>
+        <div><h2>Nguồn bài viết</h2><a href="https://conference.io.vn/blog" target="_blank" rel="noopener">conference.io.vn/blog</a></div>
+    </div>
+    <small>© 2026 UIT ConFinder. Dữ liệu hội nghị trên trang này là dữ liệu mẫu.</small>
+</div></footer>
+<script src="js/newsletter.js"></script>
+</body>
+</html>

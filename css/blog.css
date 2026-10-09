@@ -1,0 +1,96 @@
+    /* ===== BX · Blog wireframe (dữ liệu thật từ conference.io.vn/blog) ===== */
+    .bx-demo { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; margin-bottom: 12px; font-size: 12px; color: var(--mu) }
+    .bx-demo > div { display: flex; flex-wrap: wrap; gap: 4px; align-items: center }
+    .bx-demo button { min-height: 36px; padding: 0 12px; border: 1px dashed var(--ctl); background: #fff; font-size: 12px; font-weight: 600 }
+    .bx-demo button[aria-pressed=true] { background: var(--p); border-style: solid; border-color: var(--p); color: #fff }
+    .bx-app { container: bx / inline-size; background: var(--bg); color: var(--tx) }
+    .bx-app [hidden] { display: none !important }
+    .bx-app ul, .bx-app ol { padding-left: 20px }
+    .bx-app a { color: inherit }
+    .bx-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+    .bx-app .hdr { flex-wrap: wrap; gap: 0 16px }
+    .bx-nav { display: flex; flex-wrap: wrap; gap: 0 4px; margin-left: auto }
+    .bx-nav a, .bx-nav span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; font-weight: 600; font-size: 13px; text-decoration: none; color: var(--mu); white-space: nowrap }
+    .bx-nav a[aria-current=page] { color: var(--p); box-shadow: inset 0 -3px var(--p) }
+    .bx-banner { background: #0f172a; color: #fff; padding: 40px 24px; text-align: center }
+    .bx-banner h1 { font-size: 28px; font-weight: 800 }
+    .bx-banner p { margin-top: 8px; color: #cbd5e1 }
+    .bx-wrap { padding: 24px 16px; max-width: 1280px; margin: 0 auto }
+    .bx-tools { display: grid; gap: 12px; margin-bottom: 24px; padding: 16px; background: #fff; border: 1px solid var(--ln); box-shadow: var(--sh) }
+    .bx-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center }
+    .bx-field { flex: 1 1 240px; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 1px solid var(--ctl); background: #fff; color: var(--mu) }
+    .bx-field input { flex: 1; min-width: 0; min-height: 42px; border: 0; background: none; font: inherit; color: var(--tx); outline: none }
+    .bx-field:focus-within { outline: 3px solid var(--p); outline-offset: 2px }
+    .bx-select { min-height: 44px; padding: 0 12px; border: 1px solid var(--ctl); background: #fff; font: inherit }
+    .bx-count { font-size: 13px; color: var(--mu) }
+    .bx-chips { display: flex; flex-wrap: wrap; gap: 4px }
+    .bx-sec-title { font-size: 20px; font-weight: 700; margin-bottom: 12px }
+    .bx-feat { display: flex; flex-direction: column; position: relative; margin-bottom: 32px; background: #fff; border: 1px solid var(--ln); box-shadow: var(--sh) }
+    .bx-feat-body { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px; justify-content: center }
+    .bx-feat h3 { font-size: 22px; line-height: 1.25 }
+    .bx-feat p { color: var(--mu) }
+    .bx-badges { display: flex; flex-wrap: wrap; gap: 4px }
+    .bx-ph { display: grid; place-items: center; min-height: 160px; background: #e2e8f0; border-bottom: 1px dashed var(--ctl); color: var(--mu); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em }
+    .bx-grid, .bx-skel-grid, .bx-rel { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 0; list-style: none }
+    .bx-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; padding: 16px; background: var(--card); border: 1px solid var(--ln); border-left: 4px solid var(--o-fg); box-shadow: var(--sh) }
+    .bx-card:hover, .bx-feat:hover { background: #f8fafc }
+    .bx-card:focus-within, .bx-feat:focus-within { outline: 3px solid var(--p); outline-offset: 2px }
+    .bx-card h3 { font-size: 16px; line-height: 1.35 }
+    .bx-link { text-decoration: none; color: var(--tx) }
+    .bx-link:focus-visible { outline: none }
+    .bx-link::after { content: ""; position: absolute; inset: 0 }
+    .bx-card p { color: var(--mu); font-size: 13px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
+    .bx-ft { margin-top: auto; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--mu) }
+    .bx-skel { gap: 12px; border-left-color: var(--ln); pointer-events: none }
+    .bx-skel .sk { width: 100% }
+    .bx-sug { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center }
+    .bx-region[data-state=loading] > :not(.bx-skel-grid), .bx-region[data-state=error] > :not(.bx-err), .bx-region[data-state=empty] > :not(.bx-emp), .bx-region[data-state=ready] > :not(.bx-grid) { display: none }
+    .bx-pager { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px }
+    .bx-pager p { font-size: 13px; color: var(--mu) }
+    .bx-pager .pb { cursor: pointer }
+    .bx-pager .pb:disabled { cursor: default }
+    .bx-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0 4px; font-size: 13px; color: var(--mu) }
+    .bx-crumbs button { min-height: 44px; color: var(--p); font-weight: 600 }
+    .bx-crumbs [aria-current] { font-weight: 600; color: var(--tx) }
+    .bx-detail-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start }
+    .bx-article h1 { font-size: 28px; line-height: 1.2; font-weight: 800; margin: 8px 0 }
+    .bx-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: var(--mu); margin-bottom: 16px }
+    .bx-cover { min-height: 200px; border: 1px dashed var(--ctl); margin-bottom: 24px }
+    .bx-toc { background: #fff; border: 1px solid var(--ln); box-shadow: var(--sh) }
+    .bx-toc-btn { width: 100%; min-height: 44px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; font-weight: 700 }
+    .bx-toc-h { display: none; padding: 12px 16px; font-weight: 700 }
+    .bx-toc-list { display: none; list-style: none; padding: 0 16px 8px !important }
+    .bx-toc[data-open=true] .bx-toc-list { display: block }
+    .bx-toc-list button { display: block; width: 100%; min-height: 44px; text-align: left; font-size: 13px; color: var(--p) }
+    .bx-toc-list .h3 button { padding-left: 16px; color: var(--mu) }
+    .bx-prose { font-size: 15px; line-height: 1.7; max-width: 70ch }
+    .bx-prose h2 { font-size: 22px; margin: 24px 0 8px; line-height: 1.3 }
+    .bx-prose h3 { font-size: 18px; margin: 16px 0 8px }
+    .bx-prose p, .bx-prose ul, .bx-prose ol { margin-bottom: 12px }
+    .bx-prose blockquote { margin: 16px 0; padding: 8px 16px; border-left: 4px solid var(--p); background: #f1f5f9; color: var(--mu) }
+    .bx-prose blockquote p { margin: 0 }
+    .bx-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 24px 0 }
+    .bx-related { margin-top: 32px }
+    .bx-news { background: #fff; border-top: 1px solid var(--ln); padding: 32px 16px }
+    .bx-news form { max-width: 560px; margin: 0 auto; display: grid; gap: 8px }
+    .bx-news h2 { font-size: 20px }
+    .bx-news .bx-field[data-bad=true] { border-color: var(--c-fg); border-width: 2px }
+    .bx-msg { min-height: 20px; font-size: 13px; color: var(--mu) }
+    .bx-msg[data-bad=true] { color: var(--c-fg); font-weight: 600 }
+    .bx-msg[data-ok=true] { color: var(--o-fg); font-weight: 600 }
+    @container bx (min-width: 40rem) {
+        .bx-grid, .bx-skel-grid, .bx-rel { grid-template-columns: repeat(2, 1fr) }
+        .bx-feat { flex-direction: row }
+        .bx-feat .bx-ph { flex: 0 0 40%; border-bottom: 0; border-right: 1px dashed var(--ctl) }
+        .bx-wrap { padding: 24px }
+        .bx-banner h1 { font-size: 34px }
+    }
+    @container bx (min-width: 64rem) {
+        .bx-grid, .bx-skel-grid, .bx-rel { grid-template-columns: repeat(3, 1fr) }
+        .bx-detail-grid { grid-template-columns: minmax(0, 1fr) 280px }
+        .bx-article { grid-column: 1; grid-row: 1 }
+        .bx-toc { grid-column: 2; grid-row: 1; position: sticky; top: 88px }
+        .bx-toc-btn { display: none }
+        .bx-toc-h { display: block }
+        .bx-toc-list { display: block }
+    }

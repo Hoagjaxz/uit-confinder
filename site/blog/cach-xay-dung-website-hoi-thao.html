@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cách xây dựng website hội thảo khoa học chuyên nghiệp | UIT ConFinder</title>
+    <meta name="description" content="Hướng dẫn xây dựng website hội thảo khoa học: bảy nhóm trang bắt buộc, hệ thống nhận bài có mã số, tên miền và checklist nghiệm thu trước khi mở nhận bài.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;1,6..72,400;1,6..72,500&display=swap">
+    <link rel="stylesheet" href="../css/site.css">
+    <link rel="stylesheet" href="../css/blog.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3"/>
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/>
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"/>
+        </symbol>
+        <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+        </symbol>
+        <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"/>
+        </symbol>
+        <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+        </symbol>
+        <symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>
+        </symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/>
+            <path d="M12 9v4M12 17h.01"/>
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+        </symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18"/>
+        </symbol>
+        <symbol id="i-calplus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18M12 13v6M9 16h6"/>
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"/>
+        </symbol>
+        <symbol id="i-okc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m9 12 2 2 4-4"/>
+        </symbol>
+        <symbol id="i-xc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m15 9-6 6M9 9l6 6"/>
+        </symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+            <circle cx="12" cy="10" r="3"/>
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/>
+        </symbol>
+        <symbol id="i-nores" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3M8.5 8.5l5 5M13.5 8.5l-5 5"/>
+        </symbol>
+        <symbol id="i-dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+        </symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/>
+        </symbol>
+        <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+        </symbol>
+        <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </symbol>
+        <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+        </symbol>
+    </defs>
+</svg>
+<header class="masthead"><div class="container masthead-in">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">C</span><span>UIT <em>ConFinder</em></span></a>
+    
+    <nav class="nav" aria-label="Điều hướng chính"><a href="../lich-hoi-nghi.html">Lịch hội nghị</a><a href="../blog.html" aria-current="page">Bài viết</a></nav>
+</div></header>
+<main>
+<div class="container post">
+    <nav class="crumbs" aria-label="Breadcrumb"><span>Trang chủ</span><span aria-hidden="true">›</span><a href="../blog.html">Blog</a><span aria-hidden="true">›</span><span aria-current="page">Cách xây dựng website hội thảo khoa học chuyên nghiệp</span></nav>
+    <div class="post-grid">
+        <details class="toc" id="toc" open><summary>Mục lục<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-down"/></svg></summary><nav aria-label="Mục lục"><ul><li><a href="#s0">Website hội thảo khoa học khác gì một trang giới thiệu sự kiện?</a></li><li><a href="#s1">Website hội thảo cần những trang nào?</a></li><li class=h3><a href="#s2">Trang mốc thời gian: nơi hay sai nhất</a></li><li><a href="#s3">Hệ thống nhận bài cần làm được gì?</a></li><li><a href="#s4">Tự dựng, dùng mã nguồn mở, hay thuê dịch vụ?</a></li><li><a href="#s5">Tên miền và lưu trữ: quyết định có hậu quả dài hạn</a></li><li><a href="#s6">Mốc thời gian triển khai thực tế</a></li><li><a href="#s7">Sai lầm thường gặp tại các hội thảo ở Việt Nam</a></li><li><a href="#s8">Checklist nghiệm thu trước ngày mở nhận bài</a></li><li><a href="#s9">Câu hỏi thường gặp</a></li><li><a href="#s10">Tóm tắt</a></li></ul></nav></details>
+        <article class="article">
+            <span class="badge k">Kiến thức</span>
+            <h1>Cách xây dựng website hội thảo khoa học chuyên nghiệp</h1>
+            <p class="lede">Hướng dẫn xây dựng website hội thảo khoa học: bảy nhóm trang bắt buộc, hệ thống nhận bài có mã số, tên miền và checklist nghiệm thu trước khi mở nhận bài.</p>
+            <div class="meta"><span>Conference.io.vn</span><time datetime="2026-05-27T04:35:55.388Z">27/05/2026</time><span>15 phút đọc</span></div>
+            <div class="ph cover" role="img" aria-label="Ảnh bìa (giữ chỗ)">Ảnh bìa</div>
+            <div class="prose">
+<h2 id="s0">Website hội thảo khoa học khác gì một trang giới thiệu sự kiện?</h2>
+<p><strong>Xây dựng website hội thảo khoa học</strong> gồm bốn phần việc: dựng bộ trang thông tin bắt buộc (call for papers, mốc thời gian, ban chương trình, đăng ký), gắn một hệ thống nhận bài cấp được mã số theo dõi cho tác giả, chọn tên miền và phương án lưu trữ tồn tại lâu hơn kỳ hội thảo, rồi nghiệm thu bằng checklist trước ngày mở nhận bài. Phần quyết định thành bại không phải giao diện, mà là hai thứ tác giả dùng hằng ngày: trang mốc thời gian luôn khớp thực tế, và luồng nộp bài không làm mất bản thảo.</p>
+<blockquote>
+<p>Nguyên tắc thực dụng: nếu ban tổ chức vẫn phải mở hộp thư để trả lời câu hỏi "bài của tôi tới đâu rồi?", thì website chưa làm đúng việc của nó.</p>
+</blockquote>
+<h2 id="s1">Website hội thảo cần những trang nào?</h2>
+<p>Bảy nhóm trang dưới đây là mức tối thiểu. Thiếu bất kỳ nhóm nào đều tạo ra một luồng câu hỏi lặp đi lặp lại về hộp thư ban tổ chức.</p>
+<h3 id="s2">Trang mốc thời gian: nơi hay sai nhất</h3>
+<p>Mốc thời gian phải được viết ở một chỗ duy nhất và mọi nơi khác chỉ dẫn về đó. Thực tế thường gặp là hạn nộp xuất hiện đồng thời trên trang chủ, trong call for papers và trong thư mời — đến khi gia hạn thì chỉ sửa được một trong ba, và tác giả căn theo bản chưa sửa để khiếu nại.</p>
+<h2 id="s3">Hệ thống nhận bài cần làm được gì?</h2>
+<p>Đây là phần lõi. Một hệ thống nhận bài dùng được cần đáp ứng các chức năng sau, xếp theo thứ tự người dùng gặp phải:</p>
+<h2 id="s4">Tự dựng, dùng mã nguồn mở, hay thuê dịch vụ?</h2>
+<p>Câu hỏi quyết định không phải "phương án nào rẻ hơn" mà là <strong>ai sẽ trực hệ thống trong tuần trước hạn nộp</strong>. Đó là lúc lưu lượng nộp bài dồn lại, tác giả gặp sự cố và cần phản hồi trong vài giờ. Phương án nào cũng hỏng nếu không có người trực.</p>
+<h2 id="s5">Tên miền và lưu trữ: quyết định có hậu quả dài hạn</h2>
+<p>Tên miền là thứ đi vào bài báo, vào thư mời và vào các trích dẫn về sau. Chọn sai thì sửa rất tốn kém vì không thu hồi được những gì đã in ra.</p>
+<h2 id="s6">Mốc thời gian triển khai thực tế</h2>
+<p>Bảng dưới đây tính lùi từ ngày mở nhận bài, là mốc quan trọng hơn ngày diễn ra hội thảo.</p>
+<h2 id="s7">Sai lầm thường gặp tại các hội thảo ở Việt Nam</h2>
+<p><strong>1. Công bố website khi trang mốc thời gian còn để trống.</strong> Tác giả vào lần đầu không thấy hạn nộp sẽ rời đi và phần lớn không quay lại. Nên hoãn công bố cho tới khi trang này hoàn chỉnh.</p>
+<h2 id="s8">Checklist nghiệm thu trước ngày mở nhận bài</h2>
+<ul>
+<li>Bảy nhóm trang bắt buộc đều có nội dung thật, không còn chữ mẫu</li>
+<li>Mốc thời gian ghi đủ ngày, giờ kết thúc và múi giờ; chỉ tồn tại ở một trang duy nhất</li>
+<li>Nộp thử trọn vẹn một bài: tạo tài khoản, nộp tệp, nhận thư xác nhận, thay tệp, xem trạng thái</li>
+<li>Phân công thử một phản biện và gửi lại nhận xét theo biểu mẫu</li>
+<li>Phát hành thử một quyết định và kiểm tra nội dung thư thông báo</li>
+<li>Thư tự động không rơi vào hộp thư rác ở ít nhất ba nhà cung cấp thư điện tử khác nhau</li>
+<li>Giới hạn dung lượng tệp lớn hơn kích thước bản thảo có hình ảnh thông thường</li>
+<li>Website hiển thị đúng trên điện thoại — nhiều tác giả tra mốc thời gian bằng điện thoại</li>
+<li>Có trang liên hệ với địa chỉ thư điện tử được kiểm tra hằng ngày</li>
+<li>Đã phân quyền theo vai trò, không dùng chung tài khoản quản trị</li>
+<li>Đã thống nhất bằng văn bản thời hạn lưu trữ dữ liệu sau hội thảo</li>
+<li>Đã sao lưu và thử khôi phục ít nhất một lần</li>
+</ul>
+<h2 id="s9">Câu hỏi thường gặp</h2>
+<h2 id="s10">Tóm tắt</h2>
+<ul>
+<li>Website hội thảo vận hành một quy trình có trạng thái, khác hẳn trang giới thiệu sự kiện một chiều.</li>
+<li>Bảy nhóm trang bắt buộc: trang chủ, call for papers, mốc thời gian, hướng dẫn nộp bài, ban tổ chức, đăng ký, chương trình và kỷ yếu.</li>
+<li>Chọn hệ thống nhận bài trước khi chốt mốc thời gian, không phải ngược lại.</li>
+<li>Mốc thời gian chỉ nên tồn tại ở một trang duy nhất, ghi đủ ngày, giờ và múi giờ.</li>
+<li>Tính lùi tám đến mười tuần từ ngày mở nhận bài, trong đó bắt buộc có bước nộp thử một bài trọn vẹn.</li>
+<li>Tên miền và thời hạn lưu trữ là quyết định dài hạn, cần chốt bằng văn bản ngay từ đầu.</li>
+</ul>
+
+            </div>
+            <p class="note">Trang này chỉ trích tiêu đề và đoạn mở đầu của từng mục. <a href="https://conference.io.vn/blog/cach-xay-dung-website-hoi-thao" target="_blank" rel="noopener">Đọc bản đầy đủ tại conference.io.vn</a></p>
+            <div class="actions">
+                <button type="button" class="btn" id="copy" data-url="https://conference.io.vn/blog/cach-xay-dung-website-hoi-thao">Sao chép liên kết</button>
+                <span class="count" id="copy-msg" role="status" aria-live="polite"></span>
+            </div>
+            <section class="related" aria-labelledby="rel-h"><h2 class="sec-title" id="rel-h">Bài viết liên quan</h2><div class="rel"><article class="bcard"><span class="badge k">Kiến thức</span><h3><a class="blink" href="quy-trinh-to-chuc-hoi-nghi-khoa-hoc.html">Quy trình tổ chức hội nghị khoa học từ A đến Z: 7 giai đoạn</a></h3><div class="ft"><span>Conference.io.vn</span><time datetime="2026-06-05T02:06:54.079Z">05/06/2026</time></div></article><article class="bcard"><span class="badge k">Kiến thức</span><h3><a class="blink" href="cach-doc-call-for-papers-giai-ma-cfp-truoc-khi-nop-bai.html">Cách đọc Call for Papers: Giải mã CFP trước khi nộp bài</a></h3><div class="ft"><span>Conference.io.vn</span><time datetime="2026-08-14T03:00:00.000Z">14/08/2026</time></div></article><article class="bcard"><span class="badge k">Kiến thức</span><h3><a class="blink" href="cach-gui-bai-hoi-thao-khoa-hoc.html">Cách gửi bài hội thảo khoa học: Hướng dẫn chi tiết từ A-Z</a></h3><div class="ft"><span>Conference.io.vn</span><time datetime="2026-05-27T04:35:55.388Z">27/05/2026</time></div></article></div></section>
+            <div class="actions"><a class="btn pri" href="../blog.html">← Quay lại danh sách</a></div>
+        </article>
+    </div>
+</div>
+</main>
+<section class="news" aria-labelledby="news-h"><div class="container">
+    <form id="news-form" novalidate>
+        <h2 id="news-h">Đăng ký nhận tin</h2>
+        <p class="lead">Nhận thông tin về các hội thảo khoa học mới qua email.</p>
+        <div class="news-row">
+            <label class="field" id="news-field"><span class="vh">Email</span>
+                <input id="news-email" type="email" placeholder="ten@truong.edu.vn" autocomplete="email" aria-describedby="news-msg"></label>
+            <button type="submit" class="btn pri">Đăng ký</button>
+        </div>
+        <p class="msg" id="news-msg" role="status" aria-live="polite"></p>
+    </form>
+</div></section>
+<footer class="foot"><div class="container">
+    <div class="foot-grid">
+        <div><a class="brand" href="../index.html" style="padding:0"><span class="brand-mark" aria-hidden="true">C</span><span>UIT <em>ConFinder</em></span></a>
+            <p style="margin-top:10px;max-width:42ch">Tra cứu hạn nộp bài hội nghị khoa học và đọc kiến thức về hội thảo.</p></div>
+        <div><h2>Trang</h2><a href="../index.html">Trang chủ</a><a href="../lich-hoi-nghi.html">Lịch hội nghị</a><a href="../blog.html">Bài viết</a></div>
+        <div><h2>Nguồn bài viết</h2><a href="https://conference.io.vn/blog" target="_blank" rel="noopener">conference.io.vn/blog</a></div>
+    </div>
+    <small>© 2026 UIT ConFinder.</small>
+</div></footer>
+<script src="../js/blog-post.js"></script>
+<script src="../js/newsletter.js"></script>
+</body>
+</html>

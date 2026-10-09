@@ -15,9 +15,9 @@ Hoàn thiện website tĩnh UIT ConFinder (tra cứu hội nghị khoa học, de
 
 ## Kiến trúc chung
 
-- Không đổi token sáng. Thêm token tối dưới `:root[data-theme="dark"]` và `@media (prefers-color-scheme: dark)` (guard `:root:not([data-theme="light"])`), mỗi cặp urgency có bản tối riêng, kiểm contrast AA.
+- Không đổi token sáng. Thêm token tối dưới `:root[data-theme="dark"]` (mỗi cặp urgency có bản tối riêng, kiểm contrast AA bằng `tools/check-contrast.mjs`). `theme.js` chạy đồng bộ trong `<head>`, đọc lựa chọn đã lưu hoặc `prefers-color-scheme` rồi gán `data-theme`; không có JS thì hiện giao diện sáng. Màu cứng trong CSS được chuyển thành token trước.
 - CSS mới: `css/states.css` (skeleton, error, empty), `css/pages.css` (trang phụ). Token chỉ khai báo ở `site.css`.
-- JS mới, mỗi file một việc: `js/theme.js` (toggle + localStorage), `js/states-demo.js` (`?state=loading|error|empty|ready` và nút demo), `js/save.js` (sao ★ lưu localStorage, đọc ở trang Đã lưu). `newsletter.js` giữ nguyên. Mọi truy cập localStorage bọc try/catch.
+- JS mới, mỗi file một việc: `js/theme.js` (toggle + localStorage), `js/states-demo.js` (`?state=loading|error|empty|ready` và nút demo), `js/save.js` (sao ★ lưu localStorage, đọc ở trang Đã lưu), `js/nav.js` (menu điện thoại, mở/đóng nhóm bộ lọc theo độ rộng), `js/contact.js` (thông báo form liên hệ). `newsletter.js` giữ nguyên. Mọi truy cập localStorage bọc try/catch.
 - Header/footer copy-paste mỗi trang. Đồng bộ một lần bằng script PowerShell (không thành dependency): thêm skip link, nút theme, link trang mới.
 - Trang mới nằm ngang hàng trong `site/`: `gioi-thieu.html`, `lien-he.html`, `faq-aoe.html`, `404.html`, `da-luu.html`, `hoi-nghi-<slug>.html`.
 
@@ -56,6 +56,10 @@ Hoàn thiện website tĩnh UIT ConFinder (tra cứu hội nghị khoa học, de
 - Hội nghị là hội nghị thật nhưng ngày deadline là **dữ liệu minh hoạ**. Footer/Giới thiệu ghi: "Dữ liệu minh hoạ cho đồ án, kiểm tra lại trên trang chính thức trước khi nộp bài."
 - Countdown là chuỗi cố định; ngày mẫu quanh 10/2026 sẽ lỗi thời, không sửa.
 - Font Google tải ngoài; offline rơi về font hệ thống.
+
+## Công cụ
+
+Thư mục `tools/` ở gốc repo (ngoài `site/`): `sync-chrome.mjs` (đồng bộ header/footer, idempotent), `check-site.mjs` (link nội bộ, meta, đồng bộ), `check-contrast.mjs`, `build-conferences.mjs` (sinh trang chi tiết từ `conferences.mjs`), `new-page.mjs`, `serve.mjs`. Chi tiết trong kế hoạch triển khai.
 
 ## Rủi ro
 

@@ -93,11 +93,12 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
     border-bottom: 1px solid var(--rule);
     box-shadow: 0 3px 0 -2px var(--rule);
 }
-.masthead-in { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; min-height: 68px }
+.masthead-in { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; min-height: 68px }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--serif); font-weight: 700; font-size: 20px; letter-spacing: -.01em; min-height: 44px }
 .brand em { font-style: italic; font-weight: 500; color: var(--gold-text) }
 .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; background: var(--navy); color: var(--on-navy); border-radius: 6px; font-size: 20px; box-shadow: 3px 3px 0 var(--gold) }
-.nav { display: flex; margin-left: auto }
+.nav { display: none; order: 2; flex: 1 1 100%; flex-direction: column; padding-bottom: 8px }
+.nav[data-open=true] { display: flex }
 .nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-weight: 600; font-size: 14px; text-decoration: none; color: var(--mute) }
 .nav a::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 6px; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .25s ease }
 .nav a:hover, .nav a[aria-current=page] { color: var(--ink) }
@@ -107,6 +108,16 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .m-search:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
 .m-search kbd { font: 11px var(--mono); border: 1px solid var(--rule); border-radius: 4px; padding: 0 6px; color: var(--mute) }
 .saved { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 14px; color: var(--link); white-space: nowrap }
+
+/* ---------- khung trang: skip link, menu, giao diện tối ---------- */
+.skip { position: absolute; left: 12px; top: -64px; z-index: 100; padding: 12px 16px; border-radius: var(--r); background: var(--navy); color: #fff; font-weight: 600; text-decoration: none }
+.skip:focus { top: 12px }
+main:focus { outline: none }
+.menu-btn, .theme-btn { flex: none; width: 44px; height: 44px; display: inline-grid; place-items: center; border-radius: 50%; color: var(--ink) }
+.menu-btn:hover, .theme-btn:hover { background: var(--gold-soft) }
+.menu-btn { margin-left: auto }
+.theme-btn .sun, :root[data-theme="dark"] .theme-btn .moon { display: none }
+:root[data-theme="dark"] .theme-btn .sun { display: block }
 
 /* ---------- controls ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 1px solid var(--link); border-radius: var(--r); background: var(--card); color: var(--link); font-weight: 600; font-size: 14px; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s, transform .2s }
@@ -179,6 +190,12 @@ button.pb:not(:disabled):hover { background: var(--gold-soft) }
 
 @media (min-width: 40rem) {
     .container { padding: 0 24px }
+    .masthead-in { gap: 4px 20px }
     .m-search { order: 0; flex: 1 1 280px; max-width: 460px; margin-bottom: 0 }
     .foot-grid { grid-template-columns: 2fr 1fr 1fr }
+}
+
+@media (min-width: 64rem) {
+    .menu-btn { display: none }
+    .nav { display: flex; order: 0; flex: 0 0 auto; flex-direction: row; margin-left: auto; padding: 0 }
 }

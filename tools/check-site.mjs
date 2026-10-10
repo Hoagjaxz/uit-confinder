@@ -29,10 +29,10 @@ for (const [rel, html] of pages) {
 }
 
 // Mỗi thẻ hội nghị trong lịch phải dẫn tới một trang chi tiết.
-for (const rel of ['lich-hoi-nghi.html', 'index.html']) {
-    for (const m of (pages.get(rel) ?? '').matchAll(/<article class="cd (?!sk)[\s\S]*?<\/article>/g)) {
-        if (!/<h3><a href="hoi-nghi[^"]*\.html">/.test(m[0])) {
-            err(rel, `thẻ chưa có trang chi tiết: ${m[0].match(/<h3>(?:<a[^>]*>)?([^<]+)/)?.[1] ?? '?'}`);
+for (const rel of ['lich-hoi-nghi.html', 'index.html', 'da-luu.html']) {
+    for (const m of (pages.get(rel) ?? '').matchAll(/<article class="badge-card\b[\s\S]*?<\/article>/g)) {
+        if (!/<h3 class="bc-name"><a href="hoi-nghi[^"]*\.html">/.test(m[0])) {
+            err(rel, `thẻ chưa có trang chi tiết: ${m[0].match(/<h3[^>]*>(?:<a[^>]*>)?([^<]+)/)?.[1] ?? '?'}`);
         }
     }
 }

@@ -5,64 +5,43 @@ import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { pageShell } from './shell.mjs';
 import { CONFERENCES } from './conferences.mjs';
+import { LEVELS, icon, ub } from './levels.mjs';
+import { formatVN, daysLeft, icsStart, urgency } from './time-vn.mjs';
 
-const LEVELS = {
-    c: { cls: 'u-c', icon: 'i-alert', label: 'Gấp', range: 'dưới 3 ngày' },
-    s: { cls: 'u-s', icon: 'i-clock', label: 'Trong tuần', range: 'dưới 7 ngày' },
-    u: { cls: 'u-u', icon: 'i-calendar', label: 'Trong tháng', range: 'dưới 30 ngày' },
-    o: { cls: 'u-o', icon: 'i-okc', label: 'Còn rộng', range: 'từ 30 ngày' },
-    x: { cls: 'u-x', icon: 'i-xc', label: 'Đã hết hạn', range: 'đã qua' },
-};
-const DAY = 864e5;
-const NOW = Date.UTC(2026, 9, 9); // 09/10/2026: mốc tính "Còn N ngày"
-
-const pad = n => String(n).padStart(2, '0');
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-const parse = iso => { const [y, m, d] = iso.split('-').map(Number); return new Date(Date.UTC(y, m - 1, d)); };
-const dmy = d => `${pad(d.getUTCDate())}/${pad(d.getUTCMonth() + 1)}/${d.getUTCFullYear()}`;
-const ymd = d => `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}`;
-const icon = (id, size = 16) => `<svg class="ic" width="${size}" height="${size}" aria-hidden="true"><use href="#${id}"/></svg>`;
-const ub = (lv, tail) => `<span class="ub ${LEVELS[lv].cls}">${icon(LEVELS[lv].icon)}<b>${LEVELS[lv].label}</b>${tail ? `<i class="sep">·</i><span class="mono">${tail}</span>` : ''}</span>`;
 
-// 23:59 AoE ngày D = 18:59 ngày D+1 theo giờ Việt Nam.
-const aoeText = m => `23:59 ${dmy(m.aoe)} AoE`;
-const vnText = m => `18:59 ${dmy(m.vn)}`;
+const when = m => { const t = formatVN(m.at); return `${t.time} ${t.date}`; };
 
 const analyse = c => {
-    const items = c.milestones.map(m => {
-        if (!m.date) return { ...m, kind: 'event' };
-        const aoe = parse(m.date);
-        const vn = new Date(aoe.getTime() + DAY);
-        return { ...m, aoe, vn, days: Math.round((vn - NOW) / DAY), kind: 'dated' };
-    });
+    const items = c.milestones.map(m => (m.at ? { ...m, days: daysLeft(m.at), kind: 'dated' } : { ...m, kind: 'event' }));
     const next = c.closed ? -1 : items.findIndex(m => m.kind === 'dated' && m.days >= 0);
-    return items.map((m, i) => ({ ...m, kind: m.kind === 'event' ? 'event' : m.days < 0 ? 'past' : i === next ? 'next' : 'later' }));
+    return items.map((m, i) => ({ ...m, kind: m.kind === 'event' ? 'event' : urgency(m.days) === 'x' ? 'past' : i === next ? 'next' : 'later' }));
 };
 
 const row = (c, m) => {
     if (m.kind === 'event') {
-        return `<tr><td><span class="nm2">${m.name}</span></td><td class="mono" data-l="Hạn (AoE)">${m.range}</td><td class="mono" data-l="Quy đổi GMT+7">—</td><td data-l="Trạng thái"><span class="cvv">Không áp dụng AoE</span></td></tr>`;
+        return `<tr><td><span class="nm2">${m.name}</span></td><td class="mono" data-l="Hạn (giờ Việt Nam)">${m.range}</td><td data-l="Trạng thái"><span class="cvv">Diễn ra</span></td></tr>`;
     }
-    const when = (bold) => `<td class="mono" data-l="Hạn (AoE)">${bold ? `<b>${aoeText(m)}</b>` : aoeText(m)}</td><td class="mono" data-l="Quy đổi GMT+7">${bold ? `<b>${vnText(m)}</b>` : vnText(m)}</td>`;
+    const cell = bold => `<td class="mono" data-l="Hạn (giờ Việt Nam)">${bold ? `<b>${when(m)}</b>` : when(m)}</td>`;
     if (m.kind === 'past') {
-        return `<tr class="past"><td><span class="nm2">${m.name}</span></td>${when(false)}<td data-l="Trạng thái"><span class="badge soft">${icon('i-check', 12)}Đã qua</span></td></tr>`;
+        return `<tr class="past"><td><span class="nm2">${m.name}</span></td>${cell(false)}<td data-l="Trạng thái"><span class="badge soft">${icon('i-check', 12)}Đã qua</span></td></tr>`;
     }
     if (m.kind === 'next') {
-        return `<tr class="next"><td><div class="nxt">${icon('i-alert', 14)}Mốc kế tiếp</div><div class="nm2">${m.name}</div></td>${when(true)}<td data-l="Trạng thái">${ub(c.level, c.next.text)}</td></tr>`;
+        return `<tr class="next"><td><div class="nxt">${icon('i-alert', 14)}Mốc kế tiếp</div><div class="nm2">${m.name}</div></td>${cell(true)}<td data-l="Trạng thái">${ub(c.level, c.next.text)}</td></tr>`;
     }
-    return `<tr><td><span class="nm2">${m.name}</span></td>${when(false)}<td data-l="Trạng thái"><span class="mono cvv">Còn ${m.days} ngày</span></td></tr>`;
+    return `<tr><td><span class="nm2">${m.name}</span></td>${cell(false)}<td data-l="Trạng thái"><span class="mono cvv">Còn ${m.days} ngày</span></td></tr>`;
 };
 
 const calendarLinks = (c, m) => {
     const title = `${c.name} ${c.year}: ${m.name}`;
-    const note = `Hạn ${aoeText(m)}. Dữ liệu minh hoạ, hãy kiểm tra lại trên trang chính thức.`;
-    const day = ymd(m.vn);
-    const gcal = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${day}T115900Z/${day}T120000Z&details=${encodeURIComponent(note)}`;
+    const note = `Hạn ${when(m)} (giờ Việt Nam). Dữ liệu minh hoạ, hãy kiểm tra lại trên trang chính thức.`;
+    const from = icsStart(m.at), to = icsStart(m.at, 1);
+    const gcal = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${from}/${to}&details=${encodeURIComponent(note)}`;
     const text = s => s.replace(/,/g, '\\,');
     const ics = [
         'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//UIT ConFinder//VI', 'BEGIN:VEVENT',
-        `UID:${c.slug}-${m.date}@uit-confinder.example`, 'DTSTAMP:20261009T000000Z',
-        `DTSTART:${day}T115900Z`, `DTEND:${day}T120000Z`,
+        `UID:${c.slug}-${from}@uit-confinder.example`, 'DTSTAMP:20261009T000000Z',
+        `DTSTART:${from}`, `DTEND:${to}`,
         `SUMMARY:${text(title)}`, `DESCRIPTION:${text(note)}`, 'END:VEVENT', 'END:VCALENDAR',
     ].join('\r\n') + '\r\n';
     return `<a class="btn pri block" href="${esc(gcal)}" target="_blank" rel="noopener">${icon('i-calplus', 18)}Thêm vào Google Calendar</a>
@@ -75,7 +54,7 @@ const sidebar = (c, items) => {
         return `<div class="cdbig">
                 <div class="lab">Hạn nộp bài đã kết thúc<b>${m.name}</b></div>
                 ${ub('x')}
-                <div class="tm mono"><div>${aoeText(m)} (UTC−12)</div><div class="cv">= ${vnText(m)} (GMT+7)</div></div>
+                <div class="tm mono"><div>${when(m)}</div></div>
             </div>`;
     }
     const m = items.find(x => x.kind === 'next');
@@ -86,7 +65,7 @@ const sidebar = (c, items) => {
                 <div class="digits mono" role="timer" aria-live="off">
                     <div><b>${n.d}</b><small>ngày</small></div><div><b>${n.h}</b><small>giờ</small></div><div><b>${n.m}</b><small>phút</small></div><div><b>${n.s}</b><small>giây</small></div>
                 </div>
-                <div class="tm mono"><div>${aoeText(m)} (UTC−12)</div><div class="cv">= ${vnText(m)} (GMT+7)</div></div>
+                <div class="tm mono"><div>${when(m)}</div></div>
             </div>`;
 };
 
@@ -104,8 +83,8 @@ const main = c => {
                 <div class="brow"><span class="badge">${c.core}</span>${c.ccf ? `<span class="badge">${c.ccf}</span>` : ''}<span class="badge fmt">${c.format}</span>${c.fields.map(f => `<span class="chipbtn"><span class="chip">${f}</span></span>`).join('')}</div>
                 <div class="meta"><span>${icon('i-pin')}${c.place}</span><span>${icon('i-calendar')}${c.dates}</span></div>
             </div>
-            <section class="panel"><h2>Các mốc quan trọng · <small>AoE (UTC−12)</small></h2>
-                <table class="mt"><thead><tr><th>Mốc</th><th>Hạn (AoE)</th><th>Quy đổi GMT+7</th><th>Trạng thái</th></tr></thead>
+            <section class="panel"><h2>Các mốc quan trọng</h2>
+                <table class="mt"><thead><tr><th>Mốc</th><th>Hạn (giờ Việt Nam)</th><th>Trạng thái</th></tr></thead>
                 <tbody>
 ${items.map(m => row(c, m)).join('\n')}
                 </tbody></table>
@@ -128,7 +107,7 @@ ${items.map(m => row(c, m)).join('\n')}
 for (const c of CONFERENCES) {
     const html = pageShell({
         title: `${c.name} ${c.year}, chi tiết hội nghị`,
-        description: `${c.name} ${c.year}: các mốc quan trọng, hạn nộp bài theo AoE và giờ Việt Nam.`,
+        description: `${c.name} ${c.year}: các mốc quan trọng, hạn nộp bài theo giờ Việt Nam.`,
         scripts: ['save'],
         main: main(c),
     });

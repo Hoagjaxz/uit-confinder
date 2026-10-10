@@ -30,8 +30,9 @@
     color-scheme: light;
     --r: 6px;
     --r-s: 3px;
-    --sans: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --sans: "Be Vietnam Pro", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
 :root[data-theme="dark"] {
     color-scheme: dark;
@@ -84,7 +85,7 @@ img, svg { max-width: 100% }
 a { color: inherit }
 button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0 }
 h1, h2, h3 { font-family: var(--sans); font-weight: 600; font-style: normal; line-height: 1.2 }
-h1 { font-weight: 700 }
+h1, h2 { font-family: var(--serif); font-optical-sizing: auto; text-wrap: balance }
 ::selection { background: var(--accent); color: var(--paper) }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px }
 ::-webkit-scrollbar { width: 12px; height: 12px }

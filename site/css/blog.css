@@ -1,7 +1,7 @@
 /* Trang blog: danh sách + bài viết */
 .hero { background: var(--card); color: var(--ink); text-align: left; padding: 40px 0 36px; border-bottom: 1px solid var(--rule) }
 .hero .container { position: relative }
-.hero h1 { font-family: var(--sans); font-size: 40px; line-height: 1.05; max-width: 14ch }
+.hero h1 { font-family: var(--serif); font-size: 40px; line-height: 1.05; max-width: 14ch }
 .hero p { margin-top: 12px; color: var(--mute); max-width: 52ch; font-size: 16px }
 
 .wrap { padding: 28px 0 0 }
@@ -13,7 +13,7 @@
 .select { min-height: 46px; padding: 0 14px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--field); font: inherit }
 .count { font-size: 13px; color: var(--mute) }
 .chips-row { display: flex; flex-wrap: wrap; gap: 4px }
-.sec-title { font-family: var(--sans); font-size: 26px; margin-bottom: 14px }
+.sec-title { font-family: var(--serif); font-size: 26px; margin-bottom: 14px }
 
 .feat { position: relative; display: flex; flex-direction: column; margin-bottom: 36px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden }
 .feat-body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 22px }
@@ -45,7 +45,7 @@
 .crumbs a:hover { text-decoration: underline }
 .crumbs [aria-current] { font-weight: 600; color: var(--ink) }
 .post-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 4px }
-.article h1 { font-family: var(--sans); font-size: 34px; line-height: 1.08; margin: 10px 0 12px; max-width: 24ch }
+.article h1 { font-family: var(--serif); font-size: 34px; line-height: 1.08; margin: 10px 0 12px; max-width: 24ch }
 .lede { font-family: var(--sans); font-size: 19px; line-height: 1.5; color: var(--mute); max-width: 60ch; margin-bottom: 14px }
 .meta { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 13px; color: var(--mute); padding: 12px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 22px }
 .cover { min-height: 220px; border-radius: var(--r); border: 1px solid var(--rule); margin-bottom: 28px }
@@ -58,7 +58,7 @@
 .toc a:hover { background: var(--hover) }
 .toc .h3 a { padding-left: 24px; color: var(--mute) }
 .prose { font-size: 17px; line-height: 1.75; max-width: 68ch }
-.prose h2 { font-family: var(--sans); font-size: 28px; line-height: 1.2; margin: 36px 0 10px }
+.prose h2 { font-family: var(--serif); font-size: 28px; line-height: 1.2; margin: 36px 0 10px }
 .prose h3 { font-family: var(--sans); font-size: 21px; margin: 24px 0 8px }
 .prose p, .prose ul, .prose ol { margin-bottom: 14px }
 .prose ul, .prose ol { padding-left: 22px }

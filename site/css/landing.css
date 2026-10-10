@@ -4,7 +4,7 @@
 /* ---------- hero ---------- */
 .lp-hero { position: relative; overflow: hidden; padding: 44px 0 64px; border-bottom: 1px solid var(--rule) }
 .lp-hero-in { position: relative; display: grid; gap: 40px; align-items: center }
-.lp-copy h1 { font-family: var(--sans); font-weight: 600; font-size: clamp(44px, 9vw, 104px); line-height: .96; margin: 14px 0 22px; text-wrap: balance }
+.lp-copy h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(44px, 9vw, 104px); line-height: .96; margin: 14px 0 22px; text-wrap: balance }
 .lp-copy h1 em { font-style: normal; font-weight: 400; color: var(--accent); position: relative; white-space: nowrap }
 .lp-copy h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .06em; height: .09em; background: var(--accent); opacity: .35; transform-origin: left }
 .lp-sub { font-size: 18px; color: var(--mute); max-width: 52ch }
@@ -35,7 +35,7 @@
 /* ---------- section chung ---------- */
 .lp-sec { padding: 72px 0 0 }
 .lp-sec > .container > header { max-width: 640px; margin-bottom: 32px }
-.lp-sec h2 { font-family: var(--sans); font-weight: 600; font-size: clamp(32px, 5vw, 52px); line-height: 1.04; margin-top: 8px }
+.lp-sec h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5vw, 52px); line-height: 1.04; margin-top: 8px }
 .lp-sec h2 em { font-style: normal; font-weight: 400; color: var(--accent) }
 .lp-sec header p { color: var(--mute); font-size: 16px; margin-top: 12px }
 

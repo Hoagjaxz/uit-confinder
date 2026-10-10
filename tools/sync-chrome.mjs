@@ -3,7 +3,7 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { skipHtml, navHtml, footLinksHtml, savedHtml, faviconHtml, currentFor, FOOT_NOTE } from './chrome.mjs';
+import { skipHtml, navHtml, footLinksHtml, savedHtml, faviconHtml, FONTS_HTML, currentFor, FOOT_NOTE } from './chrome.mjs';
 
 export const SITE = fileURLToPath(new URL('../site/', import.meta.url));
 export const htmlFiles = (dir = SITE) =>
@@ -18,8 +18,9 @@ export const syncPage = (html, rel) => {
     const prefix = '../'.repeat(rel.split('/').length - 1);
     let out = html;
     if (!out.includes('class="skip"')) out = out.replace('<body>', `<body>\n${skipHtml}`);
-    // Bộ chữ hệ thống: gỡ mọi thẻ Google Fonts (preconnect và stylesheet).
+    // Gỡ mọi thẻ Google Fonts cũ rồi chèn đúng một bộ trước site.css.
     out = out.replace(/[ \t]*<link[^>]*fonts\.(?:googleapis|gstatic)\.com[^>]*>\r?\n?/g, '');
+    out = out.replace(/([ \t]*)(<link rel="stylesheet" href="[^"]*css\/site\.css">)/, (_, ind, tag) => `${ind}${FONTS_HTML}\n${ind}${tag}`);
     if (!out.includes('rel="icon"')) out = out.replace('</head>', `    ${faviconHtml}\n</head>`);
     else out = out.replace(/<link rel="icon"[^>]*>/, () => faviconHtml);
     if (!out.includes('js/theme.js')) out = out.replace('</head>', `    <script src="${prefix}js/theme.js"></script>\n</head>`);

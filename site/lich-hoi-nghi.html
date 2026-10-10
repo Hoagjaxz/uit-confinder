@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;1,6..72,400;1,6..72,500&display=swap">
     <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/conference.css">
+    <link rel="stylesheet" href="css/states.css">
     <script src="js/theme.js"></script>
 </head>
 <body>
@@ -147,6 +148,41 @@
     <details class="fg" open><summary>Trạng thái<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-down"/></svg></summary><label class="opt"><input type="checkbox" checked><span>Hiện đã hết hạn</span><span class="cnt">23</span></label></details>
 </aside>
         <section aria-label="Danh sách hội nghị">
+            <div class="demo-bar" role="navigation" aria-label="Xem thử trạng thái danh sách"><span>Xem thử trạng thái:</span><a href="?state=ready">Có dữ liệu</a><a href="?state=loading">Đang tải</a><a href="?state=error">Lỗi</a><a href="?state=empty">Không có kết quả</a></div>
+            <div data-state="loading" hidden>
+                <div class="tb" role="status"><h2>Đang tải lịch hội nghị…</h2></div>
+                <div class="grid" aria-hidden="true" style="margin-top:16px">
+                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
+                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
+                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
+                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
+                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
+                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
+                </div>
+            </div>
+            <div data-state="error" hidden>
+                <div class="state-box err" role="alert" style="margin-top:16px">
+                    <span class="big"><svg class="ic" width="32" height="32" aria-hidden="true"><use href="#i-alert"/></svg></span>
+                    <h2>Không tải được lịch hội nghị</h2>
+                    <p>Kết nối bị gián đoạn hoặc máy chủ đang bận. Bộ lọc bạn chọn vẫn được giữ nguyên, hãy thử lại sau ít giây.</p>
+                    <div class="acts"><a class="btn pri" href="?state=ready"><svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-refresh"/></svg>Thử lại</a><a class="btn" href="index.html">Về trang chủ</a></div>
+                </div>
+            </div>
+            <div data-state="empty" hidden>
+                <div class="tb"><h2>0 hội nghị <small>trên tổng 128</small></h2></div>
+                <div class="chips" aria-label="Bộ lọc đang áp dụng">
+                    <button type="button" class="fchip" aria-label="Bỏ lọc Lĩnh vực: An toàn thông tin">Lĩnh vực: An toàn thông tin<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-x"/></svg></button>
+                    <button type="button" class="fchip" aria-label="Bỏ lọc Rank CORE: A*">Rank CORE: A*<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-x"/></svg></button>
+                    <button type="button" class="fchip" aria-label="Bỏ lọc Hạn trong 7 ngày">Hạn trong 7 ngày<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-x"/></svg></button>
+                </div>
+                <div class="state-box">
+                    <span class="big"><svg class="ic" width="32" height="32" aria-hidden="true"><use href="#i-nores"/></svg></span>
+                    <h2>Không có hội nghị khớp bộ lọc</h2>
+                    <p>Chưa có hội nghị nào vừa thuộc lĩnh vực và rank đã chọn, vừa còn hạn trong 7 ngày tới. Thử bỏ bớt bộ lọc, hoặc bật "Hiện đã hết hạn" để xem cả các hội nghị đã qua hạn.</p>
+                    <div class="acts"><a class="btn pri" href="?state=ready">Xoá tất cả bộ lọc</a><a class="btn" href="?state=ready">Hiện đã hết hạn</a></div>
+                </div>
+            </div>
+            <div data-state="ready">
             <div class="tb"><h2>37 hội nghị <small>trên tổng 128</small></h2><span class="sp"></span>
                 <button type="button" class="btn">Sắp xếp: <b>Deadline gần nhất</b><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-down"/></svg></button>
                 <div class="seg" role="group" aria-label="Chế độ xem"><span class="on"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-grid"/></svg>Thẻ</span><span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-list"/></svg>Bảng</span></div>
@@ -221,6 +257,7 @@
             </div>
             <div class="pager"><p>Hiển thị 1–6 / 37</p>
                 <nav class="pg" aria-label="Phân trang"><span class="pb dis"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-left"/></svg></span><span class="pb cur" aria-current="page">1</span><span class="pb">2</span><span class="pb">3</span><span class="pb">4</span><span class="pb"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-right"/></svg></span></nav></div>
+            </div>
         </section>
     </div>
 </div>
@@ -247,6 +284,7 @@
     <small>© 2026 UIT ConFinder. Dữ liệu hội nghị là dữ liệu minh hoạ cho đồ án, hãy kiểm tra lại trên trang chính thức trước khi nộp bài.</small>
 </div></footer>
 <script src="js/newsletter.js"></script>
+<script src="js/states-demo.js"></script>
 <script src="js/nav.js"></script>
 </body>
 </html>

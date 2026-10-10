@@ -1,0 +1,24 @@
+/* Trạng thái danh sách: đang tải, lỗi, trống + dải xem thử */
+.demo-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0 0; padding: 10px 12px; border: 1px dashed var(--rule); border-radius: var(--r); font-size: 13px; color: var(--mute) }
+.demo-off .demo-bar { display: none }
+.demo-bar a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid var(--rule); border-radius: 999px; background: var(--card); color: var(--link); font-weight: 600; text-decoration: none }
+.demo-bar a[aria-current=true] { background: var(--navy); border-color: var(--navy); color: #fff }
+
+.sk-line { height: 14px; border-radius: 4px; background: var(--tint) }
+.sk-line.lg { height: 28px; width: 55% }
+.sk-line.w80 { width: 80% }
+.sk-line.w60 { width: 60% }
+.sk-line.w40 { width: 40% }
+.cd.sk:hover { transform: none; box-shadow: var(--sh) }
+@media (prefers-reduced-motion: no-preference) {
+    @keyframes shimmer { 0%, 100% { opacity: 1 } 50% { opacity: .45 } }
+    .sk .sk-line { animation: shimmer 1.4s ease-in-out infinite }
+}
+
+.state-box { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 24px; text-align: center; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--sh) }
+.state-box.plain { border: 0; box-shadow: none }
+.state-box h2, .state-box h3 { font-family: var(--serif); font-size: 24px }
+.state-box p { max-width: 52ch; color: var(--mute) }
+.state-box .big { width: 68px; height: 68px; display: grid; place-items: center; border-radius: 50%; background: var(--gold-soft); color: var(--link) }
+.state-box.err .big { background: var(--c-bg); color: var(--c-fg) }
+.state-box .acts { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px }

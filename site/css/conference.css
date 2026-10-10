@@ -161,8 +161,8 @@
 .mt { width: 100%; border-collapse: collapse; font-size: 13.5px }
 .mt thead { display: none }
 .mt tr { display: grid; gap: 4px; padding: 14px 18px; border-top: 1px solid var(--rule) }
-.mt td { display: flex; justify-content: space-between; gap: 12px; align-items: center }
-.mt td::before { content: attr(data-l); font-size: 12px; color: var(--mute) }
+.mt td { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap }
+.mt td::before { content: attr(data-l); font-size: 12px; color: var(--mute); white-space: nowrap }
 .mt td:first-child::before { display: none }
 .mt td:first-child { display: block }
 .mt tr.past { color: var(--mute); background: var(--past) }

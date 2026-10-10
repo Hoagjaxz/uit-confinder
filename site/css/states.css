@@ -30,3 +30,4 @@
 .state-box .big { display: grid; place-items: center; color: var(--link) }
 .state-box.err .big { color: var(--c-fg) }
 .state-box .acts { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px }
+[data-demo-state=error] .side .cnt { visibility: hidden } /* lỗi tải: chưa có số đếm */

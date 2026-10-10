@@ -57,7 +57,6 @@
         $('#empty').hidden = !empty;
         pager.hidden = empty;
         count.textContent = `Hiển thị ${hits.length} bài viết`;
-        $('#feat').hidden = !!(st.q.trim() || st.cat);
 
         if (!empty) {
             range.textContent = `Hiển thị ${from + 1}–${from + shown.size} / ${hits.length}`;

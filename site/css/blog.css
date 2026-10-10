@@ -1,30 +1,24 @@
-/* Trang blog: danh sách + bài viết */
-.hero { background: var(--card); color: var(--ink); text-align: left; padding: 40px 0 36px; border-bottom: 1px solid var(--rule) }
-.hero .container { position: relative }
-.hero h1 { font-family: var(--serif); font-size: 40px; line-height: 1.05; max-width: 14ch }
-.hero p { margin-top: 12px; color: var(--mute); max-width: 52ch; font-size: 16px }
+/* Trang blog: danh sách (hàng phẳng) + bài viết */
+.wrap { padding-top: 14px }
+.blog-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 16px; margin-bottom: 16px }
+.blog-head h1 { font-size: 28px; line-height: 1.15 }
+.blog-head p { color: var(--mute); max-width: 60ch }
 
-.wrap { padding: 28px 0 0 }
-.tools { display: grid; gap: 12px; margin-bottom: 28px; padding: 16px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r) }
-.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center }
-.field { flex: 1 1 240px; display: flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 14px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--field); color: var(--mute) }
-.field input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: none; font: inherit; color: var(--ink); outline: none }
-.field:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
-.select { min-height: 46px; padding: 0 14px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--field); font: inherit }
+.tools { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-bottom: 8px }
+.field { flex: 1 1 100%; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 1px solid var(--rule-2); border-radius: var(--r); background: var(--field); color: var(--mute) }
+.field input { flex: 1; min-width: 0; min-height: 42px; border: 0; background: none; font: inherit; color: var(--ink); outline: none }
+.field:focus-within { outline: 2px solid var(--focus); outline-offset: 2px }
+.sortbox { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--mute) }
+.select { min-height: 44px; padding: 0 10px; border: 1px solid var(--rule-2); border-radius: var(--r); background: var(--field); color: var(--ink); font: inherit; font-size: 14px }
 .count { font-size: 13px; color: var(--mute) }
+#count { margin: 0 0 10px }
 .chips-row { display: flex; flex-wrap: wrap; gap: 4px }
 .sec-title { font-family: var(--serif); font-size: 26px; margin-bottom: 14px }
-
-.feat { position: relative; display: flex; flex-direction: column; margin-bottom: 36px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden }
-.feat-body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 22px }
-.feat h3 { font-family: var(--sans); font-size: 28px; line-height: 1.15 }
-.feat p { color: var(--mute) }
-.badges { display: flex; flex-wrap: wrap; gap: 6px }
 .ph { display: grid; place-items: center; min-height: 180px; background: var(--tint); color: var(--mute); font: 600 12px var(--mono); text-transform: uppercase }
 
-.bgrid { display: grid; grid-template-columns: 1fr; gap: 20px }
+/* thẻ bài dùng chung với phần "Bài liên quan" ở trang bài; dạng hàng chỉ áp dụng trong #grid */
 .bcard { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; padding: 20px 18px 16px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden }
-.bcard:focus-within, .feat:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
+.bcard:focus-within { outline: 2px solid var(--focus); outline-offset: 2px }
 .bcard h3 { font-family: var(--sans); font-size: 20px; line-height: 1.25 }
 .blink { text-decoration: none; color: var(--ink) }
 .blink:focus-visible { outline: none }
@@ -32,11 +26,22 @@
 .bcard p { color: var(--mute); font-size: 13.5px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden }
 .ft { margin-top: auto; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--mute) }
 
-.empty { background: var(--card); border: 2px dashed var(--rule); border-radius: var(--r); padding: 48px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px }
-.empty .big { width: 68px; height: 68px; display: grid; place-items: center; border-radius: 50%; background: var(--hover); color: var(--link) }
-.empty h3 { font-family: var(--sans); font-size: 24px }
+.bgrid { display: grid; grid-template-columns: minmax(0, 1fr); background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden }
+.bgrid .bcard { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "meta tag" "title title" "desc desc"; align-items: center; gap: 6px 12px; padding: 14px 16px; border: 0; border-radius: 0; background: none }
+.bgrid .bcard + .bcard { border-top: 1px solid var(--rule) }
+.bgrid .bcard:hover { background: var(--hover) }
+.bgrid .bcard:focus-within { outline-offset: -2px }
+.bgrid .badge { grid-area: tag }
+.bgrid h3 { grid-area: title; font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.25; text-wrap: balance }
+.bgrid .bcard p { grid-area: desc; -webkit-line-clamp: 2; line-clamp: 2; max-width: 68ch }
+.bgrid .ft { grid-area: meta; margin: 0; flex-direction: row-reverse; justify-content: flex-end; gap: 2px 14px }
+.bgrid .ft time { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--ink) }
+
+.empty { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 32px 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px }
+.empty .big { color: var(--mute); line-height: 0 }
+.empty h3 { font-family: var(--sans); font-size: 18px }
 .empty p { color: var(--mute); max-width: 52ch }
-.sug { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center }
+.sug { display: flex; flex-wrap: wrap; gap: 4px }
 
 /* ---------- bài viết ---------- */
 .post { padding: 12px 0 0 }
@@ -70,18 +75,17 @@
 .rel { display: grid; grid-template-columns: 1fr; gap: 20px }
 
 @media (min-width: 40rem) {
-    .hero h1 { font-size: 54px }
-    .tools { grid-template-columns: 1fr }
-    .bgrid, .rel { grid-template-columns: repeat(2, 1fr) }
-    .feat { flex-direction: row }
-    .feat .ph { flex: 0 0 40%; min-height: 100% }
-    .feat-body { padding: 28px }
+    .blog-head h1 { font-size: 34px }
+    .field { flex: 1 1 240px; max-width: 420px }
+    .sortbox { margin-left: auto }
+    .bgrid .bcard { grid-template-columns: 9.5rem minmax(0, 1fr) auto; grid-template-areas: "meta title tag" "meta desc tag"; align-items: start; column-gap: 20px; padding: 16px 20px }
+    .bgrid .badge { align-self: start; margin-top: 2px }
+    .bgrid .ft { flex-direction: column-reverse; align-items: flex-start; justify-content: flex-end }
+    .rel { grid-template-columns: repeat(2, 1fr) }
     .article h1 { font-size: 44px }
 }
 @media (min-width: 64rem) {
-    .hero { padding: 76px 0 70px }
-    .hero h1 { font-size: 68px }
-    .bgrid, .rel { grid-template-columns: repeat(3, 1fr) }
+    .rel { grid-template-columns: repeat(3, 1fr) }
     .post-grid { grid-template-columns: minmax(0, 1fr) 300px }
     .toc { grid-column: 2; grid-row: 1; position: sticky; top: 92px }
     .article { grid-column: 1; grid-row: 1 }

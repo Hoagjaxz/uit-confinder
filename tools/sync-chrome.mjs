@@ -20,11 +20,15 @@ export const syncPage = (html, rel) => {
     if (!out.includes('class="skip"')) out = out.replace('<body>', `<body>\n${skipHtml}`);
     if (!out.includes('rel="icon"')) out = out.replace('</head>', `    ${faviconHtml}\n</head>`);
     if (!out.includes('js/theme.js')) out = out.replace('</head>', `    <script src="${prefix}js/theme.js"></script>\n</head>`);
+    if (!out.includes('js/save.js')) out = out.replace('</body>', `<script src="${prefix}js/save.js"></script>
+</body>`);
     if (!out.includes('js/nav.js')) out = out.replace('</body>', `<script src="${prefix}js/nav.js"></script>\n</body>`);
     out = out.replace(/<main(?:\s[^>]*)?>/, '<main id="main" tabindex="-1">');
     out = out.replace(NAV_RE, () => navHtml(prefix, currentFor(rel)));
     out = out.replace(FOOT_RE, () => footLinksHtml(prefix));
-    out = out.replace(SAVED_RE, () => savedHtml(prefix));
+    if (SAVED_RE.test(out)) out = out.replace(SAVED_RE, () => savedHtml(prefix));
+    else out = out.replace(/(<a class="brand"[\s\S]*?<\/a>)/, (m) => `${m}
+    ${savedHtml(prefix)}`);
     const i = out.indexOf('<footer class="foot">');
     if (i >= 0) out = out.slice(0, i) + out.slice(i).replace(/<small>[\s\S]*?<\/small>/, () => `<small>${FOOT_NOTE}</small>`);
     return out;

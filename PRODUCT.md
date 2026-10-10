@@ -1,55 +1,63 @@
-# PRODUCT.md — UIT ConFinder
+# Product
 
-## Sản phẩm là gì
-Website tra cứu hạn nộp bài hội nghị khoa học. Người dùng mở trang để trả lời một câu: "hội nghị nào còn nhận bài, còn bao lâu, hạn đó là mấy giờ ở Việt Nam?". Hạn nộp (kèm đếm ngược và giờ GMT+7 quy đổi từ AoE) là thông tin quan trọng nhất ở mọi nơi nó xuất hiện.
+<!-- impeccable:product-schema 1 -->
 
-Site tĩnh (HTML/CSS/JS thuần, không framework, không backend). Là đồ án môn IE104 (Internet và Công nghệ Web), UIT, ĐHQG-HCM. Dữ liệu hội nghị là dữ liệu minh hoạ, hiển thị rõ ràng như vậy trên site.
+## Platform
 
-## Register
-`product` (công cụ tra cứu), không phải `brand`. Giao diện phục vụ việc quét, lọc, so sánh. Trang chủ cũng là công cụ: người dùng vào là thấy ngay hạn sắp tới, không phải trang quảng cáo.
+web
 
-## Người dùng
-- Sinh viên và nghiên cứu sinh Việt Nam (chủ yếu CNTT, AI, kỹ thuật phần mềm) đang tìm nơi nộp bài.
-- Dùng trên laptop khi tra cứu, trên điện thoại khi kiểm tra nhanh hạn.
-- Đọc tiếng Việt, đã quen các thuật ngữ: CORE, CCF, AoE, camera-ready, rebuttal. Không cần giải thích từng từ ở mọi nơi.
-- Căng thẳng về thời gian: sợ bỏ lỡ hạn hơn là cần được truyền cảm hứng.
+## Users
 
-## Mục tiêu
-1. Thấy hạn gần nhất trong vài giây, không cuộn.
-2. Lọc theo lĩnh vực, rank, hình thức mà không phải học giao diện.
-3. Tin được con số: mỗi hạn ghi cả giờ AoE lẫn giờ Việt Nam, không mơ hồ.
-4. Lưu hội nghị quan tâm và quay lại.
+- **Sinh viên, học viên cao học, nghiên cứu sinh CNTT ở Việt Nam** đang cần chọn nơi nộp bài. Họ mở site khi tra cứu (laptop) hoặc kiểm tra nhanh một hạn (điện thoại). Việc cần làm: biết hội nghị nào còn nhận bài, còn bao lâu, hạn đó là mấy giờ ở Việt Nam. Họ đã quen CORE, CCF, AoE, camera-ready, rebuttal. Họ lo bỏ lỡ hạn hơn là cần được truyền cảm hứng.
+- **Giảng viên, nhà nghiên cứu** tra nhanh hạn và rank để chọn nơi gửi.
+- Người chấm đồ án IE104 cũng mở site này để đánh giá (bối cảnh đánh giá, không phải đối tượng sản phẩm).
 
-## Giọng và tính cách
-Điềm tĩnh, chính xác, thực dụng. Như một bảng tin của khoa hoặc một công cụ dành cho dân kỹ thuật: ít lời, nhiều thông tin. Không rao giảng, không khoa trương, không khẩu hiệu.
+## Product Purpose
 
-Chữ trên giao diện: tiếng Việt tự nhiên, ngắn, đúng việc. Không câu hô hào ("Mọi hạn nộp bài trong một trang."), không cấu trúc "không chỉ X mà còn Y", không ba ý đối xứng đều tăm tắp.
+Tra cứu hạn nộp bài hội nghị khoa học. Mỗi hội nghị có các mốc quan trọng, hạn theo AoE kèm giờ Việt Nam (GMT+7) và đếm ngược. Thành công là người dùng biết đúng hạn trong vài giây và không nhầm múi giờ. Site là sản phẩm của đồ án môn IE104 (Internet và Công nghệ Web), Trường Đại học Công nghệ Thông tin (UIT), ĐHQG-HCM.
 
-## Anti-reference (đừng trông giống)
-- Landing page SaaS do AI sinh: hero khổng lồ, chữ serif nghiêng màu vàng, gạch chân nhấn, thẻ nghiêng nổi, huy hiệu tròn xoay, đồng hồ trang trí.
-- Bộ ba "navy + vàng đồng + kem" kiểu tạp chí giả.
-- Nhãn nhỏ viết hoa, rải khoảng chữ, font mono ở trên mỗi tiêu đề (eyebrow).
-- Lưới thẻ đều nhau với bóng đổ lệch, hover nhấc lên, hiệu ứng xuất hiện lần lượt.
-- Khối "Cách hoạt động ba bước", dải chạy chữ, số liệu "37+ hội nghị" để lấp chỗ.
-- Mọi thứ bo tròn như nhau, mọi thứ đều có viền và bóng.
+## Positioning
 
-## Tham chiếu tích cực
-Mật độ thông tin và sự kiềm chế của GitHub, Linear, arXiv listing, các trang "Call for Papers" đã được dùng thật (wikicfp, trang hội nghị ACM/IEEE). Bảng và danh sách rõ ràng trước, trang trí sau.
+Điểm khác, theo người sở hữu sản phẩm:
+- Thang 5 mức khẩn (Gấp, Trong tuần, Trong tháng, Còn rộng, Đã hết hạn) kèm đếm ngược.
+- Lọc theo lĩnh vực, rank CORE/CCF và hình thức tham dự (online, offline, hybrid).
+- Thêm mốc kế tiếp vào lịch (Google Calendar hoặc tệp .ics).
 
-## Nguyên tắc thiết kế
-1. **Hạn nộp là nhân vật chính.** Mọi thẻ/hàng đặt ngày giờ và đếm ngược lên trước tên phụ, rank và nơi tổ chức.
-2. **Màu để báo mức khẩn, không để trang trí.** Năm mức khẩn là màu duy nhất rực trên trang; phần còn lại trung tính với một màu nhấn tiết chế. Màu luôn đi kèm chữ và biểu tượng.
-3. **Mật độ thay vì khoảng trắng phô trương.** Danh sách hội nghị cho phép quét nhiều hàng một lúc; thẻ chỉ dùng khi cần.
-4. **Một họ chữ sans cho giao diện, mono cho số liệu.** Không chữ trang trí, không chữ nghiêng làm điểm nhấn.
-5. **Bớt thay vì thêm.** Mỗi khối phải trả lời được "người dùng làm gì với cái này?". Không có thì bỏ.
-6. **Sáng và tối ngang hàng.** Cả hai đều phải đọc tốt; không phải bản này là phụ của bản kia.
-7. **Dùng được trên 320px và bằng bàn phím.** Vùng bấm ≥44px, focus nhìn thấy, tôn trọng giảm chuyển động.
+## Operating Context
 
-## Ràng buộc kỹ thuật
-- Site tĩnh trong `site/`, không thêm dependency, không bundler.
-- Giữ chức năng: nút lưu (localStorage), đổi sáng/tối, `?state=` xem thử trạng thái, bộ sinh trang hội nghị (`tools/build-conferences.mjs`) và đồng bộ header/footer (`tools/sync-chrome.mjs`). Template và công cụ phải được sửa cùng với HTML sinh ra.
-- Font có hỗ trợ tiếng Việt đầy đủ.
-- Phải qua `node tools/check-site.mjs`, `node tools/check-contrast.mjs` (WCAG AA ở cả hai giao diện) và `node --test tools/*.test.mjs`.
+- Người dùng so sánh nhiều hội nghị cạnh nhau, thường khi đang gấp.
+- Hạn gốc ghi theo AoE (UTC−12): 23:59 AoE ngày D là 18:59 ngày D+1 theo giờ Việt Nam.
+- Dữ liệu hội nghị trong site là dữ liệu **minh hoạ** và được ghi rõ như vậy trên site.
+- Site chạy tĩnh, không backend; trạng thái lưu hội nghị và giao diện sáng/tối nằm trong trình duyệt.
 
-## Khẳng định cần tránh
-Không bịa số liệu hay thành tích ("hơn 10.000 người dùng"). Số hội nghị chỉ nêu khi đếm được từ dữ liệu có trong site. Dữ liệu minh hoạ luôn được ghi rõ.
+## Capabilities and Constraints
+
+- Site tĩnh trong `site/`: HTML, CSS, JS thuần, không framework, không bundler, không thêm dependency.
+- Có sẵn và đang chạy: danh sách hội nghị có bộ lọc và 4 trạng thái (đang tải, lỗi, trống, có dữ liệu) xem thử bằng `?state=`; 6 trang chi tiết hội nghị do `tools/build-conferences.mjs` sinh từ `tools/conferences.mjs`; nút lưu (★) và trang Đã lưu; đổi sáng/tối; blog 29 bài; Giới thiệu, Liên hệ, 404.
+- Header, footer và tiêu đề trang do `tools/sync-chrome.mjs` đồng bộ; mọi sửa khung trang phải qua công cụ, không sửa tay từng file.
+- Kiểm tra bắt buộc: `node tools/check-site.mjs`, `node tools/check-contrast.mjs`, `node --test tools/*.test.mjs`.
+- Chưa quyết định: có giữ tính năng lưu hội nghị và đổi sáng/tối sau khi làm lại giao diện hay không (chủ sở hữu không đặt chúng là bắt buộc).
+
+## Brand Commitments
+
+- Tên **UIT ConFinder** và toàn bộ chữ trên giao diện bằng tiếng Việt.
+- **29 bài blog và nội dung bài viết giữ nguyên chữ**; chỉ được đổi cách trình bày.
+
+## Evidence on Hand
+
+- 6 hội nghị minh hoạ trong `tools/conferences.mjs` (ICSE, FSE, ACL, ASE, ICLR, NeurIPS) và 29 bài trong `site/blog/`.
+- Không có người dùng thật, số liệu truy cập, lời chứng thực hay logo của đối tác: đừng bịa. Số hội nghị chỉ nêu khi đếm được từ dữ liệu có trong site.
+
+## Product Principles
+
+1. Hạn nộp bài là thông tin quan trọng nhất ở mọi nơi nó xuất hiện, luôn đi kèm giờ Việt Nam.
+2. Không bao giờ để người dùng phải đoán múi giờ.
+3. Dữ liệu minh hoạ phải luôn được gọi đúng tên, không giả làm dữ liệu thật.
+4. Mỗi khối trên trang phải giúp người dùng làm được một việc; không có việc thì bỏ.
+
+## Accessibility & Inclusion
+
+- WCAG AA (tương phản chữ ≥ 4.5:1) ở cả giao diện sáng và tối, kiểm bằng `tools/check-contrast.mjs`.
+- Dùng được hoàn toàn bằng bàn phím, có skip link, focus nhìn thấy, vùng bấm ≥ 44px.
+- Tôn trọng `prefers-reduced-motion` và `prefers-color-scheme`.
+- Dùng được từ 320px trở lên; màu không là tín hiệu duy nhất (luôn kèm chữ hoặc icon).

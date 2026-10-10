@@ -2,7 +2,6 @@
 export const NAV = [
     { href: 'lich-hoi-nghi.html', label: 'Lịch hội nghị' },
     { href: 'blog.html', label: 'Bài viết' },
-    { href: 'faq-aoe.html', label: 'Hướng dẫn AoE' },
     { href: 'gioi-thieu.html', label: 'Giới thiệu' },
     { href: 'lien-he.html', label: 'Liên hệ' },
 ];
@@ -11,7 +10,6 @@ export const FOOT_PAGES = [
     { href: 'lich-hoi-nghi.html', label: 'Lịch hội nghị' },
     { href: 'da-luu.html', label: 'Đã lưu' },
     { href: 'blog.html', label: 'Bài viết' },
-    { href: 'faq-aoe.html', label: 'Hướng dẫn AoE' },
     { href: 'gioi-thieu.html', label: 'Giới thiệu' },
     { href: 'lien-he.html', label: 'Liên hệ' },
 ];

@@ -21,7 +21,8 @@ createServer(async (req, res) => {
         const body = await readFile(file);
         res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' }).end(body);
     } catch {
-        try { res.writeHead(404, { 'content-type': TYPES['.html'] }).end(await readFile(join(ROOT, '404.html'))); }
-        catch { res.writeHead(404).end('Not found'); }
+        const page = await readFile(join(ROOT, '404.html')).catch(() => null);
+        if (page) res.writeHead(404, { 'content-type': TYPES['.html'] }).end(page);
+        else res.writeHead(404).end('Not found');
     }
 }).listen(5173, () => console.log('http://localhost:5173'));

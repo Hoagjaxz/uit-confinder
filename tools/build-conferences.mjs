@@ -5,7 +5,7 @@ import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { pageShell } from './shell.mjs';
 import { CONFERENCES } from './conferences.mjs';
-import { LEVELS, icon, ub } from './levels.mjs';
+import { icon, ub, ribbon } from './levels.mjs';
 import { formatVN, daysLeft, icsStart, urgency } from './time-vn.mjs';
 
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -48,24 +48,25 @@ const calendarLinks = (c, m) => {
                 <a class="btn block" href="data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}" download="${c.slug}-${c.year}.ics">${icon('i-dl', 18)}Tải .ics</a>`;
 };
 
+const bigDue = (m, c) => {
+    const { time, date } = formatVN(m.at);
+    return `<div class="cd-due"><time class="cd-date mono" datetime="${m.at}">${date.slice(0, 5)}<small>${date.slice(5)}</small></time><span class="cd-time mono">${time} giờ Việt Nam</span></div>`;
+};
+
 const sidebar = (c, items) => {
     if (c.closed) {
         const m = items.find(x => x.name === c.closedLabel);
         return `<div class="cdbig">
-                <div class="lab">Hạn nộp bài đã kết thúc<b>${m.name}</b></div>
-                ${ub('x')}
-                <div class="tm mono"><div>${when(m)}</div></div>
+                <h2 class="lab">Hạn nộp bài đã kết thúc<b>${m.name}</b></h2>
+                ${bigDue(m, c)}
+                <div class="cd-state">${ub('x')}</div>
             </div>`;
     }
     const m = items.find(x => x.kind === 'next');
-    const n = c.next;
     return `<div class="cdbig">
-                <div class="lab">Mốc kế tiếp<b>${m.name}</b></div>
-                ${ub(c.level, LEVELS[c.level].range)}
-                <div class="digits mono" role="timer" aria-live="off">
-                    <div><b>${n.d}</b><small>ngày</small></div><div><b>${n.h}</b><small>giờ</small></div><div><b>${n.m}</b><small>phút</small></div><div><b>${n.s}</b><small>giây</small></div>
-                </div>
-                <div class="tm mono"><div>${when(m)}</div></div>
+                <h2 class="lab">Mốc kế tiếp<b>${m.name}</b></h2>
+                ${bigDue(m, c)}
+                <div class="cd-state">${ub(c.level)}<span class="cd-left mono" role="timer" aria-live="off">${c.next.text.replace(/^Còn /, '')}</span></div>
             </div>`;
 };
 
@@ -76,13 +77,13 @@ const main = c => {
     return `<main>
 <div class="container dp">
     <a class="crumb" href="lich-hoi-nghi.html">${icon('i-left', 18)}Danh sách hội nghị</a>
+    <header class="dh"><h1>${c.name} <span>${c.year}</span></h1>
+        <p class="full">${c.full}</p>
+        <div class="brow">${[c.core, c.ccf].filter(Boolean).map(ribbon).join('')}${c.fields.map(f => `<span class="chip">${f}</span>`).join('')}</div>
+        <div class="meta"><span>${icon('i-pin')}${c.place}</span><span>${icon('i-calendar')}${c.dates}</span><span>Hình thức: ${c.format}</span></div>
+    </header>
     <div class="dgrid lv-${lv}">
         <div>
-            <div class="dh"><h1>${c.name} <span>${c.year}</span></h1>
-                <p class="full">${c.full}</p>
-                <div class="brow"><span class="badge">${c.core}</span>${c.ccf ? `<span class="badge">${c.ccf}</span>` : ''}<span class="badge fmt">${c.format}</span>${c.fields.map(f => `<span class="chipbtn"><span class="chip">${f}</span></span>`).join('')}</div>
-                <div class="meta"><span>${icon('i-pin')}${c.place}</span><span>${icon('i-calendar')}${c.dates}</span></div>
-            </div>
             <section class="panel"><h2>Các mốc quan trọng</h2>
                 <table class="mt"><thead><tr><th>Mốc</th><th>Hạn (giờ Việt Nam)</th><th>Trạng thái</th></tr></thead>
                 <tbody>
@@ -92,7 +93,7 @@ ${items.map(m => row(c, m)).join('\n')}
             <footer class="dfoot"><span>Nguồn: website chính thức của hội nghị ${icon('i-ext', 12)} (dữ liệu minh hoạ)</span><span>Cập nhật: ${c.updated}</span>
                 <a class="btn" href="lien-he.html">${icon('i-flag')}Báo dữ liệu sai</a></footer>
         </div>
-        <aside class="dsb" aria-label="Đồng hồ đếm ngược">
+        <aside class="dsb" aria-label="Mốc kế tiếp">
             ${sidebar(c, items)}
             <div class="panel actions">
                 ${next ? calendarLinks(c, next) : ''}

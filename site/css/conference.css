@@ -140,7 +140,7 @@
 .fl { position: relative; z-index: 1; margin: -6px 0 -8px }
 
 /* ---------- chi tiết ---------- */
-.dp { padding: 12px 0 0 }
+.dp { padding-top: 12px }
 .crumb { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: var(--link); font-weight: 600; text-decoration: none }
 .crumb:hover { text-decoration: underline }
 .dgrid { display: grid; gap: 24px; align-items: start; margin-top: 8px; --k-fg: var(--c-fg); --k-bg: var(--c-bg) }
@@ -148,10 +148,11 @@
 .dgrid.lv-u { --k-fg: var(--u-fg); --k-bg: var(--u-bg) }
 .dgrid.lv-o { --k-fg: var(--o-fg); --k-bg: var(--o-bg) }
 .dgrid.lv-x { --k-fg: var(--x-fg); --k-bg: var(--x-bg) }
-.dh h1 { font-size: 40px; line-height: 1.08; font-weight: 700 }
-.dh h1 span { font-weight: 400; color: var(--mute) }
+.dh h1 { font-family: var(--serif); font-optical-sizing: auto; font-size: 40px; line-height: 1.08; font-weight: 600 }
+.dh h1 span { font-weight: 500; color: var(--mute) }
 .dh .full { font-size: 17px; color: var(--mute); margin: 8px 0 16px }
 .brow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 14px }
+.brow .ribbon { height: 26px; padding-left: 10px; font-size: 13px }
 .meta { display: flex; gap: 8px 28px; flex-wrap: wrap; color: var(--mute); font-size: 14px; margin-bottom: 28px }
 .meta span { display: flex; gap: 8px; align-items: center }
 .panel { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden }
@@ -173,15 +174,17 @@
 .nxt { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; font-weight: 700; color: var(--k-fg); margin-bottom: 2px }
 .dfoot { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rule); display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; color: var(--mute); font-size: 13px }
 .dfoot .btn { margin-left: auto }
-.dsb { display: flex; flex-direction: column; gap: 16px }
-.cdbig { position: relative; border: 1px solid var(--rule); background: var(--badge); border-radius: var(--r); padding: 22px 18px 18px; display: flex; flex-direction: column; gap: 14px }
+.dsb { order: -1; display: flex; flex-direction: column; gap: 16px }
+.cdbig { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 26px 18px 20px; background: var(--badge); border: 1px solid var(--rule); border-radius: var(--r) }
 .cdbig::before { content: ""; position: absolute; top: -1px; left: 50%; width: 28px; height: 8px; margin-left: -14px; background: var(--paper); border: 1px solid var(--rule-2); border-top: 0; border-radius: 0 0 8px 8px }
-.cdbig .lab { font-size: 13px; color: var(--k-fg); font-weight: 600 }
-.cdbig .lab b { display: block; font-size: 20px; color: var(--ink) }
-.digits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center }
-.digits div { background: var(--field); border: 1px solid var(--rule-2); border-radius: var(--r); padding: 10px 0 8px }
-.digits b { display: block; font: 700 28px var(--mono); line-height: 1.1; color: var(--k-fg) }
-.digits small { font-size: 11px; color: var(--mute) }
+.cdbig .lab { font: 600 13px var(--sans); color: var(--mute) }
+.cdbig .lab b { display: block; margin-top: 2px; font-family: var(--serif); font-size: 22px; line-height: 1.2; font-weight: 600; color: var(--ink) }
+.cd-due { display: flex; flex-direction: column; gap: 2px }
+.cd-date { font-size: 44px; line-height: 1.05; font-weight: 700 }
+.cd-date small { font-size: 16px; font-weight: 400; color: var(--mute) }
+.cd-time { font-size: 13px; color: var(--mute) }
+.cd-state { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding-top: 12px; border-top: 1px solid var(--rule) }
+.cd-left { font-size: 24px; font-weight: 700; color: var(--k-fg) }
 .actions { padding: 16px; display: flex; flex-direction: column; gap: 8px }
 
 @media (min-width: 40rem) {
@@ -202,6 +205,6 @@
     .opt, .more { min-height: 36px }
     .grid { grid-template-columns: repeat(3, minmax(0, 1fr)) }
     .dgrid { grid-template-columns: minmax(0, 1fr) 360px }
-    .dsb { position: sticky; top: 92px }
+    .dsb { order: 0; position: sticky; top: 92px }
     .dh h1 { font-size: 52px }
 }

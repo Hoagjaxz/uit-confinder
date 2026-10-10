@@ -9,3 +9,4 @@ export const LEVELS = {
 };
 export const icon = (id, size = 16) => `<svg class="ic" width="${size}" height="${size}" aria-hidden="true"><use href="#${id}"/></svg>`;
 export const ub = (lv, tail) => `<span class="ub ${LEVELS[lv].cls}">${icon(LEVELS[lv].icon)}<b>${LEVELS[lv].label}</b>${tail ? `<i class="sep">·</i><span class="mono">${tail}</span>` : ''}</span>`;
+export const ribbon = text => `<span class="ribbon rb-${/A\*/.test(text) ? 'a' : /A$/.test(text) ? 'b' : /B$/.test(text) ? 'c' : 'd'}">${text}</span>`;

@@ -4,10 +4,8 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { CONFERENCES } from './conferences.mjs';
-import { icon, ub } from './levels.mjs';
+import { icon, ub, ribbon } from './levels.mjs';
 import { formatVN, daysLeft, urgency, nextDue } from './time-vn.mjs';
-
-const ribbon = text => `<span class="ribbon rb-${/A\*/.test(text) ? 'a' : /A$/.test(text) ? 'b' : /B$/.test(text) ? 'c' : 'd'}">${text}</span>`;
 
 const card = c => {
     const due = nextDue(c);

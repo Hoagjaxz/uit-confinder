@@ -8,13 +8,13 @@ web
 
 ## Users
 
-- **Sinh viên, học viên cao học, nghiên cứu sinh CNTT ở Việt Nam** đang cần chọn nơi nộp bài. Họ mở site khi tra cứu (laptop) hoặc kiểm tra nhanh một hạn (điện thoại). Việc cần làm: biết hội nghị nào còn nhận bài, còn bao lâu, hạn đó là mấy giờ ở Việt Nam. Họ đã quen CORE, CCF, AoE, camera-ready, rebuttal. Họ lo bỏ lỡ hạn hơn là cần được truyền cảm hứng.
+- **Sinh viên, học viên cao học, nghiên cứu sinh CNTT ở Việt Nam** đang cần chọn nơi nộp bài. Họ mở site khi tra cứu (laptop) hoặc kiểm tra nhanh một hạn (điện thoại). Việc cần làm: biết hội nghị nào còn nhận bài, còn bao lâu, hạn chót là mấy giờ ngày nào ở Việt Nam. Họ đã quen CORE, CCF, camera-ready, rebuttal. Họ lo bỏ lỡ hạn hơn là cần được truyền cảm hứng.
 - **Giảng viên, nhà nghiên cứu** tra nhanh hạn và rank để chọn nơi gửi.
 - Người chấm đồ án IE104 cũng mở site này để đánh giá (bối cảnh đánh giá, không phải đối tượng sản phẩm).
 
 ## Product Purpose
 
-Tra cứu hạn nộp bài hội nghị khoa học. Mỗi hội nghị có các mốc quan trọng, hạn theo AoE kèm giờ Việt Nam (GMT+7) và đếm ngược. Thành công là người dùng biết đúng hạn trong vài giây và không nhầm múi giờ. Site là sản phẩm của đồ án môn IE104 (Internet và Công nghệ Web), Trường Đại học Công nghệ Thông tin (UIT), ĐHQG-HCM.
+Tra cứu hạn nộp bài hội nghị khoa học. Mỗi hội nghị có các mốc quan trọng, hạn chót hiển thị theo giờ Việt Nam (GMT+7) và đếm ngược. Thành công là người dùng biết đúng hạn trong vài giây. Site là sản phẩm của đồ án môn IE104 (Internet và Công nghệ Web), Trường Đại học Công nghệ Thông tin (UIT), ĐHQG-HCM.
 
 ## Positioning
 
@@ -26,7 +26,7 @@ Tra cứu hạn nộp bài hội nghị khoa học. Mỗi hội nghị có các 
 ## Operating Context
 
 - Người dùng so sánh nhiều hội nghị cạnh nhau, thường khi đang gấp.
-- Hạn gốc ghi theo AoE (UTC−12): 23:59 AoE ngày D là 18:59 ngày D+1 theo giờ Việt Nam.
+- Mọi hạn trên site hiển thị theo **giờ Việt Nam (GMT+7)**. Site không nói đến AoE hay múi giờ gốc của hội nghị; người sở hữu coi đó là thông tin không cần thiết.
 - Dữ liệu hội nghị trong site là dữ liệu **minh hoạ** và được ghi rõ như vậy trên site.
 - Site chạy tĩnh, không backend; trạng thái lưu hội nghị và giao diện sáng/tối nằm trong trình duyệt.
 
@@ -50,8 +50,8 @@ Tra cứu hạn nộp bài hội nghị khoa học. Mỗi hội nghị có các 
 
 ## Product Principles
 
-1. Hạn nộp bài là thông tin quan trọng nhất ở mọi nơi nó xuất hiện, luôn đi kèm giờ Việt Nam.
-2. Không bao giờ để người dùng phải đoán múi giờ.
+1. Hạn nộp bài là thông tin quan trọng nhất ở mọi nơi nó xuất hiện.
+2. Mọi giờ trên site là giờ Việt Nam; không bao giờ để người dùng phải đổi múi giờ.
 3. Dữ liệu minh hoạ phải luôn được gọi đúng tên, không giả làm dữ liệu thật.
 4. Mỗi khối trên trang phải giúp người dùng làm được một việc; không có việc thì bỏ.
 

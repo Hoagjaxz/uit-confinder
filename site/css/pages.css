@@ -31,13 +31,7 @@
 .qa[open] summary .ic { transform: rotate(180deg) }
 .qa p { padding: 0 0 16px; color: var(--mute) }
 
-.saved-list { list-style: none }
-.srow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 18px; border-top: 1px solid var(--rule) }
-.srow:first-child { border-top: 0 }
-.srow-t { flex: 1 1 260px; display: grid; gap: 2px; text-decoration: none }
-.srow-t b { font-family: var(--sans); font-size: 22px; line-height: 1.2 }
-.srow-t b span { font-weight: 400; font-style: normal; color: var(--mute) }
-.srow-n { font-size: 13px; color: var(--mute) }
+.saved-wrap { margin-top: 24px }
 
 .nf { margin: 56px auto 0; max-width: 560px }
 .nf-code { font: 600 clamp(64px, 18vw, 120px) var(--sans); line-height: 1; color: var(--accent) }

@@ -1,3 +1,4 @@
 .idea/
 *.bak
 Thumbs.db
+.playwright-mcp/

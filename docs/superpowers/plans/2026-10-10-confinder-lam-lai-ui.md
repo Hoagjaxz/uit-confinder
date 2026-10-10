@@ -7,7 +7,7 @@
 
 **Kiến trúc:** site tĩnh `site/`. CSS: `site.css` (token, thành phần chung, khung), `conference.css` (thẻ và chi tiết), `pages.css` (trang phụ), `blog.css`, `states.css`. `landing.css` bị xoá. Markup lặp lại sinh từ `tools/conferences.mjs`, không sửa tay: header/footer qua `tools/sync-chrome.mjs`; trang hội nghị qua `tools/build-conferences.mjs`; **các thẻ ở trang lịch, trang chủ, Đã lưu qua `tools/build-lists.mjs` mới**.
 
-**Ngăn xếp:** HTML/CSS/JS thuần, Node chỉ cho công cụ, không dependency. Bỏ Google Fonts (bộ chữ hệ thống).
+**Ngăn xếp:** HTML/CSS/JS thuần, Node chỉ cho công cụ, không dependency. Chữ nạp từ Google Fonts (Be Vietnam Pro, Newsreader, JetBrains Mono) qua một thẻ link duy nhất do `tools/sync-chrome.mjs` quản lý.
 
 ---
 
@@ -22,7 +22,7 @@
 | Bảng màu **Mận** (tối) | nền `#131018`, thẻ `#1c1823`, chữ `#f2eff6`, chữ phụ `#a9a2b8`, viền `#2d2838` / `#3c3649`, nhấn `#b794f6`, dây đeo `#ff5c93`, hover `#241f2d`. |
 | Ruy-băng rank | Sáng: CORE A* `#2a1647`, hạng A/CCF `#7a3fc0`, hạng B `#a15bd0`, hạng C `#6e6880`, chữ trắng. Tối: A* nền `#f2eff6` chữ tối, A/CCF `#8a5fd6`, B `#a98be0`, C `#8c849c`. **Không dùng đỏ hay cam cho ruy-băng** (tránh lẫn mức khẩn). |
 | Mức khẩn | Giữ cặp token `--c/--s/--u/--o/--x` (fg/bg). Sáng: Gấp `#a8200f`/`#fde6e1`, Trong tuần `#8a5200`/`#fdf0d3`, Trong tháng `#1f4fae`/`#e5edfb`, Còn rộng `#3b6a12`/`#ecf3d6`, Hết hạn `#586070`/`#eceef2`. Tối: Gấp `#ffa89b`/`#3d1a15`, Trong tuần `#ffd28a`/`#382a0c`, Trong tháng `#aac4ff`/`#15284e`, Còn rộng `#cfe79a`/`#26300f`, Hết hạn `#b6bfcc`/`#23262d`. Hiển thị = nhãn (biểu tượng ▲ ● ✓ + chữ), **không** vạch cao dần (đã bỏ). |
-| Chữ | Bộ chữ **hệ thống** sans (`system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`), không serif trang trí, không chữ nghiêng nhấn. Số `font-variant-numeric: tabular-nums`. Ngày chót (24px) và đếm ngược dùng mono hệ thống (`ui-monospace, "Cascadia Mono", Consolas, monospace`). Không `letter-spacing` rải, **không eyebrow**. |
+| Chữ (người dùng chốt) | **Be Vietnam Pro** (400/500/600/700) cho giao diện và đoạn chữ; **Newsreader** (upright, 500/600, **không nghiêng**) làm chữ có chân để nhấn mạnh: tên hội nghị trên thẻ, tiêu đề trang (`h1`), số lớn ở hero; **JetBrains Mono** (400/500/700) cho ngày giờ và đếm ngược. Nạp từ Google Fonts bằng **một** thẻ `<link>` do `sync-chrome` quản lý (`display=swap`, kèm preconnect), fallback `system-ui` / `Georgia` / `ui-monospace`. Số `font-variant-numeric: tabular-nums`. Không `letter-spacing` rải, **không eyebrow**, không chữ nghiêng, không gạch chân nhấn kiểu vàng. |
 | Hình khối | Thẻ bo 6px, ruy-băng/nhãn bo 3px, viền 1px, **không bóng, không hover nhấc lên, không animation xuất hiện lần lượt**. Hover chỉ đổi nền thẻ. Focus ring 2px nhấn, offset 2px. **Cấm** `border-left` màu >1px. |
 | Hình dạng đặc trưng | **Chỉ hai**: khe nhỏ (lỗ xỏ dây) ở mép trên mỗi thẻ và đuôi chữ V của ruy-băng. Không thêm hoạ tiết. |
 
@@ -76,7 +76,7 @@ Với trang đã sửa: dò tràn ngang bằng `tools/probe-overflow.js` trong i
 
 - [ ] Đọc `site.css`; liệt kê token và chỗ dùng (`grep -rn "var(--" site/css`).
 - [ ] Thay giá trị token trong `:root` và `:root[data-theme="dark"]` theo bảng. Giữ tên token các CSS khác đang dùng; bỏ `--gold*`, `--navy*`, `--on-navy`, `--sh`; thêm `--accent`, `--badge`, `--lanyard`, `--ribbon-a/b/c/d`. Chỉnh giá trị cho qua `check-contrast` (thêm cặp mới: chữ trắng trên từng ruy-băng, nhấn trên nền và trên thẻ, giờ chót trên thẻ, chữ phụ trên thẻ) mà không hạ ngưỡng.
-- [ ] Bộ chữ hệ thống, bỏ Google Fonts ở mọi nơi bằng bước idempotent trong `sync-chrome.mjs`.
+- [ ] Chữ: một thẻ `<link>` Google Fonts duy nhất (3 họ) do `sync-chrome.mjs` ghi idempotent ở mọi trang (thay cho mọi thẻ font cũ); token `--sans`, `--serif`, `--mono` trỏ tới 3 họ với fallback.
 - [ ] Viết lại thành phần chung: `body`, `h1–h3`, `.btn` (+ `.pri`, `.ghost`, `.block`), `.badge`, `.chip`, `.ub` (nhãn mức khẩn), `.ribbon` (đuôi chữ V, `clip-path`), `.iconbtn`, `.panel`, `.crumb`, `.mono`, focus, `.skip`, `::selection`, `caret-color`, thanh cuộn theo token. Xoá `.rise` + keyframes, mọi `box-shadow` trang trí, `translateY` khi hover, `.eyebrow`, `.brand-mark` bóng lệch, mọi `border-left` màu >1px.
 - [ ] Thêm `.badge-card` (xem trên) vào `conference.css` kèm markup mẫu trong comment đầu khối.
 - [ ] `states.css`: token mới, skeleton thành thẻ rỗng, chỉ đổi opacity (tôn trọng `prefers-reduced-motion`).
@@ -122,14 +122,19 @@ Với trang đã sửa: dò tràn ngang bằng `tools/probe-overflow.js` trong i
 
 ---
 
-## Task 4: Trang chủ `index.html`
+## Task 4: Trang chủ `index.html` — hero sáng tạo
 
-**Files:** `site/index.html`, `site/css/` (dùng `.badge-card`), xoá `site/css/landing.css`.
+**Files:** `site/index.html`, `site/css/` (dùng `.badge-card`, `.ribbon`), xoá `site/css/landing.css`; có thể thêm `site/css/home.css` và `site/js/home.js` nhỏ nếu cần.
 
-Bố cục (một cột ≈1100px): (1) tiêu đề một dòng nêu việc ("Hạn nộp bài hội nghị khoa học") + một câu ≤ 18 từ (không nhắc AoE) + ô tìm kiếm và nút "Xem lịch hội nghị"; (2) **Sắp đến hạn**: 6 thẻ, liên kết "Xem tất cả"; (3) hàng chip sáu lĩnh vực liên kết tới trang lịch; (4) 3 bài viết mới dạng danh sách (tiêu đề, ngày, một dòng). Bỏ: ticker, stamp, đồng hồ + thẻ nghiêng, số liệu, "Cách hoạt động", "Năm mức khẩn".
+**Tự do sáng tạo (người dùng cho phép): hero phải thật sự có ý tưởng, không phải một hero SaaS.** Khung: vẫn là công cụ tra cứu, vẫn trong thế giới Thẻ đeo hội nghị màu Mận, vẫn **không AoE**, không đồng hồ/ticker/huy hiệu cũ, không số liệu bịa, không eyebrow, không chữ nghiêng, không gradient chữ, không bóng. Màn hình đầu tiên phải cho thấy **các hạn gần nhất bằng chính thẻ hội nghị thật** (dữ liệu từ `tools/conferences.mjs`, sinh bằng `build-lists.mjs`).
+
+Gợi ý hướng (chọn một, hoặc đề xuất hướng riêng và giải thích trong báo cáo): thẻ hội nghị cỡ lớn treo trên dây đeo, tên đặt bằng Newsreader cỡ lớn, hạn sắp tới là thứ to nhất trang; hoặc một "dây thẻ" ngang các hội nghị sắp đến hạn xếp theo thời gian, trượt/cuộn ngang trên mobile. Tiêu đề một câu (không hô hào), ô tìm kiếm, một nút "Xem lịch hội nghị".
+
+Phần dưới hero: (2) **Sắp đến hạn** 6 thẻ; (3) hàng chip sáu lĩnh vực liên kết tới trang lịch; (4) 3 bài viết mới dạng danh sách. Bỏ ticker, stamp, đồng hồ, thẻ nghiêng, khối số liệu, "Cách hoạt động", "Năm mức khẩn".
 
 - [ ] `grep` không còn class `lp-*`, `ticker`, `stamp`, `mini`, `rise`; xoá `landing.css` và thẻ link.
-- [ ] **Chấp nhận:** ở 1280×800 thấy tiêu đề, tìm kiếm và ≥ 3 thẻ không cuộn; 375px không tràn; sáng/tối ổn; không còn chữ AoE.
+- [ ] **Giới hạn kiểm tra:** một đợt chụp ảnh, một đợt sửa, một vòng xác nhận; Claude chính xem ảnh thật và chỉ nhận khi hero có ý tưởng rõ (kể được bằng một câu) và đọc được trong 3 giây. Nếu chưa, đề xuất lại hướng khác một lần, rồi hỏi người dùng.
+- [ ] **Chấp nhận:** ở 1280×800 thấy tiêu đề, tìm kiếm và ≥ 2 thẻ sắp đến hạn không cuộn; 375px không tràn; sáng/tối đều ổn; không còn chữ AoE.
 
 ---
 
@@ -202,7 +207,7 @@ Bố cục (một cột ≈1100px): (1) tiêu đề một dòng nêu việc ("H�
 
 Theo `new-work.md` mục 7: kiểm tra, rồi giao cho agent độc lập.
 
-- [ ] Bộ kiểm tra chung đều pass; `grep -rn "landing.css\|newsletter\|--gold\|--navy\|Newsreader\|Be Vietnam\|JetBrains\|fonts.googleapis" site tools` rỗng.
+- [ ] Bộ kiểm tra chung đều pass; `grep -rn "landing.css\|newsletter\|--gold\|--navy" site tools` rỗng.
 - [ ] **Một đợt chụp ảnh** (không lặp): `index`, `lich-hoi-nghi` (+ `?state=` error/empty), `hoi-nghi-fse`, `hoi-nghi-neurips`, `da-luu`, `blog`, một bài blog, `gioi-thieu`, `lien-he`, `404`; mỗi trang 1280 sáng, 1280 tối, 375 sáng. Lưu vào `.impeccable/review/`, mở từng file kiểm hợp lệ, sửa **một đợt**, xác nhận bằng **một** vòng nữa, rồi dừng.
 - [ ] Chạy một lần: `impeccable.cmd detect --json site/css site/index.html site/lich-hoi-nghi.html site/hoi-nghi-fse.html`, sửa mục máy móc.
 - [ ] Giao `impeccable-finish-reviewer` (tươi, không kế thừa hội thoại) với: yêu cầu gốc, hợp đồng, ảnh chụp, `craft-floor.md`, kết quả detect. Làm theo disposition (`ship`/`fix`/`rebuild`/`recapture`).

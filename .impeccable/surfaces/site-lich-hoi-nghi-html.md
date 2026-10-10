@@ -8,7 +8,7 @@ related_targets: ["site/index.html","site/hoi-nghi.html","site/da-luu.html"]
 # Surface brief: UIT ConFinder (cả site, mode Operate; blog và trang tĩnh là Read, thừa hưởng thế giới này)
 
 Scope: danh sách hội nghị (`lich-hoi-nghi.html`), trang chủ, trang chi tiết hội nghị, Đã lưu. Blog/Giới thiệu/Liên hệ/404 kế thừa token và thành phần, chỉ khác bố cục đọc.
-Visitor: SV/NCS và giảng viên tra hạn; người chấm đồ án. Task: biết hội nghị nào còn nhận bài, hạn chót là ngày giờ nào ở Việt Nam. Build path: code-led. Seed: 2d35624c, re-roll 4. Người dùng chốt hướng được giao ("Thẻ đeo hội nghị") và bảng màu **Mận**. **Bỏ hẳn AoE: mọi giờ là giờ Việt Nam (GMT+7).** Người dùng đã bỏ 5 vạch cao dần; mức khẩn chỉ là nhãn chữ + biểu tượng.
+Visitor: SV/NCS và giảng viên tra hạn; người chấm đồ án. Task: biết hội nghị nào còn nhận bài, hạn chót là ngày giờ nào ở Việt Nam. Build path: code-led. Seed: 2d35624c, re-roll 4. Người dùng chốt hướng được giao ("Thẻ đeo hội nghị") và bảng màu **Mận**. **Bỏ hẳn AoE: mọi giờ là giờ Việt Nam (GMT+7).** Người dùng cho phép hero trang chủ sáng tạo tự do trong thế giới này. Người dùng đã bỏ 5 vạch cao dần; mức khẩn chỉ là nhãn chữ + biểu tượng.
 
 ## Direction contract
 

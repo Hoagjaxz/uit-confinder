@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "site/index.html"
+        ],
+        "createdAt": "2026-10-10T16:31:08.935Z",
+        "reason": "Claude: bảng màu Mận là lựa chọn người dùng chốt ('chốt màu mận'), tím phẳng, không gradient"
+      }
+    ]
+  }
+}

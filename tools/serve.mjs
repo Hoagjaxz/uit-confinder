@@ -18,7 +18,8 @@ createServer(async (req, res) => {
     const file = normalize(join(ROOT, path.endsWith('/') ? path + 'index.html' : path));
     if (!file.startsWith(ROOT)) { res.writeHead(403).end(); return; }
     try {
-        res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' }).end(await readFile(file));
+        const body = await readFile(file);
+        res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' }).end(body);
     } catch {
         try { res.writeHead(404, { 'content-type': TYPES['.html'] }).end(await readFile(join(ROOT, '404.html'))); }
         catch { res.writeHead(404).end('Not found'); }

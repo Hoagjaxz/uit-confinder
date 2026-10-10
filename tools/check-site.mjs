@@ -1,0 +1,36 @@
+// Kiểm tra tĩnh toàn site. Dùng: node tools/check-site.mjs (thoát mã 1 nếu có lỗi).
+import { readFileSync, existsSync } from 'node:fs';
+import { dirname, join, relative } from 'node:path';
+import { SITE, htmlFiles, syncPage } from './sync-chrome.mjs';
+
+const errors = [];
+const err = (rel, msg) => errors.push(`${rel}: ${msg}`);
+const slash = p => p.split('\\').join('/');
+const pages = new Map(htmlFiles().map(f => [slash(relative(SITE, f)), readFileSync(f, 'utf8')]));
+
+for (const [rel, html] of pages) {
+    if (!/<html lang="vi"/.test(html)) err(rel, 'thiếu <html lang="vi">');
+    if (!/<title>[^<]+<\/title>/.test(html)) err(rel, 'thiếu <title>');
+    if (!/<meta name="description" content="[^"]+"/.test(html)) err(rel, 'thiếu meta description');
+    if (!/<meta name="viewport"/.test(html)) err(rel, 'thiếu meta viewport');
+    if (syncPage(html, rel) !== html) err(rel, 'header/footer chưa đồng bộ (chạy node tools/sync-chrome.mjs)');
+    for (const m of html.matchAll(/<img\b(?![^>]*\balt=)[^>]*>/g)) err(rel, `<img> thiếu alt: ${m[0].slice(0, 60)}`);
+    for (const m of html.matchAll(/\b(?:href|src)="([^"]*)"/g)) {
+        const url = m[1];
+        if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(url)) continue;
+        if (url === '#' || url === '') { err(rel, `liên kết rỗng href="${url}"`); continue; }
+        const [pathPart, hash = ''] = url.split('#');
+        const file = pathPart.split('?')[0];
+        const target = file ? slash(join(dirname(rel), file)) : rel;
+        const targetHtml = pages.get(target);
+        if (!targetHtml && !existsSync(join(SITE, target))) { err(rel, `liên kết gãy: ${url}`); continue; }
+        if (hash && targetHtml && !targetHtml.includes(`id="${hash}"`)) err(rel, `neo không tồn tại: ${url}`);
+    }
+}
+
+if (errors.length) {
+    console.error(errors.join('\n'));
+    console.error(`\n${errors.length} lỗi`);
+    process.exit(1);
+}
+console.log(`OK: ${pages.size} trang`);

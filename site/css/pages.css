@@ -1,41 +1,49 @@
-/* Trang phụ: giới thiệu, hướng dẫn AoE, liên hệ, đã lưu, 404 */
+/* Trang phụ: giới thiệu, liên hệ, đã lưu, 404 (một cột đọc, kế thừa token của site.css) */
 .pg-wrap { padding-bottom: 8px }
-.cols { display: grid; gap: 24px; margin-top: 24px; align-items: start }
-.stack { display: grid; gap: 24px }
-.panel.pad { padding: 20px 18px }
-.panel.pad > h2 { padding: 0 0 10px; font-size: 22px }
-.panel.pad p + p { margin-top: 10px }
-.panel.pad ul { padding-left: 20px; margin-top: 10px }
-.panel.pad .lvl { list-style: none; padding: 0; display: grid; gap: 10px }
-.panel.pad .lvl li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px }
-.lvl .r { color: var(--mute); font-size: 14px }
-.rank-row { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px }
-.rank-row .badge { margin-top: 2px }
-.links { display: grid; gap: 4px }
-.links a { display: flex; align-items: center; justify-content: space-between; min-height: 44px; color: var(--link); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--rule) }
-.links a:last-child { border: 0 }
-.links a:hover { background: var(--hover) }
+.pg-read { max-width: 46rem; margin: 0 auto; padding-bottom: 32px }
+.pg-read .page-head { display: block; padding-top: 24px }
+.pg-read .page-head h1 { font-size: 30px }
+.pg-read .page-head p { margin-top: 8px; font-size: 16px }
 
-.fform { display: grid; gap: 16px }
+.sec { margin-top: 32px }
+.sec > h2 { margin-bottom: 8px; font-size: 22px }
+.sec p { max-width: 68ch }
+.sec p + p { margin-top: 10px }
+.note { padding: 12px 14px; background: var(--badge); border: 1px solid var(--rule-2); border-radius: var(--r) }
+
+/* bảng rank và thang độ khẩn: dưới 40rem mỗi hàng thành khối dọc có nhãn */
+.rt { width: 100%; margin-top: 14px; border-collapse: collapse; background: var(--badge); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; font-size: 14px }
+.rt thead { display: none }
+.rt tr { display: grid; gap: 6px; padding: 12px 14px; border-top: 1px solid var(--rule) }
+.rt tbody tr:first-child { border-top: 0 }
+.rt th, .rt td { display: block; text-align: left; font-weight: 400 }
+.rt th .ub, .rt th .ribbon { vertical-align: middle }
+.rt td[data-l]::before { content: attr(data-l) ": "; color: var(--mute) }
+
+.fform { display: grid; gap: 18px; margin-top: 24px }
 .fr { display: grid; gap: 6px }
 .fr label { font-weight: 600; font-size: 14px }
-.fr input, .fr select, .fr textarea { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--field); color: var(--ink); font: inherit }
+.fr input, .fr select, .fr textarea { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--rule-2); border-radius: var(--r); background: var(--field); color: var(--ink); font: inherit }
 .fr textarea { min-height: 140px; resize: vertical }
 .fr .hint { font-size: 12.5px; color: var(--mute) }
 .fmsg { min-height: 22px; font-weight: 600; color: var(--o-fg) }
-
-.qa { border-bottom: 1px solid var(--rule) }
-.qa:last-child { border: 0 }
-.qa summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; cursor: pointer; list-style: none; font-weight: 600 }
-.qa summary::-webkit-details-marker { display: none }
-.qa[open] summary .ic { transform: rotate(180deg) }
-.qa p { padding: 0 0 16px; color: var(--mute) }
+.info { padding-top: 20px; border-top: 1px solid var(--rule) }
+.info p + p { margin-top: 6px }
 
 .saved-wrap { margin-top: 24px }
 
-.nf { margin: 56px auto 0; max-width: 560px }
-.nf-code { font: 600 clamp(64px, 18vw, 120px) var(--sans); line-height: 1; color: var(--accent) }
+.nf { padding-top: 56px }
+.nf-code { font-size: 48px; font-weight: 700; line-height: 1; color: var(--dim) }
+.nf h1 { margin-top: 12px; font-size: 28px }
+.nf > p:not(.nf-code) { margin-top: 8px; max-width: 52ch; color: var(--mute) }
+.nf > .nf-links { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 16px }
+.nf-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--link); font-weight: 600 }
 
-@media (min-width: 64rem) {
-    .cols { grid-template-columns: minmax(0, 1fr) 340px }
+@media (min-width: 40rem) {
+    .rt thead { display: table-header-group }
+    .rt thead th { border-top: 0; padding: 10px 14px; background: var(--tint-2); font-size: 12.5px; font-weight: 600; color: var(--mute) }
+    .rt tr { display: table-row; padding: 0 }
+    .rt th, .rt td { display: table-cell; padding: 12px 14px; vertical-align: middle; border-top: 1px solid var(--rule) }
+    .rt tbody tr:first-child > * { border-top: 0 }
+    .rt td[data-l]::before { content: none }
 }

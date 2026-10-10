@@ -43,3 +43,5 @@ export const footLinksHtml = prefix =>
 
 export const savedHtml = prefix =>
     `<!--c:saved--><a class="saved" href="${prefix}da-luu.html" aria-label="Đã lưu"><svg class="ic fill" width="18" height="18" aria-hidden="true"><use href="#i-star"/></svg><span><span class="sv-t">Đã lưu </span>(<span data-saved-count>0</span>)</span></a><!--/c:saved-->`;
+
+export const faviconHtml = '<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\'%3E%3Crect width=\'32\' height=\'32\' rx=\'6\' fill=\'%231e2a4a\'/%3E%3Ctext x=\'16\' y=\'23\' font-size=\'20\' text-anchor=\'middle\' fill=\'%23f3e6c4\' font-family=\'Georgia,serif\' font-weight=\'700\'%3EC%3C/text%3E%3C/svg%3E">';

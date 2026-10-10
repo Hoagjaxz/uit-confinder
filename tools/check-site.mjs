@@ -37,6 +37,15 @@ for (const rel of ['lich-hoi-nghi.html', 'index.html']) {
     }
 }
 
+// Mỗi trang một <title> riêng.
+const titles = new Map();
+for (const [rel, html] of pages) {
+    const t = html.match(/<title>([^<]+)<\/title>/)?.[1];
+    if (!t) continue;
+    if (titles.has(t)) err(rel, `trùng <title> với ${titles.get(t)}: ${t}`);
+    else titles.set(t, rel);
+}
+
 if (errors.length) {
     console.error(errors.join('\n'));
     console.error(`\n${errors.length} lỗi`);

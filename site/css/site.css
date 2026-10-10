@@ -14,6 +14,17 @@
     --u-fg: #1e40af; --u-bg: #eff6ff;
     --o-fg: #166534; --o-bg: #f0fdf4;
     --x-fg: #334155; --x-bg: #eceff3;
+    --link: #1e2a4a;
+    --focus: #8a6411;
+    --gold-text: #8a6411;
+    --on-navy: #f3e6c4;
+    --field: #ffffff;
+    --tint: var(--tint);
+    --tint-2: var(--tint-2);
+    --closed: var(--closed);
+    --past: var(--past);
+    --dim: var(--dim);
+    color-scheme: light;
     --r: 8px;
     --sh: 0 1px 2px rgba(22, 32, 42, .07), 0 8px 22px rgba(22, 32, 42, .06);
     --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
@@ -39,7 +50,7 @@ img, svg { max-width: 100% }
 [hidden] { display: none !important }
 a { color: inherit }
 button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0 }
-:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px }
 .mono { font-family: var(--mono); font-variant-numeric: tabular-nums }
 .ic { flex: none; vertical-align: middle }
 .ic.fill { fill: currentColor }
@@ -49,15 +60,15 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 /* ---------- masthead ---------- */
 .masthead {
     position: sticky; top: 0; z-index: 40;
-    background: rgba(246, 241, 231, .94);
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--rule);
     box-shadow: 0 3px 0 -2px var(--rule);
 }
 .masthead-in { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; min-height: 68px }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--serif); font-weight: 700; font-size: 20px; letter-spacing: -.01em; min-height: 44px }
-.brand em { font-style: italic; font-weight: 500; color: var(--gold) }
-.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; background: var(--navy); color: var(--gold-soft); border-radius: 6px; font-size: 20px; box-shadow: 3px 3px 0 var(--gold) }
+.brand em { font-style: italic; font-weight: 500; color: var(--gold-text) }
+.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; background: var(--navy); color: var(--on-navy); border-radius: 6px; font-size: 20px; box-shadow: 3px 3px 0 var(--gold) }
 .nav { display: flex; margin-left: auto }
 .nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-weight: 600; font-size: 14px; text-decoration: none; color: var(--mute) }
 .nav a::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 6px; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .25s ease }
@@ -65,27 +76,27 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .nav a:hover::after, .nav a[aria-current=page]::after { transform: scaleX(1) }
 .m-search { order: 3; flex: 1 1 100%; display: flex; align-items: center; gap: 8px; min-height: 44px; margin-bottom: 10px; padding: 0 12px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); color: var(--mute) }
 .m-search input { flex: 1; min-width: 0; min-height: 42px; border: 0; background: none; font: inherit; color: var(--ink); outline: none }
-.m-search:focus-within { outline: 3px solid var(--gold); outline-offset: 2px }
+.m-search:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
 .m-search kbd { font: 11px var(--mono); border: 1px solid var(--rule); border-radius: 4px; padding: 0 6px; color: var(--mute) }
-.saved { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 14px; color: var(--navy); white-space: nowrap }
+.saved { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 14px; color: var(--link); white-space: nowrap }
 
 /* ---------- controls ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 1px solid var(--navy); border-radius: var(--r); background: var(--card); color: var(--navy); font-weight: 600; font-size: 14px; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s, transform .2s }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 1px solid var(--link); border-radius: var(--r); background: var(--card); color: var(--link); font-weight: 600; font-size: 14px; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s, transform .2s }
 .btn:hover { background: var(--gold-soft) }
-.btn.pri { background: var(--navy); color: #fff }
+.btn.pri { background: var(--navy); color: #fff; border-color: var(--navy) }
 .btn.pri:hover { background: var(--navy-2) }
 .btn.ghost { border-color: transparent; background: none }
-.btn.ghost:hover { background: rgba(30, 42, 74, .07) }
+.btn.ghost:hover { background: color-mix(in srgb, var(--link) 8%, transparent) }
 .btn.block { width: 100% }
-.badge { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 9px; border-radius: 4px; background: var(--navy); color: var(--gold-soft); font-size: 12px; font-weight: 700; letter-spacing: .02em; white-space: nowrap }
-.badge.soft { background: #e9e1cf; color: var(--ink) }
+.badge { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 9px; border-radius: 4px; background: var(--navy); color: var(--on-navy); font-size: 12px; font-weight: 700; letter-spacing: .02em; white-space: nowrap }
+.badge.soft { background: var(--tint); color: var(--ink) }
 .badge.fmt { background: var(--card); color: var(--ink); border: 1px solid var(--rule); font-weight: 600 }
-.badge.k { background: var(--o-bg); color: var(--o-fg); border: 1px solid #bbdcc5 }
+.badge.k { background: var(--o-bg); color: var(--o-fg); border: 1px solid color-mix(in srgb, currentColor 35%, transparent) }
 .chipbtn { display: inline-flex; align-items: center; min-height: 44px }
 .chip { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 13px; border: 1px solid var(--rule); border-radius: 999px; background: var(--card); font-size: 12.5px; font-weight: 500; white-space: nowrap; transition: background .2s, border-color .2s }
 .chipbtn:hover .chip { background: var(--gold-soft); border-color: var(--gold) }
 .chip.on, .chipbtn[aria-pressed=true] .chip { background: var(--navy); border-color: var(--navy); color: #fff }
-.fchip { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px 0 14px; border: 1px solid var(--navy); border-radius: 999px; background: var(--card); color: var(--navy); font-size: 13px; font-weight: 600; white-space: nowrap }
+.fchip { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px 0 14px; border: 1px solid var(--link); border-radius: 999px; background: var(--card); color: var(--link); font-size: 13px; font-weight: 600; white-space: nowrap }
 
 /* urgency */
 .ub { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 2px 10px; border: 1px solid currentColor; border-radius: 999px; font-size: 12.5px; white-space: nowrap; align-self: flex-start }
@@ -104,7 +115,7 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .pb { min-width: 44px; height: 44px; padding: 0 12px; border: 1px solid var(--rule); border-radius: var(--r); display: grid; place-items: center; background: var(--card); font-weight: 600; transition: background .2s }
 button.pb:not(:disabled):hover { background: var(--gold-soft) }
 .pb.cur { background: var(--navy); border-color: var(--navy); color: #fff }
-.pb.dis, .pb:disabled { color: #a7a08f; background: transparent; cursor: default }
+.pb.dis, .pb:disabled { color: var(--dim); background: transparent; cursor: default }
 
 /* newsletter */
 .news { background: var(--navy); color: #fff; margin-top: 56px; padding: 44px 0; position: relative; overflow: hidden }
@@ -113,9 +124,9 @@ button.pb:not(:disabled):hover { background: var(--gold-soft) }
 .news h2 { font-family: var(--serif); font-size: 30px; line-height: 1.15 }
 .news p.lead { color: #c9d1e6 }
 .news-row { display: flex; flex-wrap: wrap; gap: 10px }
-.news .field { flex: 1 1 260px; display: flex; align-items: center; min-height: 48px; padding: 0 14px; background: #fff; color: var(--ink); border: 2px solid transparent; border-radius: var(--r) }
-.news .field input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: none; font: inherit; outline: none }
-.news .field:focus-within { outline: 3px solid var(--gold); outline-offset: 2px }
+.news .field { flex: 1 1 260px; display: flex; align-items: center; min-height: 48px; padding: 0 14px; background: #fff; color: #16202a; border: 2px solid transparent; border-radius: var(--r) }
+.news .field input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: none; font: inherit; color: inherit; outline: none }
+.news .field:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
 .news .field[data-bad=true] { border-color: #f87171 }
 .news .btn.pri { background: var(--gold); border-color: var(--gold); color: #1b1303 }
 .news .btn.pri:hover { background: #cf9c36 }

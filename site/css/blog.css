@@ -9,10 +9,10 @@
 .wrap { padding: 28px 0 0 }
 .tools { display: grid; gap: 12px; margin-bottom: 28px; padding: 16px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--sh) }
 .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center }
-.field { flex: 1 1 240px; display: flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 14px; border: 1px solid var(--rule); border-radius: var(--r); background: #fff; color: var(--mute) }
+.field { flex: 1 1 240px; display: flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 14px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--field); color: var(--mute) }
 .field input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: none; font: inherit; color: var(--ink); outline: none }
-.field:focus-within { outline: 3px solid var(--gold); outline-offset: 2px }
-.select { min-height: 46px; padding: 0 14px; border: 1px solid var(--rule); border-radius: var(--r); background: #fff; font: inherit }
+.field:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
+.select { min-height: 46px; padding: 0 14px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--field); font: inherit }
 .count { font-size: 13px; color: var(--mute) }
 .chips-row { display: flex; flex-wrap: wrap; gap: 4px }
 .sec-title { font-family: var(--serif); font-size: 26px; letter-spacing: -.01em; margin-bottom: 14px }
@@ -23,13 +23,13 @@
 .feat h3 { font-family: var(--serif); font-size: 28px; line-height: 1.15; letter-spacing: -.01em }
 .feat p { color: var(--mute) }
 .badges { display: flex; flex-wrap: wrap; gap: 6px }
-.ph { display: grid; place-items: center; min-height: 180px; background: repeating-linear-gradient(135deg, #e9e1cf 0 14px, #efe8d7 14px 28px); color: var(--mute); font: 600 12px var(--mono); letter-spacing: .1em; text-transform: uppercase }
+.ph { display: grid; place-items: center; min-height: 180px; background: repeating-linear-gradient(135deg, var(--tint) 0 14px, var(--tint-2) 14px 28px); color: var(--mute); font: 600 12px var(--mono); letter-spacing: .1em; text-transform: uppercase }
 
 .bgrid { display: grid; grid-template-columns: 1fr; gap: 20px }
 .bcard { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; padding: 20px 18px 16px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--sh); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease }
 .bcard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold) }
 .bcard:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(22, 32, 42, .08), 0 16px 32px rgba(22, 32, 42, .10) }
-.bcard:focus-within, .feat:focus-within { outline: 3px solid var(--gold); outline-offset: 2px }
+.bcard:focus-within, .feat:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
 .bcard h3 { font-family: var(--serif); font-size: 20px; line-height: 1.25; letter-spacing: -.005em }
 .blink { text-decoration: none; color: var(--ink) }
 .blink:focus-visible { outline: none }
@@ -38,7 +38,7 @@
 .ft { margin-top: auto; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--mute) }
 
 .empty { background: var(--card); border: 2px dashed var(--rule); border-radius: var(--r); padding: 48px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px }
-.empty .big { width: 68px; height: 68px; display: grid; place-items: center; border-radius: 50%; background: var(--gold-soft); color: var(--navy) }
+.empty .big { width: 68px; height: 68px; display: grid; place-items: center; border-radius: 50%; background: var(--gold-soft); color: var(--link) }
 .empty h3 { font-family: var(--serif); font-size: 24px }
 .empty p { color: var(--mute); max-width: 52ch }
 .sug { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center }
@@ -46,7 +46,7 @@
 /* ---------- bài viết ---------- */
 .post { padding: 12px 0 0 }
 .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; font-size: 13px; color: var(--mute) }
-.crumbs a { display: inline-flex; align-items: center; min-height: 44px; color: var(--navy); font-weight: 600; text-decoration: none }
+.crumbs a { display: inline-flex; align-items: center; min-height: 44px; color: var(--link); font-weight: 600; text-decoration: none }
 .crumbs a:hover { text-decoration: underline }
 .crumbs [aria-current] { font-weight: 600; color: var(--ink) }
 .post-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 4px }
@@ -60,7 +60,7 @@
 .toc summary .ic { transition: transform .2s }
 .toc[open] summary .ic { transform: rotate(180deg) }
 .toc ul { list-style: none; padding: 0 8px 10px }
-.toc a { display: block; padding: 10px 8px; min-height: 44px; font-size: 13.5px; color: var(--navy); text-decoration: none; border-radius: 6px; line-height: 1.35 }
+.toc a { display: block; padding: 10px 8px; min-height: 44px; font-size: 13.5px; color: var(--link); text-decoration: none; border-radius: 6px; line-height: 1.35 }
 .toc a:hover { background: var(--gold-soft) }
 .toc .h3 a { padding-left: 24px; color: var(--mute) }
 .prose { font-size: 17px; line-height: 1.75; max-width: 68ch }

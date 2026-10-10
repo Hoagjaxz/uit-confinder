@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-10-10T16:31:08.935Z",
         "reason": "Claude: bảng màu Mận là lựa chọn người dùng chốt ('chốt màu mận'), tím phẳng, không gradient"
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "site/da-luu.html"
+        ],
+        "createdAt": "2026-10-10T16:40:12.445Z",
+        "reason": "Claude: bảng màu Mận do người dùng chốt, tím phẳng không gradient (cùng ngoại lệ index.html)"
       }
     ]
   }

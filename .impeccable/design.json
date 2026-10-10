@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-11T00:00:00+07:00",
+  "title": "Design System: UIT ConFinder",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Tím mận", "canonical": "#5b2d9b", "tonalRamp": ["#1f0f38", "#2e1553", "#431f78", "#5b2d9b", "#7a4fb5", "#9b78c9", "#c0aedf", "#e6dcf3"] },
+      "lanyard": { "role": "secondary", "displayName": "Dây đeo hồng cánh sen", "canonical": "#d6336c", "tonalRamp": ["#4a0f23", "#6e1736", "#9a2049", "#d6336c", "#e0587f", "#ea809d", "#f3adc0", "#fadbe4"] },
+      "paper": { "role": "neutral", "displayName": "Nền bàn", "canonical": "#f1eff5", "tonalRamp": ["#131018", "#1c1823", "#2d2838", "#625c70", "#8a8399", "#c8c2d6", "#dcd8e4", "#f1eff5"] },
+      "badge": { "role": "neutral", "displayName": "Thẻ trắng", "canonical": "#ffffff", "tonalRamp": ["#1c1823", "#241f2d", "#3c3649", "#8a8399", "#c8c2d6", "#e6e2ee", "#f7f5fa", "#ffffff"] },
+      "ink": { "role": "neutral", "displayName": "Mực tím đen", "canonical": "#1d1a24", "tonalRamp": ["#0e0c12", "#1d1a24", "#2d2838", "#3c3649", "#625c70", "#8a8399", "#c8c2d6", "#f2eff6"] },
+      "ribbon-core-a-star": { "role": "tertiary", "displayName": "Ruy-băng CORE A*", "canonical": "#2a1647", "tonalRamp": ["#120a20", "#1c0f32", "#2a1647", "#3d2166", "#563a85", "#7d62a6", "#ac9bc7", "#dcd3e8"] },
+      "ribbon-tier-a": { "role": "tertiary", "displayName": "Ruy-băng hạng A / CCF A", "canonical": "#7a3fc0", "tonalRamp": ["#2a1647", "#43256f", "#5c3196", "#7a3fc0", "#9566d0", "#b190de", "#cfbbea", "#ebe1f6"] },
+      "ribbon-tier-b": { "role": "tertiary", "displayName": "Ruy-băng hạng B", "canonical": "#8a4cb8", "tonalRamp": ["#2f1744", "#48265f", "#663787", "#8a4cb8", "#a272c7", "#bb98d5", "#d6bfe6", "#efe5f6"] },
+      "ribbon-tier-c": { "role": "tertiary", "displayName": "Ruy-băng hạng C", "canonical": "#6e6880", "tonalRamp": ["#26232d", "#393541", "#4f4a5c", "#6e6880", "#8a8499", "#a8a3b5", "#c8c4d1", "#e6e4eb"] },
+      "urgent-fg": { "role": "semantic", "displayName": "Gấp (đỏ)", "canonical": "#a8200f", "tonalRamp": ["#3d0a04", "#6b1409", "#a8200f", "#d04a38", "#e38274", "#f1b0a6", "#fde6e1", "#fff4f2"] },
+      "week-fg": { "role": "semantic", "displayName": "Trong tuần (vàng nâu)", "canonical": "#8a5200", "tonalRamp": ["#2e1b00", "#5a3600", "#8a5200", "#b97a14", "#d8a24a", "#ebc787", "#fdf0d3", "#fff8e8"] },
+      "month-fg": { "role": "semantic", "displayName": "Trong tháng (lam)", "canonical": "#1f4fae", "tonalRamp": ["#0a1c42", "#112f6e", "#1f4fae", "#4a74c6", "#7d9bd9", "#adc0ea", "#e5edfb", "#f3f7fd"] },
+      "open-fg": { "role": "semantic", "displayName": "Còn rộng (lục)", "canonical": "#3b6a12", "tonalRamp": ["#14260a", "#264510", "#3b6a12", "#5d8a35", "#86ab62", "#b0cb92", "#ecf3d6", "#f6faea"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display (Newsreader)", "purpose": "Tiêu đề hero trang chủ và tên hội nghị lớn; luôn upright." },
+      "headline": { "displayName": "Headline (Newsreader)", "purpose": "H1 trang danh sách, blog, trang phụ." },
+      "title": { "displayName": "Title (Newsreader)", "purpose": "Tên hội nghị trên thẻ đeo, tiêu đề bài." },
+      "body": { "displayName": "Body (Be Vietnam Pro)", "purpose": "Giao diện và văn bản; bài blog 17px, tối đa 68ch." },
+      "label": { "displayName": "Label (Be Vietnam Pro)", "purpose": "Ruy-băng, nhãn, chip, tiêu đề nhóm lọc." },
+      "deadline": { "displayName": "Deadline (JetBrains Mono)", "purpose": "Ngày chót, giờ và đếm ngược; tabular-nums." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "state-fade", "value": "background .15s, color .15s", "purpose": "Chuyển nền khi hover thẻ, nút, chip." },
+      { "name": "skeleton-shimmer", "value": "shimmer 1.4s ease-in-out infinite (opacity 1 to .45)", "purpose": "Khung xương đang tải; tắt khi prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "40rem" },
+      { "name": "lg", "value": "64rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Badge Card",
+      "kind": "card",
+      "refersTo": "badge-card",
+      "description": "Thẻ đeo hội nghị: tên, ruy-băng, ngày chót mono, mức khẩn.",
+      "html": "<article class=\"ds-badge-card\"><div class=\"ds-main\"><h3 class=\"ds-name\">ICSE 2027</h3><p class=\"ds-full\">International Conference on Software Engineering</p><span class=\"ds-ribbon\">CORE A*</span></div><div class=\"ds-due\"><span class=\"ds-lab\">Nộp toàn văn</span><span class=\"ds-date\">11/10</span> <span class=\"ds-time\">18:59</span></div><div class=\"ds-state\"><span class=\"ds-ub\"><b>Gấp</b></span> <span class=\"ds-cd\">2 ngày 04:12</span></div></article>",
+      "css": ".ds-badge-card { position: relative; display: grid; gap: 10px; padding: 16px 16px 10px; background: var(--badge, #fff); border: 1px solid var(--rule, #dcd8e4); border-radius: 6px; color: var(--ink, #1d1a24); transition: background .15s; max-width: 340px } .ds-badge-card::before { content: ''; position: absolute; top: -1px; left: 50%; width: 28px; height: 8px; margin-left: -14px; background: var(--paper, #f1eff5); border: 1px solid var(--rule-2, #c8c2d6); border-top: 0; border-radius: 0 0 8px 8px } .ds-badge-card:hover { background: var(--hover, #f7f5fa) } .ds-name { font-family: Newsreader, Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1.2 } .ds-full { margin-top: 2px; font-size: 13.5px; color: var(--mute, #625c70) } .ds-ribbon { display: inline-flex; align-items: center; height: 22px; margin-top: 6px; padding: 0 16px 0 9px; border-radius: 3px 0 0 3px; background: #2a1647; color: #fff; font-size: 12px; font-weight: 700; clip-path: polygon(0 0, 100% 0, calc(100% - 7px) 50%, 100% 100%, 0 100%) } .ds-lab { display: block; font-size: 12px; color: var(--mute, #625c70) } .ds-date { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700 } .ds-time { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--mute, #625c70) } .ds-ub { display: inline-flex; gap: 6px; min-height: 28px; align-items: center; padding: 2px 10px; border: 1px solid currentColor; border-radius: 3px; font-size: 12.5px; color: #a8200f; background: #fde6e1 } .ds-cd { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 600 }"
+    },
+    {
+      "name": "Rank Ribbon",
+      "kind": "chip",
+      "refersTo": "ribbon",
+      "description": "Ruy-băng rank đuôi chữ V; bốn tông tím, đen, xám.",
+      "html": "<span class=\"ds-rb ds-rb-a\">CORE A*</span> <span class=\"ds-rb ds-rb-b\">CCF A</span> <span class=\"ds-rb ds-rb-c\">CORE B</span> <span class=\"ds-rb ds-rb-d\">CORE C</span>",
+      "css": ".ds-rb { display: inline-flex; align-items: center; height: 22px; padding: 0 16px 0 9px; border-radius: 3px 0 0 3px; background: #7a3fc0; color: #fff; font: 700 12px/1 'Be Vietnam Pro', sans-serif; clip-path: polygon(0 0, 100% 0, calc(100% - 7px) 50%, 100% 100%, 0 100%) } .ds-rb-a { background: #2a1647 } .ds-rb-b { background: #7a3fc0 } .ds-rb-c { background: #8a4cb8 } .ds-rb-d { background: #6e6880 }"
+    },
+    {
+      "name": "Urgency Label",
+      "kind": "chip",
+      "refersTo": "urgency-label-urgent",
+      "description": "Nhãn mức khẩn: biểu tượng cộng chữ, năm mức ngữ nghĩa.",
+      "html": "<span class=\"ds-ub ds-u-c\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M12 3 2 21h20L12 3zM12 10v5M12 18v.01\"/></svg><b>Gấp</b></span> <span class=\"ds-ub ds-u-o\"><b>Còn rộng</b></span>",
+      "css": ".ds-ub { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 2px 10px; border: 1px solid currentColor; border-radius: 3px; font: 12.5px 'Be Vietnam Pro', sans-serif } .ds-ub b { font-weight: 700 } .ds-u-c { color: #a8200f; background: #fde6e1 } .ds-u-o { color: #3b6a12; background: #ecf3d6 }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Hành động chính: nền mực, chữ nền bàn.",
+      "html": "<button class=\"ds-btn-pri\">Thêm vào lịch</button>",
+      "css": ".ds-btn-pri { min-height: 44px; padding: 0 18px; border: 1px solid #1d1a24; border-radius: 6px; background: #1d1a24; color: #f1eff5; font: 600 14px 'Be Vietnam Pro', sans-serif; cursor: pointer } .ds-btn-pri:hover { opacity: .88 } .ds-btn-pri:focus-visible { outline: 2px solid #5b2d9b; outline-offset: 2px }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Nút mặc định: viền và chữ tím mận trên nền trắng.",
+      "html": "<button class=\"ds-btn\">Xoá bộ lọc</button>",
+      "css": ".ds-btn { min-height: 44px; padding: 0 18px; border: 1px solid #5b2d9b; border-radius: 6px; background: #fff; color: #5b2d9b; font: 600 14px 'Be Vietnam Pro', sans-serif; cursor: pointer; transition: background .15s } .ds-btn:hover { background: #f7f5fa } .ds-btn:focus-visible { outline: 2px solid #5b2d9b; outline-offset: 2px }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Chip lọc; chọn thì đảo sang nền mực.",
+      "html": "<span class=\"ds-chip\">Hybrid</span> <span class=\"ds-chip ds-chip-on\">AI</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; height: 30px; padding: 0 13px; border: 1px solid #c8c2d6; border-radius: 3px; background: #fff; font: 500 12.5px 'Be Vietnam Pro', sans-serif; color: #1d1a24 } .ds-chip-on { background: #1d1a24; border-color: #1d1a24; color: #f1eff5 }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "badge-card",
+      "description": "Ô tìm kiếm ở masthead: viền đậm, nền trắng, focus vòng tím mận.",
+      "html": "<label class=\"ds-field\"><input type=\"search\" placeholder=\"Tìm hội nghị\"></label>",
+      "css": ".ds-field { display: flex; align-items: center; min-height: 44px; padding: 0 12px; border: 1px solid #c8c2d6; border-radius: 6px; background: #fff } .ds-field input { flex: 1; min-height: 42px; border: 0; background: none; font: 15px 'Be Vietnam Pro', sans-serif; color: #1d1a24; outline: none } .ds-field:focus-within { outline: 2px solid #5b2d9b; outline-offset: 2px }"
+    },
+    {
+      "name": "Masthead Nav",
+      "kind": "nav",
+      "refersTo": "badge-card",
+      "description": "Thanh đầu trang: dải hồng 4px, wordmark serif, mục hiện tại gạch chân hồng.",
+      "html": "<header class=\"ds-mast\"><span class=\"ds-brand\">UIT Con<em>Finder</em></span><nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Lịch</a><a href=\"#\">Blog</a></nav></header>",
+      "css": ".ds-mast { display: flex; align-items: center; gap: 20px; padding: 0 16px; background: #fff; border-top: 4px solid #d6336c; border-bottom: 1px solid #dcd8e4 } .ds-brand { font: 600 21px/44px Newsreader, Georgia, serif } .ds-brand em { font-style: normal; color: #5b2d9b } .ds-nav { display: flex; margin-left: auto } .ds-nav a { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; font: 500 14px 'Be Vietnam Pro', sans-serif; color: #625c70; text-decoration: none } .ds-nav a:hover { color: #1d1a24 } .ds-nav a[aria-current] { color: #1d1a24; font-weight: 700 } .ds-nav a[aria-current]::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 6px; height: 2px; background: #d6336c }"
+    },
+    {
+      "name": "State Box",
+      "kind": "custom",
+      "refersTo": "state-box",
+      "description": "Khung trạng thái trống hoặc lỗi của danh sách.",
+      "html": "<div class=\"ds-state-box\"><h2>Chưa có hội nghị phù hợp</h2><p>Thử bỏ bớt bộ lọc.</p><button class=\"ds-btn\">Xoá bộ lọc</button></div>",
+      "css": ".ds-state-box { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 32px 24px; text-align: center; background: #fff; border: 1px solid #dcd8e4; border-radius: 6px } .ds-state-box h2 { font: 600 20px Newsreader, Georgia, serif } .ds-state-box p { max-width: 52ch; color: #625c70 } .ds-btn { min-height: 44px; padding: 0 18px; border: 1px solid #5b2d9b; border-radius: 6px; background: #fff; color: #5b2d9b; font: 600 14px 'Be Vietnam Pro', sans-serif }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Thẻ đeo hội nghị",
+    "overview": "Mỗi hội nghị là một thẻ tên đeo cổ đặt trên mặt bàn xám ánh tím: tên lớn bằng serif, ruy-băng đuôi chữ V báo hạng, hạn chót in bằng mono như số bàn. Bảng màu Mận giữ ít màu; thứ bậc đến từ độ đậm, cỡ chữ, đảo màu mực và đường kẻ mảnh, không từ trang trí. Một dải dây đeo hồng cánh sen 4px ở đỉnh trang và gạch chân mục nav hiện tại là điểm nhấn duy nhất của thế giới này.\n\nMật độ vừa, phục vụ người so sánh nhiều hội nghị khi đang gấp. Mọi thời điểm là giờ Việt Nam (GMT+7). Bản dựng phẳng hoàn toàn: không bóng đổ, hover chỉ đổi nền. Khi bản dựng lệch hợp đồng hướng đi, bản dựng thắng (xem ruy-băng hạng B ở Colors).",
+    "keyCharacteristics": [
+      "Thẻ trắng trên nền bàn tím nhạt, viền 1px, bo 6px; ruy-băng và nhãn bo 3px.",
+      "Ba giọng chữ có việc riêng: Be Vietnam Pro cho giao diện, Newsreader upright cho tên và tiêu đề, JetBrains Mono cho ngày giờ và đếm ngược.",
+      "Mức khẩn luôn là biểu tượng cộng chữ, không bao giờ chỉ là màu.",
+      "Có bản sáng và bản tối, cùng một bộ token đổi giá trị theo data-theme."
+    ],
+    "rules": [
+      { "name": "The Lanyard Rule", "body": "Hồng dây đeo chỉ là dải đỉnh trang, gạch nav hiện tại và dây trang chủ. Không tô nút, chữ hay nền bằng hồng.", "section": "colors" },
+      { "name": "The No Warm Ribbon Rule", "body": "Ruy-băng rank không bao giờ đỏ hay cam; đỏ và cam dành cho mức khẩn.", "section": "colors" },
+      { "name": "The Mono For Moments Rule", "body": "Mọi ngày, giờ và đếm ngược dùng JetBrains Mono; mọi tên hội nghị và tiêu đề dùng Newsreader upright, không nghiêng.", "section": "typography" },
+      { "name": "The Flat Card Rule", "body": "Thẻ phẳng khi nghỉ và khi hover; hover chỉ đổi nền sang #f7f5fa. Focus là vòng 2px tím mận cách 2px.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do dùng token trong :root (--paper, --badge, --ink, --accent, --lanyard); mọi màu mới có cặp bản sáng và tối.",
+      "Do hiển thị mọi hạn bằng giờ Việt Nam (GMT+7), ngày giờ bằng JetBrains Mono.",
+      "Do ghép mức khẩn bằng biểu tượng cộng chữ, không chỉ màu.",
+      "Do giữ vùng chạm tối thiểu 44px và vòng focus 2px tím mận.",
+      "Do để hạng đi bằng ruy-băng tím, đen, xám."
+    ],
+    "donts": [
+      "Don't dùng bóng đổ; chiều sâu dùng viền và tầng nền.",
+      "Don't làm ruy-băng rank đỏ hoặc cam.",
+      "Don't viết nghiêng Newsreader hay đặt tên hội nghị bằng sans.",
+      "Don't dùng hồng dây đeo cho nút hoặc nền khối lớn.",
+      "Don't thêm hero giới thiệu, lưới thẻ đều chằng chịt, biểu đồ hay thước trang trí vào danh sách."
+    ]
+  }
+}

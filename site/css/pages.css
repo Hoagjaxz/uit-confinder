@@ -1,0 +1,48 @@
+/* Trang phụ: giới thiệu, hướng dẫn AoE, liên hệ, đã lưu, 404 */
+.pg-wrap { padding-bottom: 8px }
+.cols { display: grid; gap: 24px; margin-top: 24px; align-items: start }
+.stack { display: grid; gap: 24px }
+.panel.pad { padding: 20px 18px }
+.panel.pad > h2 { padding: 0 0 10px; font-size: 22px }
+.panel.pad p + p { margin-top: 10px }
+.panel.pad ul { padding-left: 20px; margin-top: 10px }
+.panel.pad .lvl { list-style: none; padding: 0; display: grid; gap: 10px }
+.panel.pad .lvl li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px }
+.lvl .r { color: var(--mute); font-size: 14px }
+.rank-row { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px }
+.rank-row .badge { margin-top: 2px }
+.links { display: grid; gap: 4px }
+.links a { display: flex; align-items: center; justify-content: space-between; min-height: 44px; color: var(--link); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--rule) }
+.links a:last-child { border: 0 }
+.links a:hover { background: var(--gold-soft) }
+
+.fform { display: grid; gap: 16px }
+.fr { display: grid; gap: 6px }
+.fr label { font-weight: 600; font-size: 14px }
+.fr input, .fr select, .fr textarea { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--field); color: var(--ink); font: inherit }
+.fr textarea { min-height: 140px; resize: vertical }
+.fr .hint { font-size: 12.5px; color: var(--mute) }
+.fmsg { min-height: 22px; font-weight: 600; color: var(--o-fg) }
+
+.qa { border-bottom: 1px solid var(--rule) }
+.qa:last-child { border: 0 }
+.qa summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; cursor: pointer; list-style: none; font-weight: 600 }
+.qa summary::-webkit-details-marker { display: none }
+.qa summary .ic { transition: transform .2s }
+.qa[open] summary .ic { transform: rotate(180deg) }
+.qa p { padding: 0 0 16px; color: var(--mute) }
+
+.saved-list { list-style: none }
+.srow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 18px; border-top: 1px solid var(--rule) }
+.srow:first-child { border-top: 0 }
+.srow-t { flex: 1 1 260px; display: grid; gap: 2px; text-decoration: none }
+.srow-t b { font-family: var(--serif); font-size: 22px; line-height: 1.2 }
+.srow-t b span { font-weight: 400; font-style: italic; color: var(--mute) }
+.srow-n { font-size: 13px; color: var(--mute) }
+
+.nf { margin: 56px auto 0; max-width: 560px }
+.nf-code { font: 600 clamp(64px, 18vw, 120px) var(--serif); line-height: 1; color: var(--gold-text); letter-spacing: -.04em }
+
+@media (min-width: 64rem) {
+    .cols { grid-template-columns: minmax(0, 1fr) 340px }
+}

@@ -2,11 +2,18 @@
 export const NAV = [
     { href: 'lich-hoi-nghi.html', label: 'Lịch hội nghị' },
     { href: 'blog.html', label: 'Bài viết' },
+    { href: 'faq-aoe.html', label: 'Hướng dẫn AoE' },
+    { href: 'gioi-thieu.html', label: 'Giới thiệu' },
+    { href: 'lien-he.html', label: 'Liên hệ' },
 ];
 export const FOOT_PAGES = [
     { href: 'index.html', label: 'Trang chủ' },
     { href: 'lich-hoi-nghi.html', label: 'Lịch hội nghị' },
+    { href: 'da-luu.html', label: 'Đã lưu' },
     { href: 'blog.html', label: 'Bài viết' },
+    { href: 'faq-aoe.html', label: 'Hướng dẫn AoE' },
+    { href: 'gioi-thieu.html', label: 'Giới thiệu' },
+    { href: 'lien-he.html', label: 'Liên hệ' },
 ];
 export const FOOT_NOTE = '© 2026 UIT ConFinder. Dữ liệu hội nghị là dữ liệu minh hoạ cho đồ án, hãy kiểm tra lại trên trang chính thức trước khi nộp bài.';
 

@@ -14,7 +14,7 @@
 .links { display: grid; gap: 4px }
 .links a { display: flex; align-items: center; justify-content: space-between; min-height: 44px; color: var(--link); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--rule) }
 .links a:last-child { border: 0 }
-.links a:hover { background: var(--gold-soft) }
+.links a:hover { background: var(--hover) }
 
 .fform { display: grid; gap: 16px }
 .fr { display: grid; gap: 6px }
@@ -28,7 +28,6 @@
 .qa:last-child { border: 0 }
 .qa summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; cursor: pointer; list-style: none; font-weight: 600 }
 .qa summary::-webkit-details-marker { display: none }
-.qa summary .ic { transition: transform .2s }
 .qa[open] summary .ic { transform: rotate(180deg) }
 .qa p { padding: 0 0 16px; color: var(--mute) }
 
@@ -36,12 +35,12 @@
 .srow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 18px; border-top: 1px solid var(--rule) }
 .srow:first-child { border-top: 0 }
 .srow-t { flex: 1 1 260px; display: grid; gap: 2px; text-decoration: none }
-.srow-t b { font-family: var(--serif); font-size: 22px; line-height: 1.2 }
-.srow-t b span { font-weight: 400; font-style: italic; color: var(--mute) }
+.srow-t b { font-family: var(--sans); font-size: 22px; line-height: 1.2 }
+.srow-t b span { font-weight: 400; font-style: normal; color: var(--mute) }
 .srow-n { font-size: 13px; color: var(--mute) }
 
 .nf { margin: 56px auto 0; max-width: 560px }
-.nf-code { font: 600 clamp(64px, 18vw, 120px) var(--serif); line-height: 1; color: var(--gold-text); letter-spacing: -.04em }
+.nf-code { font: 600 clamp(64px, 18vw, 120px) var(--sans); line-height: 1; color: var(--accent) }
 
 @media (min-width: 64rem) {
     .cols { grid-template-columns: minmax(0, 1fr) 340px }

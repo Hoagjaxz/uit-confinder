@@ -1,14 +1,12 @@
 /* Landing page — trang chính */
 .btn.lg { min-height: 54px; padding: 0 28px; font-size: 15px; border-radius: 10px }
-.btn.pri.lg { box-shadow: 4px 4px 0 var(--gold) }
-.btn.pri.lg:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--gold) }
 
 /* ---------- hero ---------- */
 .lp-hero { position: relative; overflow: hidden; padding: 44px 0 64px; border-bottom: 1px solid var(--rule) }
 .lp-hero-in { position: relative; display: grid; gap: 40px; align-items: center }
-.lp-copy h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(44px, 9vw, 104px); line-height: .96; letter-spacing: -.035em; margin: 14px 0 22px; text-wrap: balance }
-.lp-copy h1 em { font-style: italic; font-weight: 400; color: var(--gold-text); position: relative; white-space: nowrap }
-.lp-copy h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .06em; height: .09em; background: var(--gold); opacity: .35; transform-origin: left }
+.lp-copy h1 { font-family: var(--sans); font-weight: 600; font-size: clamp(44px, 9vw, 104px); line-height: .96; margin: 14px 0 22px; text-wrap: balance }
+.lp-copy h1 em { font-style: normal; font-weight: 400; color: var(--accent); position: relative; white-space: nowrap }
+.lp-copy h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .06em; height: .09em; background: var(--accent); opacity: .35; transform-origin: left }
 .lp-sub { font-size: 18px; color: var(--mute); max-width: 52ch }
 .lp-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px }
 .lp-note { margin-top: 18px; font-size: 12.5px; color: var(--mute) }
@@ -16,51 +14,51 @@
 .lp-art { position: relative; min-height: 360px; display: grid; place-items: center }
 .lp-dial { position: absolute; width: min(520px, 120%); aspect-ratio: 1; color: var(--link); opacity: .9 }
 .lp-dial .hand-a { transform-origin: 200px 200px; animation: none }
-.mini { position: absolute; width: min(300px, 78%); padding: 16px 16px 14px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; box-shadow: 0 2px 4px rgba(22, 32, 42, .08), 0 22px 44px rgba(22, 32, 42, .14); display: flex; flex-direction: column; gap: 8px; overflow: hidden }
+.mini { position: absolute; width: min(300px, 78%); padding: 16px 16px 14px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden }
 .mini::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--lv) }
-.mini h3 { font-family: var(--serif); font-size: 26px; line-height: 1.1; letter-spacing: -.01em }
-.mini h3 span { font-style: italic; font-weight: 400; color: var(--mute) }
+.mini h3 { font-family: var(--sans); font-size: 26px; line-height: 1.1 }
+.mini h3 span { font-style: normal; font-weight: 400; color: var(--mute) }
 .mini p { font-size: 12.5px; color: var(--mute); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden }
 .mini .tm { font-size: 11.5px; line-height: 1.6 }
 .mini .tm .cv { color: var(--mute) }
-.mini.a { --lv: var(--c-fg); transform: translate(-30px, -110px) rotate(-6deg); z-index: 1 }
-.mini.b { --lv: var(--s-fg); transform: translate(26px, -10px) rotate(3deg); z-index: 2 }
-.mini.c { --lv: var(--u-fg); transform: translate(-16px, 96px) rotate(-2deg); z-index: 3 }
-.stamp { position: absolute; z-index: 4; right: 2%; top: 4%; width: 112px; height: 112px; display: grid; place-items: center; text-align: center; border-radius: 50%; background: var(--gold); color: #1b1303; font: 700 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; line-height: 1.3; transform: rotate(10deg); box-shadow: 0 0 0 5px var(--paper), 0 0 0 6px var(--gold) }
-.stamp b { display: block; font: 700 24px var(--serif); letter-spacing: 0 }
+.mini.a { --lv: var(--c-fg); transform: translate(-30px, -110px); z-index: 1 }
+.mini.b { --lv: var(--s-fg); transform: translate(26px, -10px); z-index: 2 }
+.mini.c { --lv: var(--u-fg); transform: translate(-16px, 96px); z-index: 3 }
+.stamp { position: absolute; z-index: 4; right: 2%; top: 4%; width: 112px; height: 112px; display: grid; place-items: center; text-align: center; border-radius: 50%; background: var(--accent); color: var(--badge); font: 700 11px var(--mono); text-transform: uppercase; line-height: 1.3; transform: rotate(10deg) }
+.stamp b { display: block; font: 700 24px var(--sans); letter-spacing: 0 }
 
 /* ---------- ticker ---------- */
-.ticker { background: var(--navy); color: var(--on-navy); overflow: hidden; border-block: 3px double var(--gold) }
-.ticker-track { display: flex; width: max-content; gap: 44px; padding: 14px 0; font: 600 14px var(--mono); letter-spacing: .12em; white-space: nowrap }
-.ticker-track span::after { content: "◆"; margin-left: 44px; color: var(--gold-text); font-size: 9px; vertical-align: middle }
+.ticker { background: var(--ink); color: var(--paper); overflow: hidden; border-block: 3px double var(--accent) }
+.ticker-track { display: flex; width: max-content; gap: 44px; padding: 14px 0; font: 600 14px var(--mono); white-space: nowrap }
+.ticker-track span::after { content: "◆"; margin-left: 44px; color: var(--accent); font-size: 9px; vertical-align: middle }
 
 /* ---------- section chung ---------- */
 .lp-sec { padding: 72px 0 0 }
 .lp-sec > .container > header { max-width: 640px; margin-bottom: 32px }
-.lp-sec h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5vw, 52px); line-height: 1.04; letter-spacing: -.025em; margin-top: 8px }
-.lp-sec h2 em { font-style: italic; font-weight: 400; color: var(--gold-text) }
+.lp-sec h2 { font-family: var(--sans); font-weight: 600; font-size: clamp(32px, 5vw, 52px); line-height: 1.04; margin-top: 8px }
+.lp-sec h2 em { font-style: normal; font-weight: 400; color: var(--accent) }
 .lp-sec header p { color: var(--mute); font-size: 16px; margin-top: 12px }
 
 /* ---------- số liệu ---------- */
-.facts { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--rule); border-radius: 12px; background: var(--card); box-shadow: var(--sh); overflow: hidden }
+.facts { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--rule); border-radius: 12px; background: var(--card); overflow: hidden }
 .fact { padding: 22px 20px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule) }
 .fact:nth-child(2n) { border-right: 0 }
 .fact:nth-last-child(-n+2) { border-bottom: 0 }
-.fact b { display: block; font: 600 clamp(40px, 7vw, 64px) var(--serif); line-height: 1; letter-spacing: -.03em; color: var(--link) }
+.fact b { display: block; font: 600 clamp(40px, 7vw, 64px) var(--sans); line-height: 1; color: var(--link) }
 .fact span { display: block; margin-top: 8px; font-size: 13px; color: var(--mute) }
 
 /* ---------- cách hoạt động ---------- */
 .steps { display: grid; gap: 20px; counter-reset: s }
-.step { position: relative; padding: 26px 22px 24px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; box-shadow: var(--sh); overflow: hidden }
-.step::before { counter-increment: s; content: "0" counter(s); position: absolute; right: 14px; top: -6px; font: 600 110px var(--serif); line-height: 1; color: var(--gold-soft); letter-spacing: -.05em; pointer-events: none }
+.step { position: relative; padding: 26px 22px 24px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden }
+.step::before { counter-increment: s; content: "0" counter(s); position: absolute; right: 14px; top: -6px; font: 600 110px var(--sans); line-height: 1; color: var(--hover); pointer-events: none }
 .step > * { position: relative }
-.step h3 { font-family: var(--serif); font-size: 26px; line-height: 1.1; margin: 22px 0 8px }
+.step h3 { font-family: var(--sans); font-size: 26px; line-height: 1.1; margin: 22px 0 8px }
 .step p { color: var(--mute) }
 .step .pic { display: flex; align-items: center; gap: 8px; min-height: 40px; flex-wrap: wrap }
 
 /* ---------- thang khẩn cấp ---------- */
 .spec { list-style: none; position: relative; display: grid; gap: 14px; padding-left: 28px }
-.spec::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 6px; border-radius: 3px; background: linear-gradient(var(--c-fg), var(--s-fg), var(--u-fg), var(--o-fg), var(--dim)) }
+.spec::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 6px; border-radius: 3px; background: var(--rule-2) }
 .spec li { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 16px; background: var(--card); border: 1px solid var(--rule); border-radius: 10px }
 .spec li::before { content: ""; position: absolute; left: -26px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; background: var(--paper); border: 4px solid var(--dot) }
 .spec li span.r { color: var(--mute); font-size: 14px }
@@ -69,13 +67,13 @@
 
 /* ---------- sắp đến hạn / lĩnh vực / blog ---------- */
 .lp-grid3 { display: grid; gap: 20px }
-.sec-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 22px; font-weight: 700; color: var(--link); text-decoration: none; border-bottom: 2px solid var(--gold) }
-.sec-link:hover { background: var(--gold-soft) }
+.sec-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 22px; font-weight: 700; color: var(--link); text-decoration: none; border-bottom: 1px solid var(--rule-2) }
+.sec-link:hover { background: var(--hover) }
 .fields { display: grid; gap: 12px; grid-template-columns: 1fr }
-.field-t { display: flex; align-items: center; gap: 16px; padding: 18px 18px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; transition: transform .25s, background .25s }
-.field-t:hover { transform: translateX(6px); background: var(--gold-soft) }
-.field-t i { width: 44px; height: 44px; flex: none; display: grid; place-items: center; background: var(--navy); color: var(--on-navy); border-radius: 10px; font: italic 600 22px var(--serif) }
-.field-t b { font-family: var(--serif); font-size: 19px; line-height: 1.2 }
+.field-t { display: flex; align-items: center; gap: 16px; padding: 18px 18px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px }
+.field-t:hover { background: var(--hover) }
+.field-t i { width: 44px; height: 44px; flex: none; display: grid; place-items: center; background: var(--ink); color: var(--paper); border-radius: 10px; font: 600 22px var(--sans) }
+.field-t b { font-family: var(--sans); font-size: 19px; line-height: 1.2 }
 
 .cta .news { margin-top: 88px }
 

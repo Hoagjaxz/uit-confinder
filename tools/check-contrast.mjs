@@ -21,11 +21,13 @@ const ratio = (a, b) => {
     return (hi + 0.05) / (lo + 0.05);
 };
 
+// Mỗi cặp: [chữ, nền]. Ruy-băng A* dùng --on-ribbon-a, các ruy-băng còn lại dùng --on-ribbon.
 const PAIRS = [
-    ['ink', 'paper'], ['ink', 'card'], ['mute', 'paper'], ['mute', 'card'], ['mute', 'closed'], ['mute', 'tint'], ['mute', 'past'],
-    ['ink', 'field'], ['mute', 'field'], ['link', 'paper'], ['link', 'card'], ['link', 'gold-soft'],
-    ['gold-text', 'paper'], ['gold-text', 'card'], ['#ffffff', 'navy'], ['#ffffff', 'navy-2'], ['on-navy', 'navy'],
-    ['ink', 'gold-soft'], ['ink', 'tint'],
+    ['ink', 'paper'], ['ink', 'card'], ['ink', 'badge'], ['ink', 'hover'], ['ink', 'field'], ['ink', 'tint'],
+    ['mute', 'paper'], ['mute', 'card'], ['mute', 'badge'], ['mute', 'hover'], ['mute', 'field'], ['mute', 'closed'], ['mute', 'tint'], ['mute', 'tint-2'], ['mute', 'past'],
+    ['accent', 'paper'], ['accent', 'card'], ['accent', 'badge'], ['accent', 'hover'], ['link', 'paper'], ['link', 'card'], ['focus', 'paper'],
+    ['paper', 'ink'], ['paper', 'accent'],
+    ['on-ribbon-a', 'ribbon-a'], ['on-ribbon', 'ribbon-b'], ['on-ribbon', 'ribbon-c'], ['on-ribbon', 'ribbon-d'],
     ['c-fg', 'c-bg'], ['s-fg', 's-bg'], ['u-fg', 'u-bg'], ['o-fg', 'o-bg'], ['x-fg', 'x-bg'],
 ];
 

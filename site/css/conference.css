@@ -1,61 +1,127 @@
 /* Trang danh sách và chi tiết hội nghị */
-.page-head { padding: 36px 0 8px }
-.eyebrow { font: 600 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold-text) }
-.page-head h1 { font-family: var(--serif); font-size: 36px; line-height: 1.1; letter-spacing: -.02em; margin-top: 6px }
+.page-head { padding: 32px 0 8px }
+.page-head h1 { font-size: 32px; line-height: 1.15 }
 .page-head p { color: var(--mute); max-width: 60ch; margin-top: 8px }
 
-.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 24px 0 0; align-items: start }
+/* ============================================================
+   Thành phần ký hiệu: thẻ đeo hội nghị (.badge-card) và ruy-băng rank (.ribbon)
+   Dùng chung cho trang lịch, trang chủ, Đã lưu. Mọi giờ là giờ Việt Nam.
+   data-level: c (Gấp) | s (Trong tuần) | u (Trong tháng) | o (Còn rộng) | x (Hết hạn)
+   Ruy-băng: rb-a = CORE A*, rb-b = CORE A / CCF A, rb-c = hạng B, rb-d = hạng C.
+
+   <ul class="badge-list">
+     <li>
+       <article class="badge-card" data-level="c">
+         <button type="button" class="iconbtn" data-save="icse" aria-pressed="false" aria-label="Lưu hội nghị">
+           <svg class="ic" width="20" height="20" aria-hidden="true"><use href="#i-star"/></svg>
+         </button>
+         <div class="bc-main">
+           <h3 class="bc-name"><a href="hoi-nghi-icse.html">ICSE 2027</a></h3>
+           <p class="bc-full">IEEE/ACM International Conference on Software Engineering</p>
+           <div class="bc-meta">
+             <span class="ribbon rb-a">CORE A*</span><span class="ribbon rb-b">CCF A</span>
+             <span class="bc-loc">Lisbon, Hybrid</span>
+           </div>
+         </div>
+         <div class="bc-due">
+           <span class="bc-lab">Nộp toàn văn</span>
+           <time class="bc-date mono" datetime="2026-10-11T18:59:00+07:00">11/10<small>/2026</small></time>
+           <span class="bc-time mono">18:59</span>
+         </div>
+         <div class="bc-state">
+           <span class="ub u-c"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-alert"/></svg><b>Gấp</b></span>
+           <span class="bc-cd mono">2 ngày 04:12</span>
+         </div>
+       </article>
+     </li>
+   </ul>
+   Hết hạn: data-level="x", nhãn "Đã hết hạn", bỏ .bc-cd.
+   ============================================================ */
+.badge-list { list-style: none; display: grid; gap: 8px }
+.badge-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "main star" "due due" "state state"; gap: 10px 12px; align-items: start; padding: 20px 16px 14px; background: var(--badge); border: 1px solid var(--rule); border-radius: var(--r); transition: background .15s }
+/* khe xỏ dây: một vết cắt nhỏ ở mép trên */
+.badge-card::before { content: ""; position: absolute; top: -1px; left: 50%; width: 28px; height: 8px; margin-left: -14px; background: var(--paper); border: 1px solid var(--rule-2); border-top: 0; border-radius: 0 0 8px 8px }
+.badge-card:hover { background: var(--hover) }
+.badge-card:focus-within { outline: 2px solid var(--focus); outline-offset: 2px }
+.badge-card .iconbtn { grid-area: star; z-index: 1; margin: -10px -8px 0 0 }
+.bc-main { grid-area: main; min-width: 0 }
+.bc-name { font-size: 19px; line-height: 1.25; font-weight: 700 }
+.bc-name a { text-decoration: none }
+.bc-name a::after { content: ""; position: absolute; inset: 0; border-radius: var(--r) }
+.bc-name a:focus-visible { outline: none }
+.bc-full { margin-top: 2px; font-size: 13.5px; color: var(--mute); overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.bc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 8px }
+.bc-loc { font-size: 13px; color: var(--mute) }
+.bc-due { grid-area: due; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px }
+.bc-lab { flex: 1 0 100%; font-size: 12px; color: var(--mute) }
+.bc-date { font-size: 24px; line-height: 1.2; font-weight: 700 }
+.bc-date small { font-size: 12px; font-weight: 400; color: var(--mute) }
+.bc-time { font-size: 12.5px; color: var(--mute) }
+.bc-state { grid-area: state; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px }
+.bc-cd { font-size: 17px; font-weight: 600 }
+.badge-card[data-level=x] { opacity: .66; background: var(--closed) }
+.badge-card[data-level=x] .bc-date { font-weight: 600 }
+
+/* ruy-băng rank: đuôi chữ V, chỉ tông tím / đen / xám */
+.ribbon { display: inline-flex; align-items: center; height: 22px; padding: 0 16px 0 9px; border-radius: var(--r-s) 0 0 var(--r-s); font-size: 12px; font-weight: 700; line-height: 1; white-space: nowrap; background: var(--ribbon-b); color: var(--on-ribbon); clip-path: polygon(0 0, 100% 0, calc(100% - 7px) 50%, 100% 100%, 0 100%) }
+.ribbon.rb-a { background: var(--ribbon-a); color: var(--on-ribbon-a) }
+.ribbon.rb-b { background: var(--ribbon-b) }
+.ribbon.rb-c { background: var(--ribbon-c) }
+.ribbon.rb-d { background: var(--ribbon-d) }
+
+@media (min-width: 40rem) {
+    .badge-card { grid-template-columns: auto minmax(0, 1fr) 9.5rem 11.5rem; grid-template-areas: "star main due state"; gap: 12px 16px; align-items: center; padding: 18px 16px 14px 8px }
+    .badge-card .iconbtn { margin: 0 }
+    .bc-state { flex-direction: column; align-items: flex-end; gap: 6px; text-align: right }
+    .bc-state .ub { align-self: flex-end }
+}
 
 /* ---------- bộ lọc ---------- */
-.side { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--sh); padding: 0 16px }
-.side-h { display: flex; align-items: center; justify-content: space-between; min-height: 56px; font-family: var(--serif); font-weight: 700; font-size: 20px; border-bottom: 1px solid var(--rule) }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 24px 0 0; align-items: start }
+.side { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 0 16px }
+.side-h { display: flex; align-items: center; justify-content: space-between; min-height: 56px; font-weight: 700; font-size: 18px; border-bottom: 1px solid var(--rule) }
 .fg { border-bottom: 1px solid var(--rule); padding: 4px 0 }
 .fg:last-child { border: 0 }
-.fg summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; cursor: pointer; list-style: none; font: 700 12px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--mute) }
+.fg summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; cursor: pointer; list-style: none; font-weight: 700; font-size: 13px }
 .fg summary::-webkit-details-marker { display: none }
-.fg summary .ic { transition: transform .2s }
 .fg[open] summary .ic { transform: rotate(180deg) }
 .opt { display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 14px; cursor: pointer }
-.opt input { appearance: none; width: 20px; height: 20px; flex: none; border: 2px solid var(--mute); background: var(--card); display: grid; place-items: center; cursor: pointer }
-.opt input[type=checkbox] { border-radius: 5px }
+.opt input { appearance: none; width: 20px; height: 20px; flex: none; border: 2px solid var(--mute); background: var(--field); display: grid; place-items: center; cursor: pointer }
+.opt input[type=checkbox] { border-radius: var(--r-s) }
 .opt input[type=radio] { border-radius: 50% }
-.opt input:checked { background: var(--link); border-color: var(--link) }
+.opt input:checked { background: var(--accent); border-color: var(--accent) }
 .opt input[type=checkbox]:checked::after { content: ""; width: 5px; height: 10px; border: solid var(--card); border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px) }
-.opt input[type=radio]:checked { background: var(--card) }
-.opt input[type=radio]:checked::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--link) }
+.opt input[type=radio]:checked { background: var(--field) }
+.opt input[type=radio]:checked::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent) }
 .cnt { margin-left: auto; color: var(--mute); font: 12px var(--mono) }
 .more { display: flex; align-items: center; gap: 4px; min-height: 44px; color: var(--link); font-weight: 600; font-size: 13px }
 
-/* ---------- danh sách ---------- */
+/* ---------- danh sách (thẻ .cd cũ, các trang sau sẽ chuyển sang .badge-card) ---------- */
 .tb { display: flex; align-items: center; gap: 12px 16px; flex-wrap: wrap }
-.tb h2 { font-family: var(--serif); font-size: 26px; letter-spacing: -.01em }
-.tb h2 small { font: 400 13px var(--sans); color: var(--mute); letter-spacing: 0 }
+.tb h2 { font-size: 22px }
+.tb h2 small { font: 400 13px var(--sans); color: var(--mute) }
 .tb .sp { flex: 1 }
-.seg { display: inline-flex; border: 1px solid var(--link); border-radius: var(--r); overflow: hidden; background: var(--card) }
+.seg { display: inline-flex; border: 1px solid var(--rule-2); border-radius: var(--r); overflow: hidden; background: var(--card) }
 .seg span { min-height: 44px; padding: 0 14px; display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px }
-.seg .on { background: var(--navy); color: #fff }
+.seg .on { background: var(--ink); color: var(--paper) }
 .chips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0 24px }
 
-.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px }
-.cd { position: relative; display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 20px 18px 16px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--sh); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease }
-.cd::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--lv, var(--rule)) }
-.cd:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(22, 32, 42, .08), 0 16px 32px rgba(22, 32, 42, .10) }
-.cd.lc { --lv: var(--c-fg) }
-.cd.ls { --lv: var(--s-fg) }
-.cd.lu { --lv: var(--u-fg) }
-.cd.lo { --lv: var(--o-fg) }
-.cd.closed { background: var(--closed); box-shadow: none; --lv: var(--dim) }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px }
+.cd { position: relative; display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 20px 16px 14px; background: var(--badge); border: 1px solid var(--rule); border-radius: var(--r); transition: background .15s }
+.cd:hover { background: var(--hover) }
+.cd.closed { background: var(--closed) }
 .cd.closed h3, .cd.closed .nm, .cd.closed .ms { color: var(--mute) }
 .ch { display: flex; align-items: flex-start; justify-content: space-between; margin: -6px -8px -6px 0 }
-.ch h3 { font-family: var(--serif); font-size: 28px; font-weight: 700; line-height: 44px; letter-spacing: -.01em }
-.ch h3 span { font-weight: 400; font-style: italic; color: var(--mute) }
+.ch h3 { font-size: 22px; font-weight: 700; line-height: 44px }
+.ch h3 span { font-weight: 400; color: var(--mute) }
 .ch h3 a { text-decoration: none }
 .ch h3 a::after { content: ""; position: absolute; inset: 0 }
 .ch h3 a:focus-visible { outline: none }
-.cd:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
-.iconbtn { position: relative; z-index: 1; width: 44px; height: 44px; display: inline-grid; place-items: center; border-radius: 50%; color: var(--mute); flex: none; transition: background .2s, color .2s }
-.iconbtn:hover { background: var(--gold-soft) }
-.iconbtn[aria-pressed=true] { color: var(--gold-text) }
+.cd:focus-within { outline: 2px solid var(--focus); outline-offset: 2px }
+.iconbtn { position: relative; z-index: 1; width: 44px; height: 44px; display: inline-grid; place-items: center; border-radius: 50%; color: var(--mute); flex: none; transition: background .15s, color .15s }
+.iconbtn:hover { background: var(--tint-2) }
+.iconbtn[aria-pressed=true] { color: var(--accent) }
+.iconbtn[aria-pressed=true] .ic { fill: currentColor }
 .nm { font-size: 14px; color: var(--mute); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 42px }
 .ms { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px }
 .tm { font-size: 12px; line-height: 1.65 }
@@ -74,14 +140,14 @@
 .dgrid.lv-u { --k-fg: var(--u-fg); --k-bg: var(--u-bg) }
 .dgrid.lv-o { --k-fg: var(--o-fg); --k-bg: var(--o-bg) }
 .dgrid.lv-x { --k-fg: var(--x-fg); --k-bg: var(--x-bg) }
-.dh h1 { font-family: var(--serif); font-size: 52px; line-height: 1.02; letter-spacing: -.03em; font-weight: 700 }
-.dh h1 span { font-weight: 400; font-style: italic; color: var(--gold-text) }
+.dh h1 { font-size: 40px; line-height: 1.08; font-weight: 700 }
+.dh h1 span { font-weight: 400; color: var(--mute) }
 .dh .full { font-size: 17px; color: var(--mute); margin: 8px 0 16px }
 .brow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 14px }
 .meta { display: flex; gap: 8px 28px; flex-wrap: wrap; color: var(--mute); font-size: 14px; margin-bottom: 28px }
 .meta span { display: flex; gap: 8px; align-items: center }
-.panel { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--sh); overflow: hidden }
-.panel > h2 { font-family: var(--serif); font-size: 22px; padding: 18px 18px 12px }
+.panel { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden }
+.panel > h2 { font-size: 20px; padding: 18px 18px 12px }
 .panel > h2 small { font: 500 13px var(--sans); color: var(--mute) }
 .mt { width: 100%; border-collapse: collapse; font-size: 13.5px }
 .mt thead { display: none }
@@ -92,7 +158,7 @@
 .mt td:first-child { display: block }
 .mt tr.past { color: var(--mute); background: var(--past) }
 .mt tr.past .nm2 { text-decoration: line-through }
-.mt tr.next { background: var(--k-bg); border-left: 5px solid var(--k-fg) }
+.mt tr.next { background: var(--hover) }
 .mt tr.next .nm2 { font-weight: 700; font-size: 16px }
 .nm2 { font-weight: 600 }
 .cvv { color: var(--mute) }
@@ -100,32 +166,32 @@
 .dfoot { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rule); display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; color: var(--mute); font-size: 13px }
 .dfoot .btn { margin-left: auto }
 .dsb { display: flex; flex-direction: column; gap: 16px }
-.cdbig { position: relative; border: 1px solid var(--k-fg); background: var(--k-bg); border-radius: var(--r); padding: 18px; display: flex; flex-direction: column; gap: 14px; box-shadow: var(--sh) }
+.cdbig { position: relative; border: 1px solid var(--rule); background: var(--badge); border-radius: var(--r); padding: 22px 18px 18px; display: flex; flex-direction: column; gap: 14px }
+.cdbig::before { content: ""; position: absolute; top: -1px; left: 50%; width: 28px; height: 8px; margin-left: -14px; background: var(--paper); border: 1px solid var(--rule-2); border-top: 0; border-radius: 0 0 8px 8px }
 .cdbig .lab { font-size: 13px; color: var(--k-fg); font-weight: 600 }
-.cdbig .lab b { display: block; font-family: var(--serif); font-size: 22px; color: var(--ink); letter-spacing: -.01em }
+.cdbig .lab b { display: block; font-size: 20px; color: var(--ink) }
 .digits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center }
-.digits div { background: var(--field); border: 1px solid var(--k-fg); border-radius: var(--r); padding: 10px 0 8px }
-.digits b { display: block; font-size: 32px; line-height: 1.1; font-weight: 700; color: var(--k-fg) }
+.digits div { background: var(--field); border: 1px solid var(--rule-2); border-radius: var(--r); padding: 10px 0 8px }
+.digits b { display: block; font: 700 28px var(--mono); line-height: 1.1; color: var(--k-fg) }
 .digits small { font-size: 11px; color: var(--mute) }
 .actions { padding: 16px; display: flex; flex-direction: column; gap: 8px }
 
 @media (min-width: 40rem) {
-    .page-head h1 { font-size: 48px }
+    .page-head h1 { font-size: 40px }
     .grid { grid-template-columns: repeat(2, minmax(0, 1fr)) }
     .mt thead { display: table-header-group }
     .mt thead th { text-align: left; font-size: 12.5px; color: var(--mute); padding: 10px 18px; background: var(--tint-2); border-top: 1px solid var(--rule) }
     .mt tr { display: table-row; padding: 0 }
     .mt td { display: table-cell; padding: 14px 18px; border-top: 1px solid var(--rule); vertical-align: middle }
     .mt td::before { display: none }
-    .mt tr.next td { background: var(--k-bg); border-top-color: var(--k-fg) }
-    .mt tr.next td:first-child { border-left: 5px solid var(--k-fg) }
+    .mt tr.next td { background: var(--hover) }
     .mt tr.past td { background: var(--past) }
 }
 @media (min-width: 64rem) {
-    .layout { grid-template-columns: 280px minmax(0, 1fr) }
+    .layout { grid-template-columns: 260px minmax(0, 1fr) }
     .side { position: sticky; top: 92px }
     .grid { grid-template-columns: repeat(3, minmax(0, 1fr)) }
     .dgrid { grid-template-columns: minmax(0, 1fr) 360px }
     .dsb { position: sticky; top: 92px }
-    .dh h1 { font-size: 64px }
+    .dh h1 { font-size: 52px }
 }

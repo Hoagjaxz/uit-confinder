@@ -18,7 +18,10 @@ export const syncPage = (html, rel) => {
     const prefix = '../'.repeat(rel.split('/').length - 1);
     let out = html;
     if (!out.includes('class="skip"')) out = out.replace('<body>', `<body>\n${skipHtml}`);
+    // Bộ chữ hệ thống: gỡ mọi thẻ Google Fonts (preconnect và stylesheet).
+    out = out.replace(/[ \t]*<link[^>]*fonts\.(?:googleapis|gstatic)\.com[^>]*>\r?\n?/g, '');
     if (!out.includes('rel="icon"')) out = out.replace('</head>', `    ${faviconHtml}\n</head>`);
+    else out = out.replace(/<link rel="icon"[^>]*>/, () => faviconHtml);
     if (!out.includes('js/theme.js')) out = out.replace('</head>', `    <script src="${prefix}js/theme.js"></script>\n</head>`);
     if (!out.includes('js/save.js')) out = out.replace('</body>', `<script src="${prefix}js/save.js"></script>
 </body>`);

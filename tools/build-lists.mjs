@@ -31,12 +31,16 @@ const card = c => {
 </article>`;
 };
 
-const list = (cs, li = c => '<li>') => `<ul class="badge-list">\n${cs.map(c => `${li(c)}\n${card(c)}\n</li>`).join('\n')}\n</ul>`;
+const list = (cs, li = c => '<li>', cls = 'badge-list') => `<ul class="${cls}">\n${cs.map(c => `${li(c)}\n${card(c)}\n</li>`).join('\n')}\n</ul>`;
 const byDue = (a, b) => Date.parse(nextDue(a).at) - Date.parse(nextDue(b).at);
+
+const HERO_N = 3; // trang chủ: 3 hạn gần nhất treo ở hero, phần "Các hạn tiếp theo" liệt kê phần còn lại
+const open = CONFERENCES.filter(c => !c.closed).sort(byDue);
 
 const TARGETS = {
     lich: { file: 'lich-hoi-nghi.html', html: list(CONFERENCES) },
-    'trang-chu': { file: 'index.html', html: list(CONFERENCES.filter(c => !c.closed).sort(byDue)) },
+    hero: { file: 'index.html', html: list(open.slice(0, HERO_N), undefined, 'badge-list tags') },
+    'trang-chu': { file: 'index.html', html: list(open.slice(HERO_N)) },
     'da-luu': { file: 'da-luu.html', html: list(CONFERENCES, c => `<li data-saved-item="${c.slug}" hidden>`) },
 };
 

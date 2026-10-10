@@ -13,7 +13,7 @@ export const FOOT_PAGES = [
     { href: 'gioi-thieu.html', label: 'Giới thiệu' },
     { href: 'lien-he.html', label: 'Liên hệ' },
 ];
-export const FOOT_NOTE = '© 2026 UIT ConFinder. Dữ liệu hội nghị là dữ liệu minh hoạ cho đồ án, hãy kiểm tra lại trên trang chính thức trước khi nộp bài.';
+export const FOOT_NOTE = '© 2026 UIT ConFinder. Dữ liệu hội nghị chỉ là minh hoạ cho đồ án. Hãy kiểm tra lại trên trang chính thức trước khi nộp bài.';
 
 const svg = (cls, body) =>
     `<svg class="${cls}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;

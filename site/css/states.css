@@ -10,6 +10,12 @@
 .sk-line.w60 { width: 60% }
 .sk-line.w40 { width: 40% }
 .cd.sk:hover, .badge-card.sk:hover { background: var(--badge) }
+.badge-card.sk { min-height: 96px }
+.badge-card.sk .sk-star { display: block; width: 24px; height: 24px; border-radius: 50%; grid-area: star }
+.badge-card.sk .bc-main, .badge-card.sk .bc-due, .badge-card.sk .bc-state { display: grid; gap: 8px; align-content: center }
+.badge-card.sk .bc-state { justify-items: end }
+.badge-card.sk .sk-line.lg { height: 20px }
+.badge-card.sk .bc-due .sk-line.lg2, .sk-line.lg2 { height: 24px; width: 70% }
 @media (prefers-reduced-motion: no-preference) {
     @keyframes shimmer { 0%, 100% { opacity: 1 } 50% { opacity: .45 } }
     .sk .sk-line { animation: shimmer 1.4s ease-in-out infinite }
@@ -18,10 +24,10 @@
     .sk .sk-line { animation: none }
 }
 
-.state-box { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 24px; text-align: center; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r) }
+.state-box { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 32px 24px; text-align: center; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r) }
 .state-box.plain { border: 0 }
-.state-box h2, .state-box h3 { font-size: 22px }
+.state-box h2, .state-box h3 { font-size: 20px }
 .state-box p { max-width: 52ch; color: var(--mute) }
-.state-box .big { width: 56px; height: 56px; display: grid; place-items: center; border-radius: var(--r); background: var(--tint-2); color: var(--link) }
-.state-box.err .big { background: var(--c-bg); color: var(--c-fg) }
+.state-box .big { display: grid; place-items: center; color: var(--link) }
+.state-box.err .big { color: var(--c-fg) }
 .state-box .acts { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px }

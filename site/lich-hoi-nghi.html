@@ -117,17 +117,6 @@
                 stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
         </symbol>
-        <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7" rx="1"/>
-            <rect x="14" y="3" width="7" height="7" rx="1"/>
-            <rect x="3" y="14" width="7" height="7" rx="1"/>
-            <rect x="14" y="14" width="7" height="7" rx="1"/>
-        </symbol>
-        <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
-        </symbol>
     </defs>
 </svg>
 <header class="masthead"><div class="container masthead-in">
@@ -137,11 +126,11 @@
 </div></header>
 <main id="main" tabindex="-1">
 <div class="container">
-    <div class="page-head"><span class="eyebrow">Lịch hội nghị khoa học</span><h1>Lịch hạn nộp bài hội nghị</h1>
-        <p>Tra cứu hội nghị theo lĩnh vực, rank CORE/CCF và hình thức tham dự. Hạn chót ghi theo AoE, kèm giờ Việt Nam.</p></div>
+    <div class="page-head"><h1>Lịch hạn nộp bài hội nghị</h1>
+        <p>Mọi hạn chót ghi theo giờ Việt Nam (GMT+7).</p></div>
     <div class="layout">
         <aside class="side" aria-label="Bộ lọc">
-    <div class="side-h">Bộ lọc <button type="button" class="btn ghost" style="min-height:44px;font-size:13px">Xoá tất cả</button></div>
+    <div class="side-h">Bộ lọc <button type="button" class="btn ghost">Xoá tất cả</button></div>
     <details class="fg" open><summary>Lĩnh vực<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-down"/></svg></summary><label class="opt"><input type="checkbox" checked><span>Trí tuệ nhân tạo</span><span class="cnt">42</span></label><label class="opt"><input type="checkbox" checked><span>Kỹ thuật phần mềm</span><span class="cnt">31</span></label><label class="opt"><input type="checkbox"><span>An toàn thông tin</span><span class="cnt">24</span></label><label class="opt"><input type="checkbox"><span>Tương tác người–máy</span><span class="cnt">19</span></label><div class="more">Xem thêm 8 lĩnh vực<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-down"/></svg></div></details>
     <details class="fg" open><summary>Rank CORE<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-down"/></svg></summary><label class="opt"><input type="checkbox"><span>A*</span><span class="cnt">14</span></label><label class="opt"><input type="checkbox"><span>A</span><span class="cnt">36</span></label><label class="opt"><input type="checkbox"><span>B</span><span class="cnt">47</span></label><label class="opt"><input type="checkbox"><span>C</span><span class="cnt">31</span></label></details>
     <details class="fg" open><summary>Rank CCF<svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-down"/></svg></summary><label class="opt"><input type="checkbox"><span>A</span><span class="cnt">22</span></label><label class="opt"><input type="checkbox"><span>B</span><span class="cnt">40</span></label><label class="opt"><input type="checkbox"><span>C</span><span class="cnt">38</span></label></details>
@@ -153,41 +142,40 @@
             <div class="demo-bar" role="navigation" aria-label="Xem thử trạng thái danh sách"><span>Xem thử trạng thái:</span><a href="?state=ready">Có dữ liệu</a><a href="?state=loading">Đang tải</a><a href="?state=error">Lỗi</a><a href="?state=empty">Không có kết quả</a></div>
             <div data-state="loading" hidden>
                 <div class="tb" role="status"><h2>Đang tải lịch hội nghị…</h2></div>
-                <div class="grid" aria-hidden="true" style="margin-top:16px">
-                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
-                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
-                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
-                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
-                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
-                    <article class="cd sk"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div><div class="sk-line w80"></div></article>
-                </div>
+                <ul class="badge-list" aria-hidden="true">
+                    <li><div class="badge-card sk"><span class="sk-line sk-star"></span><div class="bc-main"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w40"></div></div><div class="bc-due"><div class="sk-line w60"></div><div class="sk-line lg2"></div></div><div class="bc-state"><div class="sk-line w60"></div><div class="sk-line w80"></div></div></div></li>
+                    <li><div class="badge-card sk"><span class="sk-line sk-star"></span><div class="bc-main"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w40"></div></div><div class="bc-due"><div class="sk-line w60"></div><div class="sk-line lg2"></div></div><div class="bc-state"><div class="sk-line w60"></div><div class="sk-line w80"></div></div></div></li>
+                    <li><div class="badge-card sk"><span class="sk-line sk-star"></span><div class="bc-main"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w40"></div></div><div class="bc-due"><div class="sk-line w60"></div><div class="sk-line lg2"></div></div><div class="bc-state"><div class="sk-line w60"></div><div class="sk-line w80"></div></div></div></li>
+                    <li><div class="badge-card sk"><span class="sk-line sk-star"></span><div class="bc-main"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w40"></div></div><div class="bc-due"><div class="sk-line w60"></div><div class="sk-line lg2"></div></div><div class="bc-state"><div class="sk-line w60"></div><div class="sk-line w80"></div></div></div></li>
+                    <li><div class="badge-card sk"><span class="sk-line sk-star"></span><div class="bc-main"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w40"></div></div><div class="bc-due"><div class="sk-line w60"></div><div class="sk-line lg2"></div></div><div class="bc-state"><div class="sk-line w60"></div><div class="sk-line w80"></div></div></div></li>
+                    <li><div class="badge-card sk"><span class="sk-line sk-star"></span><div class="bc-main"><div class="sk-line lg"></div><div class="sk-line w80"></div><div class="sk-line w40"></div></div><div class="bc-due"><div class="sk-line w60"></div><div class="sk-line lg2"></div></div><div class="bc-state"><div class="sk-line w60"></div><div class="sk-line w80"></div></div></div></li>
+                </ul>
             </div>
             <div data-state="error" hidden>
-                <div class="state-box err" role="alert" style="margin-top:16px">
-                    <span class="big"><svg class="ic" width="32" height="32" aria-hidden="true"><use href="#i-alert"/></svg></span>
+                <div class="state-box err" role="alert">
+                    <span class="big"><svg class="ic" width="24" height="24" aria-hidden="true"><use href="#i-alert"/></svg></span>
                     <h2>Không tải được lịch hội nghị</h2>
-                    <p>Kết nối bị gián đoạn hoặc máy chủ đang bận. Bộ lọc bạn chọn vẫn được giữ nguyên, hãy thử lại sau ít giây.</p>
+                    <p>Kết nối bị gián đoạn nên chưa lấy được danh sách, bộ lọc bạn chọn vẫn được giữ.</p>
                     <div class="acts"><a class="btn pri" href="?state=ready"><svg class="ic" width="18" height="18" aria-hidden="true"><use href="#i-refresh"/></svg>Thử lại</a><a class="btn" href="index.html">Về trang chủ</a></div>
                 </div>
             </div>
             <div data-state="empty" hidden>
-                <div class="tb"><h2>0 hội nghị <small>trên tổng 128</small></h2></div>
+                <div class="tb"><h2>0 hội nghị</h2></div>
                 <div class="chips" aria-label="Bộ lọc đang áp dụng">
                     <button type="button" class="fchip" aria-label="Bỏ lọc Lĩnh vực: An toàn thông tin">Lĩnh vực: An toàn thông tin<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-x"/></svg></button>
                     <button type="button" class="fchip" aria-label="Bỏ lọc Rank CORE: A*">Rank CORE: A*<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-x"/></svg></button>
                     <button type="button" class="fchip" aria-label="Bỏ lọc Hạn trong 7 ngày">Hạn trong 7 ngày<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-x"/></svg></button>
                 </div>
                 <div class="state-box">
-                    <span class="big"><svg class="ic" width="32" height="32" aria-hidden="true"><use href="#i-nores"/></svg></span>
+                    <span class="big"><svg class="ic" width="24" height="24" aria-hidden="true"><use href="#i-nores"/></svg></span>
                     <h2>Không có hội nghị khớp bộ lọc</h2>
-                    <p>Chưa có hội nghị nào vừa thuộc lĩnh vực và rank đã chọn, vừa còn hạn trong 7 ngày tới. Thử bỏ bớt bộ lọc, hoặc bật "Hiện đã hết hạn" để xem cả các hội nghị đã qua hạn.</p>
+                    <p>Thử bỏ bớt bộ lọc, hoặc bật "Hiện đã hết hạn" để xem cả các hội nghị đã qua hạn.</p>
                     <div class="acts"><a class="btn pri" href="?state=ready">Xoá tất cả bộ lọc</a><a class="btn" href="?state=ready">Hiện đã hết hạn</a></div>
                 </div>
             </div>
             <div data-state="ready">
-            <div class="tb"><h2>37 hội nghị <small>trên tổng 128</small></h2><span class="sp"></span>
-                <button type="button" class="btn">Sắp xếp: <b>Deadline gần nhất</b><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-down"/></svg></button>
-                <div class="seg" role="group" aria-label="Chế độ xem"><span class="on"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-grid"/></svg>Thẻ</span><span><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-list"/></svg>Bảng</span></div>
+            <div class="tb"><h2>37 hội nghị</h2><span class="sp"></span>
+                <button type="button" class="btn">Sắp xếp: <b>Hạn gần nhất</b><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-down"/></svg></button>
             </div>
             <div class="chips" aria-label="Bộ lọc đang áp dụng">
                 <button type="button" class="fchip" aria-label="Bỏ lọc Lĩnh vực: Trí tuệ nhân tạo">Lĩnh vực: Trí tuệ nhân tạo<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-x"/></svg></button>
@@ -195,6 +183,7 @@
                 <button type="button" class="fchip" aria-label="Bỏ lọc Gồm đã hết hạn">Gồm đã hết hạn<svg class="ic" width="14" height="14" aria-hidden="true"><use href="#i-x"/></svg></button>
                 <button type="button" class="btn ghost">Xoá tất cả</button>
             </div>
+            <div class="range-bar" data-range-bar><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-calendar"/></svg><span data-range-text>Hạn từ 11/10 đến 10/12</span></div>
             <!--tickets:lich-->
 <ul class="badge-list">
 <li>
@@ -306,5 +295,6 @@
 <script src="js/save.js"></script>
 <script src="js/states-demo.js"></script>
 <script src="js/nav.js"></script>
+<script src="js/range-bar.js"></script>
 </body>
 </html>

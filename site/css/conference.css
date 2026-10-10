@@ -1,7 +1,7 @@
 /* Trang danh sách và chi tiết hội nghị */
-.page-head { padding: 32px 0 8px }
-.page-head h1 { font-size: 32px; line-height: 1.15 }
-.page-head p { color: var(--mute); max-width: 60ch; margin-top: 8px }
+.page-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 16px; padding: 14px 0 0 }
+.page-head h1 { font-size: 28px; line-height: 1.15 }
+.page-head p { color: var(--mute); max-width: 60ch }
 
 /* ============================================================
    Thành phần ký hiệu: thẻ đeo hội nghị (.badge-card) và ruy-băng rank (.ribbon)
@@ -38,23 +38,23 @@
    Hết hạn: data-level="x", nhãn "Đã hết hạn", bỏ .bc-cd.
    ============================================================ */
 .badge-list { list-style: none; display: grid; gap: 8px }
-.badge-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "main star" "due due" "state state"; gap: 10px 12px; align-items: start; padding: 20px 16px 14px; background: var(--badge); border: 1px solid var(--rule); border-radius: var(--r); transition: background .15s }
+.badge-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "main star" "due due" "state state"; gap: 10px 12px; align-items: start; padding: 16px 16px 10px; background: var(--badge); border: 1px solid var(--rule); border-radius: var(--r); transition: background .15s }
 /* khe xỏ dây: một vết cắt nhỏ ở mép trên */
 .badge-card::before { content: ""; position: absolute; top: -1px; left: 50%; width: 28px; height: 8px; margin-left: -14px; background: var(--paper); border: 1px solid var(--rule-2); border-top: 0; border-radius: 0 0 8px 8px }
 .badge-card:hover { background: var(--hover) }
 .badge-card:focus-within { outline: 2px solid var(--focus); outline-offset: 2px }
 .badge-card .iconbtn { grid-area: star; z-index: 1; margin: -10px -8px 0 0 }
 .bc-main { grid-area: main; min-width: 0 }
-.bc-name { font-family: var(--serif); font-optical-sizing: auto; font-size: 21px; line-height: 1.2; font-weight: 600 }
+.bc-name { font-family: var(--serif); font-optical-sizing: auto; font-size: 19px; line-height: 1.2; font-weight: 600 }
 .bc-name a { text-decoration: none }
 .bc-name a::after { content: ""; position: absolute; inset: 0; border-radius: var(--r) }
 .bc-name a:focus-visible { outline: none }
 .bc-full { margin-top: 2px; font-size: 13.5px; color: var(--mute); overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
-.bc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 8px }
+.bc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 6px }
 .bc-loc { font-size: 13px; color: var(--mute) }
 .bc-due { grid-area: due; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px }
 .bc-lab { flex: 1 0 100%; font-size: 12px; color: var(--mute) }
-.bc-date { font-family: var(--mono); font-size: 22px; line-height: 1.2; font-weight: 700 }
+.bc-date { font-family: var(--mono); font-size: 24px; line-height: 1.2; font-weight: 700 }
 .bc-date small { font-size: 12px; font-weight: 400; color: var(--mute) }
 .bc-time { font-family: var(--mono); font-size: 12.5px; color: var(--mute) }
 .bc-state { grid-area: state; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px }
@@ -70,19 +70,20 @@
 .ribbon.rb-d { background: var(--ribbon-d) }
 
 @media (min-width: 40rem) {
-    .badge-card { grid-template-columns: auto minmax(0, 1fr) 9.5rem 11.5rem; grid-template-areas: "star main due state"; gap: 12px 16px; align-items: center; padding: 18px 16px 14px 8px }
+    .badge-card { grid-template-columns: auto minmax(0, 1fr) 9.5rem 11.5rem; grid-template-areas: "star main due state"; gap: 12px 16px; align-items: center; padding: 14px 16px 10px 8px }
     .badge-card .iconbtn { margin: 0 }
     .bc-state { flex-direction: column; align-items: flex-end; gap: 6px; text-align: right }
     .bc-state .ub { align-self: flex-end }
 }
 
 /* ---------- bộ lọc ---------- */
-.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 24px 0 0; align-items: start }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 12px 0 0; align-items: start }
 .side { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 0 16px }
-.side-h { display: flex; align-items: center; justify-content: space-between; min-height: 56px; font-weight: 700; font-size: 18px; border-bottom: 1px solid var(--rule) }
+.side-h { display: flex; align-items: center; justify-content: space-between; min-height: 52px; font-weight: 700; font-size: 15px; border-bottom: 1px solid var(--rule) }
+.side-h .btn { min-height: 36px; padding: 0 8px; font-size: 13px }
 .fg { border-bottom: 1px solid var(--rule); padding: 4px 0 }
 .fg:last-child { border: 0 }
-.fg summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; cursor: pointer; list-style: none; font-weight: 700; font-size: 13px }
+.fg summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; cursor: pointer; list-style: none; font-weight: 700; font-size: 12px }
 .fg summary::-webkit-details-marker { display: none }
 .fg[open] summary .ic { transform: rotate(180deg) }
 .opt { display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 14px; cursor: pointer }
@@ -101,10 +102,17 @@
 .tb h2 { font-size: 22px }
 .tb h2 small { font: 400 13px var(--sans); color: var(--mute) }
 .tb .sp { flex: 1 }
-.seg { display: inline-flex; border: 1px solid var(--rule-2); border-radius: var(--r); overflow: hidden; background: var(--card) }
-.seg span { min-height: 44px; padding: 0 14px; display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px }
-.seg .on { background: var(--ink); color: var(--paper) }
 .chips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0 24px }
+.layout .chips { gap: 6px; margin: 8px 0 }
+.layout .tb .btn { min-height: 36px }
+.layout .chips .fchip { height: 28px; padding: 0 8px 0 10px; font-size: 12.5px; border-color: var(--rule-2) }
+.layout .chips .btn.ghost { min-height: 28px; padding: 0 8px; font-size: 12.5px }
+
+/* dải đầu danh sách: khoảng hạn của các thẻ đang nhìn thấy (range-bar.js) */
+.range-bar { position: relative; display: flex; align-items: center; gap: 8px; min-height: 32px; margin-bottom: 6px; padding: 0 12px; background: var(--paper); border-bottom: 1px solid var(--rule-2); color: var(--mute); font: 500 13px var(--mono) }
+
+/* trạng thái tải: sườn thẻ, chỉ đổi opacity */
+.layout .tb h2 { font-size: 20px }
 
 .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px }
 .cd { position: relative; display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 20px 16px 14px; background: var(--badge); border: 1px solid var(--rule); border-radius: var(--r); transition: background .15s }
@@ -177,7 +185,8 @@
 .actions { padding: 16px; display: flex; flex-direction: column; gap: 8px }
 
 @media (min-width: 40rem) {
-    .page-head h1 { font-size: 40px }
+    .range-bar { position: sticky; top: 53px; z-index: 30 }
+    .page-head h1 { font-size: 34px }
     .grid { grid-template-columns: repeat(2, minmax(0, 1fr)) }
     .mt thead { display: table-header-group }
     .mt thead th { text-align: left; font-size: 12.5px; color: var(--mute); padding: 10px 18px; background: var(--tint-2); border-top: 1px solid var(--rule) }
@@ -189,7 +198,8 @@
 }
 @media (min-width: 64rem) {
     .layout { grid-template-columns: 260px minmax(0, 1fr) }
-    .side { position: sticky; top: 92px }
+    .side { position: sticky; top: 68px; max-height: calc(100vh - 84px); overflow-y: auto }
+    .opt, .more { min-height: 36px }
     .grid { grid-template-columns: repeat(3, minmax(0, 1fr)) }
     .dgrid { grid-template-columns: minmax(0, 1fr) 360px }
     .dsb { position: sticky; top: 92px }

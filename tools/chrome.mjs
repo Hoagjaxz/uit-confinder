@@ -42,4 +42,4 @@ export const footLinksHtml = prefix =>
     '<!--c:foot--><div><h2>Trang</h2>' + FOOT_PAGES.map(n => `<a href="${prefix}${n.href}">${n.label}</a>`).join('') + '</div><!--/c:foot-->';
 
 export const savedHtml = prefix =>
-    `<!--c:saved--><a class="saved" href="${prefix}da-luu.html" aria-label="Đã lưu"><svg class="ic fill" width="18" height="18" aria-hidden="true"><use href="#i-star"/></svg><span class="sv-t">Đã lưu </span>(<span data-saved-count>0</span>)</a><!--/c:saved-->`;
+    `<!--c:saved--><a class="saved" href="${prefix}da-luu.html" aria-label="Đã lưu"><svg class="ic fill" width="18" height="18" aria-hidden="true"><use href="#i-star"/></svg><span><span class="sv-t">Đã lưu </span>(<span data-saved-count>0</span>)</span></a><!--/c:saved-->`;

@@ -36,8 +36,11 @@ export const navHtml = (prefix, current) =>
     NAV.map(n => `<a href="${prefix}${n.href}"${n.href === current ? ' aria-current="page"' : ''}>${n.label}</a>`).join('') +
     '</nav><button type="button" class="theme-btn" data-theme-toggle aria-pressed="false">' + MOON + SUN + '<span class="vh">Giao diện tối</span></button><!--/c:nav-->';
 
-export const footLinksHtml = prefix =>
-    '<!--c:foot--><div><h2>Trang</h2>' + FOOT_PAGES.map(n => `<a href="${prefix}${n.href}">${n.label}</a>`).join('') + '</div><!--/c:foot-->';
+export const brandHtml = prefix => `<a class="brand" href="${prefix}index.html">UIT <em>ConFinder</em></a>`;
+
+export const footerHtml = prefix =>
+    `<footer class="foot"><div class="container foot-in">${brandHtml(prefix)}<nav class="foot-nav" aria-label="Liên kết chân trang">` +
+    FOOT_PAGES.map(n => `<a href="${prefix}${n.href}">${n.label}</a>`).join('') + `</nav><small>${FOOT_NOTE}</small></div></footer>`;
 
 export const savedHtml = prefix =>
     `<!--c:saved--><a class="saved" href="${prefix}da-luu.html" aria-label="Đã lưu"><svg class="ic fill" width="18" height="18" aria-hidden="true"><use href="#i-star"/></svg><span><span class="sv-t">Đã lưu </span>(<span data-saved-count>0</span>)</span></a><!--/c:saved-->`;

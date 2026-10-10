@@ -1,5 +1,5 @@
 // tools/shell.mjs
-// Dựng khung trang mới (head + sprite + header + bản tin + footer) từ lich-hoi-nghi.html.
+// Dựng khung trang mới (head + sprite + header + footer) từ lich-hoi-nghi.html.
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 

@@ -129,7 +129,7 @@ for (const c of CONFERENCES) {
     const html = pageShell({
         title: `${c.name} ${c.year}, chi tiết hội nghị`,
         description: `${c.name} ${c.year}: các mốc quan trọng, hạn nộp bài theo AoE và giờ Việt Nam.`,
-        scripts: ['save', 'newsletter'],
+        scripts: ['save'],
         main: main(c),
     });
     writeFileSync(fileURLToPath(new URL(`../site/${c.file}`, import.meta.url)), html);

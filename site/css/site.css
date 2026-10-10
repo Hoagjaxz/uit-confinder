@@ -107,7 +107,8 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .m-search input { flex: 1; min-width: 0; min-height: 42px; border: 0; background: none; font: inherit; color: var(--ink); outline: none }
 .m-search:focus-within { outline: 3px solid var(--focus); outline-offset: 2px }
 .m-search kbd { font: 11px var(--mono); border: 1px solid var(--rule); border-radius: 4px; padding: 0 6px; color: var(--mute) }
-.saved { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 14px; color: var(--link); white-space: nowrap }
+.saved { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 14px; color: var(--link); white-space: nowrap; text-decoration: none }
+@media (max-width: 39.99rem) { .sv-t { display: none } .brand { font-size: 18px; gap: 8px } }
 
 /* ---------- khung trang: skip link, menu, giao diện tối ---------- */
 .skip { position: absolute; left: 12px; top: -64px; z-index: 100; padding: 12px 16px; border-radius: var(--r); background: var(--navy); color: #fff; font-weight: 600; text-decoration: none }

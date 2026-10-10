@@ -3,7 +3,7 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { skipHtml, navHtml, footLinksHtml, currentFor, FOOT_NOTE } from './chrome.mjs';
+import { skipHtml, navHtml, footLinksHtml, savedHtml, currentFor, FOOT_NOTE } from './chrome.mjs';
 
 export const SITE = fileURLToPath(new URL('../site/', import.meta.url));
 export const htmlFiles = (dir = SITE) =>
@@ -12,6 +12,7 @@ export const htmlFiles = (dir = SITE) =>
 
 const NAV_RE = /<!--c:nav-->[\s\S]*?<!--\/c:nav-->|<nav class="nav"[\s\S]*?<\/nav>/;
 const FOOT_RE = /<!--c:foot-->[\s\S]*?<!--\/c:foot-->|<div><h2>Trang<\/h2>[\s\S]*?<\/div>/;
+const SAVED_RE = /<!--c:saved-->[\s\S]*?<!--\/c:saved-->|<span class="saved">[\s\S]*?<\/span>/;
 
 export const syncPage = (html, rel) => {
     const prefix = '../'.repeat(rel.split('/').length - 1);
@@ -22,6 +23,7 @@ export const syncPage = (html, rel) => {
     out = out.replace(/<main(?:\s[^>]*)?>/, '<main id="main" tabindex="-1">');
     out = out.replace(NAV_RE, () => navHtml(prefix, currentFor(rel)));
     out = out.replace(FOOT_RE, () => footLinksHtml(prefix));
+    out = out.replace(SAVED_RE, () => savedHtml(prefix));
     const i = out.indexOf('<footer class="foot">');
     if (i >= 0) out = out.slice(0, i) + out.slice(i).replace(/<small>[\s\S]*?<\/small>/, () => `<small>${FOOT_NOTE}</small>`);
     return out;

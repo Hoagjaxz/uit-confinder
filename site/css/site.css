@@ -19,17 +19,45 @@
     --gold-text: #8a6411;
     --on-navy: #f3e6c4;
     --field: #ffffff;
-    --tint: var(--tint);
-    --tint-2: var(--tint-2);
-    --closed: var(--closed);
-    --past: var(--past);
-    --dim: var(--dim);
+    --tint: #e9e1cf;
+    --tint-2: #efe8d7;
+    --closed: #efeadd;
+    --past: #f4efe3;
+    --dim: #a7a08f;
     color-scheme: light;
     --r: 8px;
     --sh: 0 1px 2px rgba(22, 32, 42, .07), 0 8px 22px rgba(22, 32, 42, .06);
     --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
     --sans: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --ink: #e9e6dc;
+    --mute: #a9b3c4;
+    --paper: #0e1424;
+    --card: #161f35;
+    --rule: #2a3550;
+    --navy: #2c4075;
+    --navy-2: #3a5190;
+    --gold: #d4a64a;
+    --gold-soft: #2b2a22;
+    --link: #a9bdf2;
+    --focus: #e0b45a;
+    --gold-text: #e0b45a;
+    --on-navy: #f3e6c4;
+    --field: #1c2742;
+    --tint: #222c45;
+    --tint-2: #1d2740;
+    --closed: #121a2d;
+    --past: #131b2f;
+    --dim: #5b667e;
+    --c-fg: #fca5a5; --c-bg: #3a1518;
+    --s-fg: #fcd34d; --s-bg: #35280a;
+    --u-fg: #a9c4ff; --u-bg: #14284f;
+    --o-fg: #86efac; --o-bg: #0f2d1b;
+    --x-fg: #cbd5e1; --x-bg: #232c3f;
+    --sh: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 22px rgba(0, 0, 0, .35);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0 }

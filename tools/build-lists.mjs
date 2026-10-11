@@ -61,12 +61,23 @@ ${cs.map(c => {
 }).join('\n')}
 </ul>`;
 
+// Dải chạy: một bản đọc được + ba bản nhân đôi (aria-hidden, không tab được) để vòng lặp translateX(-25%) liền mạch tới màn hình rất rộng.
+const tickItem = (c, hidden) => {
+    const due = nextDue(c);
+    const left = c.next.text.replace(/ \d\d:\d\d$/, '').toLowerCase();
+    return `<li><a href="${c.file}"${hidden ? ' tabindex="-1"' : ''}><b>${c.name} ${c.year}</b> · ${c.core} · <time datetime="${due.at}">${formatVN(due.at).date.slice(0, 5)}</time> · <span class="tk-left">${left}</span></a></li>`;
+};
+const ticker = cs => `<div class="ticker" role="region" aria-label="Hội nghị đang mở nộp bài"><div class="tk-track">
+${[false, true, true, true].map(h => `<ul${h ? ' aria-hidden="true"' : ''}>${cs.map(c => tickItem(c, h)).join('')}</ul>`).join('')}
+</div></div>`;
+
 const HERO_N = 3; // trang chủ: hạn đầu thành thẻ lớn, hai hạn kế tiếp thành dòng meta ở hero, phần "Các hạn tiếp theo" liệt kê phần còn lại
 const open = CONFERENCES.filter(c => !c.closed).sort(byDue);
 
 const TARGETS = {
     lich: { file: 'lich-hoi-nghi.html', html: list(CONFERENCES) },
     'hero-big': { file: 'index.html', html: poster(open[0]) },
+    'hero-ticker': { file: 'index.html', html: ticker(open) },
     hero: { file: 'index.html', html: heroNext(open.slice(1, HERO_N)) },
     'trang-chu': { file: 'index.html', html: list(open.slice(HERO_N)) },
     'da-luu': { file: 'da-luu.html', html: list(CONFERENCES, c => `<li data-saved-item="${c.slug}" hidden>`) },

@@ -159,7 +159,7 @@ Bảng Mận: nền xám ánh tím, mực tím đen, một nhấn tím mận và
 - **CORE A*** (#2a1647, chữ trắng; bản tối nền sáng #f2eff6 chữ tối), **hạng A / CCF A** (#7a3fc0), **hạng B** (#8a4cb8), **hạng C** (#6e6880). Chỉ tông tím, đen, xám. Hợp đồng ghi hạng B là #a15bd0; bản dựng dùng #8a4cb8 (đủ tương phản với chữ trắng), nên #8a4cb8 là giá trị chuẩn.
 
 ### Mức khẩn (ngữ nghĩa)
-- **Gấp** đỏ (#a8200f trên #fde6e1), **Trong tuần** vàng nâu (#8a5200 trên #fdf0d3), **Trong tháng** lam (#1f4fae trên #e5edfb), **Còn rộng** lục (#3b6a12 trên #ecf3d6), **Đã hết hạn** xám lam (#586070 trên #eceef2). Mỗi mức có bản tối riêng trong site.css.
+- **Gấp** đỏ (#a8200f trên #fde6e1), **Trong tuần** vàng nâu (#8a5200 trên #fdf0d3), **Trong tháng** lam (#1f4fae trên #e5edfb), **Còn nhiều thời gian** lục (#3b6a12 trên #ecf3d6), **Đã hết hạn** xám lam (#586070 trên #eceef2). Mỗi mức có bản tối riêng trong site.css.
 
 ### Named Rules
 **The Lanyard Rule.** Hồng dây đeo chỉ là dải đỉnh trang, gạch nav hiện tại, dây trang chủ, gạch chân tên hội nghị khi chạm và vạch "hôm nay" của thanh mốc ngày ở hero. Không tô nút, chữ hay nền bằng hồng.
@@ -208,7 +208,7 @@ Thành phần ký hiệu. Khe xỏ dây ở mép trên, sao lưu ở trái, tên
 Cao 22px, chữ 12px đậm, đuôi V; bốn màu theo hạng (xem Colors). Trên trang chi tiết cao 26px.
 
 ### Nhãn mức khẩn (ub)
-Biểu tượng SVG 16px cộng chữ đậm, viền 1px cùng màu chữ, nền ngữ nghĩa, cao tối thiểu 28px, bo 3px. Năm mức: Gấp (dưới 3 ngày), Trong tuần (dưới 7), Trong tháng (dưới 30), Còn rộng (từ 30), Đã hết hạn.
+Biểu tượng SVG 16px cộng chữ đậm, viền 1px cùng màu chữ, nền ngữ nghĩa, cao tối thiểu 28px, bo 3px. Năm mức: Gấp (dưới 3 ngày), Trong tuần (dưới 7), Trong tháng (dưới 30), Còn nhiều thời gian (từ 30), Đã hết hạn.
 
 ### Hero trang chủ (câu một nhịp)
 Một câu căn giữa, đồng hồ là chữ lớn nhất: "Còn [viên nang] để nộp ICSE", hai đầu câu chỉ 0,5em tiêu đề. Viên nang bo tròn hết cỡ (ngoại lệ có chủ đích của thang bo góc), mono 700, cỡ chữ tự vừa bề ngang nhờ `--n` (tối đa 76px; 64px khi câu nằm một hàng từ 64rem). Mỗi chữ số một ô cắt gọn, giây nhảy bằng cách số mới trượt lên thế chỗ số cũ (320ms; bỏ hẳn khi giảm chuyển động, số đổi thẳng). Số chạy `aria-hidden`, trình đọc màn hình nghe đơn vị lớn nhất. Dưới 24 giờ viên nang đổi sang đỏ khẩn (`--c-fg` trên `--c-bg`) và dòng phụ mở bằng nhãn "Sắp hết hạn".

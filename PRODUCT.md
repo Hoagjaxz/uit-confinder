@@ -19,7 +19,7 @@ Tra cứu hạn nộp bài hội nghị khoa học. Mỗi hội nghị có các 
 ## Positioning
 
 Điểm khác, theo người sở hữu sản phẩm:
-- Thang 5 mức khẩn (Gấp, Trong tuần, Trong tháng, Còn rộng, Đã hết hạn) kèm đếm ngược.
+- Thang 5 mức khẩn (Gấp, Trong tuần, Trong tháng, Còn nhiều thời gian, Đã hết hạn) kèm đếm ngược.
 - Lọc theo lĩnh vực, rank CORE/CCF và hình thức tham dự (online, offline, hybrid).
 - Thêm mốc kế tiếp vào lịch (Google Calendar hoặc tệp .ics).
 

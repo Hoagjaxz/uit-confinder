@@ -4,7 +4,7 @@ export const LEVELS = {
     c: { cls: 'u-c', icon: 'i-alert', label: 'Gấp', range: 'dưới 3 ngày' },
     s: { cls: 'u-s', icon: 'i-clock', label: 'Trong tuần', range: 'dưới 7 ngày' },
     u: { cls: 'u-u', icon: 'i-calendar', label: 'Trong tháng', range: 'dưới 30 ngày' },
-    o: { cls: 'u-o', icon: 'i-okc', label: 'Còn rộng', range: 'từ 30 ngày' },
+    o: { cls: 'u-o', icon: 'i-okc', label: 'Còn nhiều thời gian', range: 'từ 30 ngày' },
     x: { cls: 'u-x', icon: 'i-xc', label: 'Đã hết hạn', range: 'đã qua' },
 };
 export const icon = (id, size = 16) => `<svg class="ic" width="${size}" height="${size}" aria-hidden="true"><use href="#${id}"/></svg>`;

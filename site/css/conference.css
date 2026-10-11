@@ -6,7 +6,7 @@
 /* ============================================================
    Thành phần ký hiệu: thẻ đeo hội nghị (.badge-card) và ruy-băng rank (.ribbon)
    Dùng chung cho trang lịch, trang chủ, Đã lưu. Mọi giờ là giờ Việt Nam.
-   data-level: c (Gấp) | s (Trong tuần) | u (Trong tháng) | o (Còn rộng) | x (Hết hạn)
+   data-level: c (Gấp) | s (Trong tuần) | u (Trong tháng) | o (Còn nhiều thời gian) | x (Hết hạn)
    Ruy-băng: rb-a = CORE A*, rb-b = CORE A / CCF A, rb-c = hạng B, rb-d = hạng C.
 
    <ul class="badge-list">
@@ -163,6 +163,7 @@
 .mt tr { display: grid; gap: 4px; padding: 14px 18px; border-top: 1px solid var(--rule) }
 .mt td { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap }
 .mt td::before { content: attr(data-l); font-size: 12px; color: var(--mute); white-space: nowrap }
+.mt td .ub { max-width: 100%; flex-wrap: wrap; white-space: normal }
 .mt td:first-child::before { display: none }
 .mt td:first-child { display: block }
 .mt tr.past { color: var(--mute); background: var(--past) }

@@ -16,7 +16,7 @@
       "urgent-fg": { "role": "semantic", "displayName": "Gấp (đỏ)", "canonical": "#a8200f", "tonalRamp": ["#3d0a04", "#6b1409", "#a8200f", "#d04a38", "#e38274", "#f1b0a6", "#fde6e1", "#fff4f2"] },
       "week-fg": { "role": "semantic", "displayName": "Trong tuần (vàng nâu)", "canonical": "#8a5200", "tonalRamp": ["#2e1b00", "#5a3600", "#8a5200", "#b97a14", "#d8a24a", "#ebc787", "#fdf0d3", "#fff8e8"] },
       "month-fg": { "role": "semantic", "displayName": "Trong tháng (lam)", "canonical": "#1f4fae", "tonalRamp": ["#0a1c42", "#112f6e", "#1f4fae", "#4a74c6", "#7d9bd9", "#adc0ea", "#e5edfb", "#f3f7fd"] },
-      "open-fg": { "role": "semantic", "displayName": "Còn rộng (lục)", "canonical": "#3b6a12", "tonalRamp": ["#14260a", "#264510", "#3b6a12", "#5d8a35", "#86ab62", "#b0cb92", "#ecf3d6", "#f6faea"] }
+      "open-fg": { "role": "semantic", "displayName": "Còn nhiều thời gian (lục)", "canonical": "#3b6a12", "tonalRamp": ["#14260a", "#264510", "#3b6a12", "#5d8a35", "#86ab62", "#b0cb92", "#ecf3d6", "#f6faea"] }
     },
     "typographyMeta": {
       "display": { "displayName": "Display (Newsreader)", "purpose": "Tiêu đề hero trang chủ và tên hội nghị lớn; luôn upright." },
@@ -58,7 +58,7 @@
       "kind": "chip",
       "refersTo": "urgency-label-urgent",
       "description": "Nhãn mức khẩn: biểu tượng cộng chữ, năm mức ngữ nghĩa.",
-      "html": "<span class=\"ds-ub ds-u-c\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M12 3 2 21h20L12 3zM12 10v5M12 18v.01\"/></svg><b>Gấp</b></span> <span class=\"ds-ub ds-u-o\"><b>Còn rộng</b></span>",
+      "html": "<span class=\"ds-ub ds-u-c\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M12 3 2 21h20L12 3zM12 10v5M12 18v.01\"/></svg><b>Gấp</b></span> <span class=\"ds-ub ds-u-o\"><b>Còn nhiều thời gian</b></span>",
       "css": ".ds-ub { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 2px 10px; border: 1px solid currentColor; border-radius: 3px; font: 12.5px 'Be Vietnam Pro', sans-serif } .ds-ub b { font-weight: 700 } .ds-u-c { color: #a8200f; background: #fde6e1 } .ds-u-o { color: #3b6a12; background: #ecf3d6 }"
     },
     {

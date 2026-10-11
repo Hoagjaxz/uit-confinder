@@ -6,7 +6,7 @@
     const DAY = 864e5, HOUR = 36e5, HOLD_MS = 4000, TICKS = 15;
     const pad = n => String(n).padStart(2, '0');
     const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-    const LV = { c: 'Gấp', s: 'Trong tuần', u: 'Trong tháng', o: 'Còn rộng', x: 'Đã hết hạn' };
+    const LV = { c: 'Gấp', s: 'Trong tuần', u: 'Trong tháng', o: 'Còn nhiều thời gian', x: 'Đã hết hạn' };
 
     // 187929 -> "2 ngày 04:12:09"; còn dưới một ngày thì bỏ phần ngày.
     function format(sec) {
@@ -91,8 +91,14 @@
         return '';
     }
 
+    // Khóa "vừa chuyển hội nghị" đặt vào shownKey sau khi giữ thông báo hết hạn; khác mọi khóa phase+iso.
+    const SWITCHED = 'switched';
+    // Báo "Sắp hết hạn" khi hội nghị đang hiển thị vừa chuyển từ còn xa sang dưới 24 giờ, hoặc vừa được chuyển tới.
+    // Tải trang (prevKey rỗng) thì không báo: người đọc chưa có ngữ cảnh "vừa đổi".
+    const shouldAnnounceSoon = (prevKey, ph, iso) => ph === 'soon' && (prevKey === SWITCHED || prevKey === 'far' + iso);
+
     if (typeof module !== 'undefined') {
-        module.exports = { format, spoken, remaining, phase, clockOffset, level, vnParts, order, defaultOpens, ticks, head, block, announce, LV, HOLD_MS };
+        module.exports = { format, spoken, remaining, phase, clockOffset, level, vnParts, order, defaultOpens, ticks, head, block, announce, shouldAnnounceSoon, SWITCHED, LV, HOLD_MS };
         return;
     }
 
@@ -153,7 +159,10 @@
             h1.innerHTML = v.h1; ticksEl.innerHTML = v.ticks; ticksEl.hidden = !v.ticks; subEl.innerHTML = v.sub; subEl.hidden = !v.sub;
             h1.dataset.state = ph;
             shownKey = key;
-            if (ph === 'soon' && was === 'far' + it.iso) live.textContent = announce(m); // chỉ khi đổi trạng thái, không phải mỗi giây
+            // Chỉ khi đổi trạng thái, không phải mỗi giây. Sau khi chuyển hội nghị, câu hết hạn cũ không đọc lại: nếu hội nghị kế
+            // chưa dưới 24 giờ thì vùng này để trống, câu hero mới nằm ngoài vùng live.
+            if (shouldAnnounceSoon(was, ph, it && it.iso)) live.textContent = announce(m);
+            else if (was === SWITCHED) live.textContent = '';
         } else if (ph === 'far' || ph === 'soon') { setFace(remaining(it.deadline, t)); setTicks(it, t); }
     }
     function syncNames(t) {
@@ -179,7 +188,7 @@
             hold = true;
             paint(cur, t, 'expired', first);
             live.textContent = announce(model(cur, t, 'expired', first));
-            setTimeout(() => { hold = false; cur = null; shownKey = ''; tick(); }, HOLD_MS);
+            setTimeout(() => { hold = false; cur = null; shownKey = SWITCHED; tick(); }, HOLD_MS);
             return;
         }
         cur = first;

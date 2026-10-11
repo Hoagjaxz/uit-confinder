@@ -130,6 +130,15 @@ test('hết hạn khi đang xem: một câu nêu hội nghị kế tiếp, thôn
     assert.equal(announce({ phase: 'far', name: 'ICSE' }), ''); // trạng thái không đổi thì không đọc gì
 });
 
+test('báo "Sắp hết hạn" khi vừa chuyển sang hội nghị kế đã dưới 24 giờ, không báo khi tải trang hay còn xa', () => {
+    const { shouldAnnounceSoon, SWITCHED } = H;
+    assert.equal(shouldAnnounceSoon(SWITCHED, 'soon', 'X'), true);     // vừa chuyển hội nghị, hội nghị kế dưới 24 giờ
+    assert.equal(shouldAnnounceSoon('farX', 'soon', 'X'), true);       // cùng hội nghị, từ còn xa sang dưới 24 giờ
+    assert.equal(shouldAnnounceSoon('farY', 'soon', 'X'), false);      // khóa của hội nghị khác
+    assert.equal(shouldAnnounceSoon('', 'soon', 'X'), false);          // tải trang
+    assert.equal(shouldAnnounceSoon(SWITCHED, 'far', 'X'), false);     // hội nghị kế còn xa: câu hero mới không vào vùng live
+});
+
 test('tên hội nghị từ dữ liệu được thoát ký tự HTML', () => {
     const v = head({ phase: 'expired', name: '<b>"X"</b>', href: 'a"b.html', next: null });
     assert.doesNotMatch(v.h1, /<b>/);

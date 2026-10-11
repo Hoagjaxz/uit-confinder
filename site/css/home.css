@@ -63,9 +63,9 @@
 .names a:hover .nm-n::after, .names a:focus-visible .nm-n::after { transform: scaleX(1) }
 .names a:hover { color: var(--accent) }
 .nm-dot { flex: none; width: max(7px, .26em); height: max(7px, .26em); border-radius: 50%; background: var(--lv) }
-.nm-due { display: flex; gap: .4em; margin-top: 8px; font-family: var(--sans); font-size: 12.5px; line-height: 1.2; color: var(--soft); white-space: nowrap }
+.nm-due { display: flex; gap: .4em; margin-top: 8px; font-family: var(--sans); font-size: 12.5px; line-height: 1.2; color: var(--soft); white-space: nowrap; flex-wrap: wrap; justify-content: center }
 /* trong DOM nhãn đứng sau ngày để trình đọc màn hình đọc "hạn 11/10, gấp"; nhìn thấy thì nhãn đứng trước */
-.nm-lv { order: -1; font-weight: 700; color: var(--lv) }
+.nm-lv { order: -1; font-weight: 700; color: var(--lv); white-space: normal; text-align: center }
 /* dưới 40rem: hạn gần nhất chiếm cả hàng, các hạn còn lại xếp hai cột; lẻ một thì hạn cuối chiếm cả hàng */
 @media (max-width: 39.99rem) {
     .names li:not(.is-closed):nth-child(1 of :not([hidden])) { grid-column: 1 / -1 }

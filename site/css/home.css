@@ -7,15 +7,15 @@
 .stage > *, .w { grid-column: 1 }
 .w { display: block; z-index: 1; font-family: var(--serif); font-optical-sizing: auto; font-size: var(--fs); font-weight: 700; line-height: .92; letter-spacing: -.03em; white-space: nowrap; color: var(--accent) }
 .w1 { grid-row: 1 }
-.w2 { grid-row: 2; margin-left: 6% }
-.w3 { grid-row: 4; z-index: 4; margin-left: 2% }
-.w4 { grid-row: 5; margin-left: 10% }
+.w2 { grid-row: 2 }
+.w3 { grid-row: 3 }
+.w4 { grid-row: 4 }
 .w em { font-style: italic; font-weight: 600; padding-right: .06em; color: var(--lanyard) }
 
-.strap { grid-row: 1 / 4; grid-column: 1; justify-self: end; width: 26px; margin: -20px calc(var(--cw) / 2 - 13px) 0 0; z-index: 0; background: linear-gradient(to bottom, transparent 0 6px, color-mix(in srgb, var(--paper) 55%, transparent) 6px 10px) center / 2px 12px repeat-y, color-mix(in srgb, var(--lanyard) 38%, var(--paper)) }
+.strap { display: none; grid-row: 1 / 4; grid-column: 1; justify-self: end; width: 26px; margin: -20px calc(var(--cw) / 2 - 13px) 0 0; z-index: 0; background: linear-gradient(to bottom, transparent 0 6px, color-mix(in srgb, var(--paper) 55%, transparent) 6px 10px) center / 2px 12px repeat-y, color-mix(in srgb, var(--lanyard) 38%, var(--paper)) }
 
 /* thẻ đeo */
-.pcard { container-type: inline-size; position: relative; grid-row: 3; justify-self: end; width: var(--cw); margin: calc(var(--fs) * -.2) 0 calc(var(--fs) * -.3); z-index: 3; display: grid; gap: 12px; padding: 36px 20px 30px; background: var(--badge); border: 1px solid var(--rule-2); border-radius: var(--r); box-shadow: 6px 6px 0 var(--tint); transform: rotate(-2deg); transform-origin: 50% 0 }
+.pcard { container-type: inline-size; position: relative; grid-row: 7; justify-self: start; width: var(--cw); margin: 28px 0 0; z-index: 3; display: grid; gap: 12px; padding: 36px 20px 30px; background: var(--badge); border: 1px solid var(--rule-2); border-radius: var(--r); box-shadow: 6px 6px 0 var(--tint); transform: rotate(-2deg); transform-origin: 50% 0 }
 .pcard::before { content: ""; position: absolute; top: -1px; left: 50%; width: 30px; height: 12px; margin-left: -15px; background: var(--lanyard); border-radius: 0 0 6px 6px }
 .pcard .iconbtn { position: absolute; top: 14px; right: 6px; z-index: 2 }
 .pc-rib { display: flex; flex-wrap: wrap; gap: 6px 8px; padding-right: 44px }
@@ -37,21 +37,23 @@
 .bc-tz { font-size: 12px; color: var(--mute) }
 
 /* nút chính là cuống vé: hai mép răng cưa, đường chấm đứt, khuyết bán nguyệt ở chỗ xé */
-.stub { position: relative; z-index: 10; grid-row: 6; justify-self: start; margin-top: 28px; text-decoration: none; color: var(--paper); transition: transform .15s }
+.stub { position: relative; z-index: 10; grid-row: 8; justify-self: start; width: var(--cw); margin-top: 22px; text-decoration: none; color: var(--paper); transition: transform .15s }
 .stub:hover { transform: translateY(-2px) }
 .stub:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px }
-.stub-body { --tw: 60px; display: grid; grid-template-columns: auto var(--tw); height: 56px; background: var(--ink);
+.stub-body { --tw: 60px; display: grid; grid-template-columns: 1fr var(--tw); height: 56px; background: var(--ink);
     -webkit-mask: radial-gradient(circle 4px at 0 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y, radial-gradient(circle 4px at 100% 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y, radial-gradient(circle 8px at calc(100% - var(--tw)) 0, #0000 97%, #000), radial-gradient(circle 8px at calc(100% - var(--tw)) 100%, #0000 97%, #000);
     -webkit-mask-composite: source-in, source-in, source-in;
     mask: radial-gradient(circle 4px at 0 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y, radial-gradient(circle 4px at 100% 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y, radial-gradient(circle 8px at calc(100% - var(--tw)) 0, #0000 97%, #000), radial-gradient(circle 8px at calc(100% - var(--tw)) 100%, #0000 97%, #000);
     mask-composite: intersect }
-.stub-main { display: flex; align-items: center; padding: 0 26px 0 30px; font-size: 15px; font-weight: 700; letter-spacing: .02em; white-space: nowrap }
+.stub-main { display: flex; align-items: center; padding: 0 16px 0 30px; font-size: 15px; font-weight: 700; letter-spacing: .02em; white-space: nowrap }
 .stub-end { display: grid; place-items: center; background: var(--lanyard); border-left: 2px dashed color-mix(in srgb, var(--paper) 70%, transparent) }
 .stub-end .ic { transition: transform .15s }
 .stub:hover .stub-end .ic { transform: translateX(3px) }
 
-.hero-sub { grid-row: 7; margin-top: 18px; font-size: 13px; color: var(--mute) }
-.pm-list { grid-row: 8; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 6px; font-size: 13px; color: var(--mute) }
+.hero-sub { grid-row: 5; margin-top: 18px; font-size: 14px; color: var(--mute) }
+.hero-open { grid-row: 6; margin-top: 4px; font-size: 13px; color: var(--mute) }
+.hero-open b { color: var(--ink); font-weight: 700 }
+.pm-list { grid-row: 9; justify-self: start; width: var(--cw); list-style: none; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 22px; margin-top: 14px; font-size: 13px; color: var(--mute) }
 .pm-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 10px }
 .pm-list a { color: var(--ink); font-weight: 700; text-underline-offset: 3px }
 .pm-list a:hover { color: var(--accent) }
@@ -74,20 +76,16 @@
 @media (min-width: 48rem) {
     .stage { --fs: clamp(4rem, min(10vw, 15vh), 8rem); --cw: min(100%, 24rem); grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 16px; padding-top: 28px }
     .w { grid-column: 1 / -1 }
-    .w1 { grid-row: 1 }
-    .w2 { grid-row: 2; margin-left: 8% }
-    .w3 { grid-row: 3; margin-left: 14.5% }
-    .w4 { grid-row: 4; margin-left: 6% }
-    .strap { z-index: 2; background: linear-gradient(to bottom, transparent 0 6px, color-mix(in srgb, var(--paper) 55%, transparent) 6px 10px) center / 2px 12px repeat-y, var(--lanyard); grid-column: 8 / 13; grid-row: 1 / 3; justify-self: center; margin: -28px 0 0 }
+    .strap { display: block; z-index: 2; background: linear-gradient(to bottom, transparent 0 6px, color-mix(in srgb, var(--paper) 55%, transparent) 6px 10px) center / 2px 12px repeat-y, var(--lanyard); grid-column: 8 / 13; grid-row: 1 / 3; justify-self: center; margin: -28px 0 0 }
     .pcard { grid-column: 8 / 13; grid-row: 1 / 4; justify-self: center; align-self: center; margin: 0 }
-    .stub { grid-column: 1 / 7; grid-row: 5; margin-top: 24px }
-    .hero-sub { grid-column: 1 / 7; grid-row: 6; margin-top: 14px }
-    .pm-list { grid-column: 8 / 13; grid-row: 5; justify-self: center; align-self: end; margin-top: 24px }
+    .stub { grid-column: 8 / 13; grid-row: 4; justify-self: center; align-self: start; margin-top: 22px }
+    .hero-sub { grid-column: 1 / 7; grid-row: 5; margin-top: 18px }
+    .hero-open { grid-column: 1 / 7; grid-row: 6; margin-top: 4px }
+    .pm-list { grid-column: 8 / 13; grid-row: 5 / 7; justify-self: center; align-self: start; margin-top: 18px }
 }
 @media (min-width: 64rem) {
     .stage { --fs: clamp(4.5rem, min(8.6vw, 14vh), 8rem) }
-    .strap, .pcard { grid-column: 9 / 13 }
-    .pm-list { grid-column: 9 / 13 }
+    .strap, .pcard, .stub, .pm-list { grid-column: 9 / 13 }
 }
 
 /* các phần dưới hero */

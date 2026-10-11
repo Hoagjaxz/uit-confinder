@@ -5,7 +5,10 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { CONFERENCES } from './conferences.mjs';
 import { icon, ub, ribbon } from './levels.mjs';
+import { createRequire } from 'node:module';
 import { formatVN, daysLeft, urgency, nextDue } from './time-vn.mjs';
+
+const { format, spoken } = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm với trình duyệt, nên HTML tĩnh khớp bản chạy
 
 const card = c => {
     const due = nextDue(c);
@@ -32,21 +35,32 @@ const card = c => {
 const list = (cs, li = c => '<li>', cls = 'badge-list') => `<ul class="${cls}">\n${cs.map(c => `${li(c)}\n${card(c)}\n</li>`).join('\n')}\n</ul>`;
 const byDue = (a, b) => Date.parse(nextDue(a).at) - Date.parse(nextDue(b).at);
 
-const HERO_N = 3; // trang chủ: 3 hạn gần nhất treo ở hero, phần "Các hạn tiếp theo" liệt kê phần còn lại
 const open = CONFERENCES.filter(c => !c.closed).sort(byDue);
+const [first] = open; // hạn gần nhất nằm trong câu tiêu đề hero; phần "Các hạn tiếp theo" liệt kê phần còn lại
+
+// Tiêu đề hero: "Còn [viên nang đồng hồ] để nộp ICSE". Giây còn lại lấy từ c.next (dữ liệu minh hoạ nhập tay).
+const heroHead = () => {
+    const { d, h, m, s } = first.next, sec = +d * 86400 + +h * 3600 + +m * 60 + +s;
+    const due = nextDue(first), { time, date } = formatVN(due.at);
+    return `<h1 id="home-h1">Còn <span class="cap" data-hero-clock data-sec="${sec}"><span class="vh">${spoken(sec)}</span><span class="cap-face mono" data-cd aria-hidden="true">${format(sec)}</span></span> để nộp <a href="${first.file}">${first.name}</a></h1>
+<p class="hero-sub">${due.name} lúc ${time} ngày ${date}, giờ Việt Nam.</p>`;
+};
+// Hàng tên hội nghị viết như logo, xếp theo hạn gần nhất.
+const heroNames = () => `<ul class="names">\n${open.map(c => `<li><a href="${c.file}" aria-label="${c.name} ${c.year}, hạn ${formatVN(nextDue(c).at).date.slice(0, 5)}">${c.name}</a></li>`).join('\n')}\n</ul>`;
 
 const TARGETS = {
-    lich: { file: 'lich-hoi-nghi.html', html: list(CONFERENCES) },
-    hero: { file: 'index.html', html: list(open.slice(0, HERO_N), undefined, 'badge-list tags') },
-    'trang-chu': { file: 'index.html', html: list(open.slice(HERO_N)) },
-    'da-luu': { file: 'da-luu.html', html: list(CONFERENCES, c => `<li data-saved-item="${c.slug}" hidden>`) },
+    'tickets:lich': { file: 'lich-hoi-nghi.html', html: list(CONFERENCES) },
+    'hero:head': { file: 'index.html', html: heroHead() },
+    'hero:names': { file: 'index.html', html: heroNames() },
+    'tickets:trang-chu': { file: 'index.html', html: list(open.slice(1)) },
+    'tickets:da-luu': { file: 'da-luu.html', html: list(CONFERENCES, c => `<li data-saved-item="${c.slug}" hidden>`) },
 };
 
 for (const [name, { file, html }] of Object.entries(TARGETS)) {
     const path = fileURLToPath(new URL(`../site/${file}`, import.meta.url));
     const src = readFileSync(path, 'utf8');
-    const re = new RegExp(`<!--tickets:${name}-->[\\s\\S]*?<!--/tickets:${name}-->`);
-    if (!re.test(src)) throw new Error(`${file}: thiếu marker tickets:${name}`);
-    const out = src.replace(re, () => `<!--tickets:${name}-->\n${html}\n<!--/tickets:${name}-->`);
+    const re = new RegExp(`<!--${name}-->[\\s\\S]*?<!--/${name}-->`);
+    if (!re.test(src)) throw new Error(`${file}: thiếu marker ${name}`);
+    const out = src.replace(re, () => `<!--${name}-->\n${html}\n<!--/${name}-->`);
     if (out !== src) { writeFileSync(path, out); console.log('updated', file); }
 }

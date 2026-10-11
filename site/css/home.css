@@ -1,33 +1,41 @@
-/* Trang chủ: các hạn gần nhất treo trên dây đeo (dùng .badge-card và .ribbon từ conference.css) */
-.hero { position: relative; overflow: hidden; padding: 24px 0 36px }
-.hero-top { display: grid; gap: 20px }
-.hero h1 { font-size: clamp(34px, 9vw, 64px); line-height: 1.04; font-weight: 600 }
-.hero-sub { margin-top: 12px; max-width: 52ch; color: var(--mute); font-size: 16px; text-wrap: pretty }
-.hero-find { display: grid; gap: 10px; max-width: 460px }
-.home-search { display: flex; align-items: center; gap: 4px; min-height: 48px; padding: 0 4px 0 14px; background: var(--field); border: 1px solid var(--rule-2); border-radius: var(--r) }
+/* Trang chủ, hero "Một câu, một nhịp": một câu căn giữa, đồng hồ sống trong viên nang giữa câu */
+.hero { --soft: color-mix(in srgb, var(--mute) 55%, var(--ink)); /* chữ phụ đậm hơn một nấc để vẫn đạt AA trên mảng mây */ position: relative; isolation: isolate; overflow: hidden; padding: 44px 0 16px; text-align: center }
+/* nền khí quyển: ba mảng mây Mận và hồng rất nhạt, tan dần về nền giấy */
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+        radial-gradient(58% 52% at 16% 4%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 72%),
+        radial-gradient(52% 46% at 88% 12%, color-mix(in srgb, var(--lanyard) 12%, transparent), transparent 72%),
+        radial-gradient(72% 38% at 50% 92%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 78%);
+    -webkit-mask-image: linear-gradient(#000 72%, transparent);
+    mask-image: linear-gradient(#000 72%, transparent) }
+.hero h1 { max-width: 17em; margin: 0 auto; font-size: clamp(36px, 7vw, 76px); line-height: 1.22; font-weight: 500; letter-spacing: -0.01em }
+.hero h1 a { color: var(--accent); text-decoration: underline var(--lanyard); text-decoration-thickness: .07em; text-underline-offset: .14em; border-radius: var(--r-s) }
+.hero h1 a:hover { background: var(--hover) }
+/* viên nang: ngoại lệ có chủ đích của thang bo góc, vì nó là "một nhịp" nằm giữa câu */
+.cap { display: inline-block; padding: .04em .42em; border: .06em solid var(--accent); border-radius: 999px; background: color-mix(in srgb, var(--card) 78%, transparent); color: var(--accent); font-size: .44em; line-height: 1.45; vertical-align: .22em; white-space: nowrap }
+.cap-face { font-weight: 700; letter-spacing: -0.02em }
+.hero-sub { margin-top: 14px; font-size: 17px; color: var(--soft); text-wrap: balance }
+
+.hero-find { display: grid; gap: 10px; max-width: 520px; margin: 28px auto 0 }
+.hero-find .btn { min-height: 48px }
+.home-search { display: flex; align-items: center; gap: 4px; min-height: 48px; padding: 0 4px 0 14px; background: var(--field); border: 1px solid var(--rule-2); border-radius: var(--r); text-align: left }
 .home-search:focus-within { outline: 2px solid var(--focus); outline-offset: 2px }
 .home-search input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: none; font: inherit; color: var(--ink); outline: none }
 .home-search input::placeholder { color: var(--mute); opacity: 1 }
 .home-search button { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: var(--r-s); color: var(--accent) }
 .home-search button:hover { background: var(--hover) }
 
-/* dây thẻ: dải hồng xuyên qua khe của từng thẻ; điện thoại và máy tính bảng cuộn ngang */
-.tags-wrap { margin: 24px -16px 0; padding: 6px 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; overscroll-behavior-x: contain }
-.tags { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: min(82vw, 330px); gap: 14px; width: max-content; min-width: 100%; align-items: start }
-.tags > li { list-style: none; scroll-snap-align: start }
-.tags::before { content: ""; position: absolute; top: -1px; left: -16px; right: -16px; height: 10px; background: var(--lanyard) }
-.tags .badge-card::before { width: 30px; height: 10px; margin-left: -15px; background: var(--lanyard); border: 0; border-radius: 0 0 5px 5px }
-.tags .badge-card { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "main star" "due due" "state state"; gap: 14px 8px; align-items: start; padding: 28px 14px 14px 16px }
-.tags .badge-card .iconbtn { margin: -12px -6px 0 0 }
-.tags .bc-name { font-size: 28px }
-.tags .bc-full { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical }
-.tags .bc-due { padding-top: 12px; border-top: 1px solid var(--rule) }
-.tags .bc-date { font-size: 40px; line-height: 1 }
-.tags .bc-date small { font-size: 14px }
-.tags .bc-time { font-size: 14px }
-.tags .bc-state { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; text-align: left; gap: 6px 12px }
-.tags .bc-state .ub { align-self: center }
-.tags .bc-cd { font-size: 20px }
+.hero-fields { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 8px; margin-top: 18px; list-style: none }
+.hero-fields a { text-decoration: none }
+
+/* hàng tên hội nghị viết như logo: chữ serif hoa cách đều, gạch hồng hiện khi chạm */
+.hero-names { max-width: 760px; margin: 36px auto 0; padding-top: 22px; border-top: 1px solid var(--rule) }
+.hero-names h2 { margin: 0 0 2px; font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--soft) }
+.names { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 clamp(14px, 5vw, 48px); list-style: none }
+.names a { position: relative; display: inline-flex; align-items: center; min-height: 52px; padding: 0 2px; font-family: var(--serif); font-size: clamp(22px, 4.2vw, 36px); font-weight: 600; letter-spacing: .06em; color: var(--ink); text-decoration: none }
+.names a::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 8px; height: 3px; background: var(--lanyard); transform: scaleX(0); transform-origin: left; transition: transform .2s ease-out }
+.names a:hover::after, .names a:focus-visible::after { transform: scaleX(1) }
+.names a:hover { color: var(--accent) }
 
 /* các phần dưới hero */
 .sec { padding-top: 56px }
@@ -47,15 +55,11 @@
 
 @media (min-width: 40rem) {
     .posts li { grid-template-columns: 7.5rem minmax(0, 1fr); gap: 16px; align-items: baseline }
+    .hero { padding: 64px 0 24px }
+    .hero-sub { font-size: 18px }
+    .hero-find { grid-template-columns: minmax(0, 1fr) auto; max-width: 600px }
 }
 @media (min-width: 64rem) {
-    .hero { padding: 32px 0 48px }
-    .hero-top { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: end; gap: 48px }
-    .hero-find { justify-self: end; width: 100% }
-    .tags-wrap { margin: 36px 0 0; padding: 0; overflow: visible }
-    .tags { grid-auto-flow: row; grid-template-columns: 1.35fr 1fr 1fr; grid-auto-columns: auto; gap: 20px; width: auto }
-    .tags::before { left: -100vw; right: -100vw }
-    .tags > li:first-child .bc-name { font-size: 38px }
-    .tags > li:first-child .bc-date { font-size: 56px }
-    .tags > li:first-child .bc-cd { font-size: 24px }
+    .hero { padding: 80px 0 24px }
+    .hero-names { margin-top: 48px }
 }

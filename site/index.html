@@ -137,41 +137,44 @@
     <!--c:nav--><button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-nav"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="vh">Mở menu</span></button><nav class="nav" id="site-nav" aria-label="Điều hướng chính"><a href="lich-hoi-nghi.html">Lịch hội nghị</a><a href="blog.html">Bài viết</a><a href="gioi-thieu.html">Giới thiệu</a><a href="lien-he.html">Liên hệ</a></nav><button type="button" class="theme-btn" data-theme-toggle aria-pressed="false"><svg class="ic moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><svg class="ic sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg><span class="vh">Giao diện tối</span></button><!--/c:nav-->
 </div></header>
 <main id="main" tabindex="-1">
-<section class="hero" aria-labelledby="home-h1"><div class="container">
-    <div class="hero-top">
-        <div>
-            <h1 id="home-h1">Hội nghị nào sắp hết hạn nộp bài?</h1>
-            <p class="hero-sub">Các hạn chót gần nhất treo ngay bên dưới, tính theo giờ Việt Nam.</p>
-        </div>
-        <div class="hero-find">
-            <form class="home-search" role="search" action="lich-hoi-nghi.html" method="get">
-                <label class="vh" for="home-q">Tìm hội nghị</label>
-                <input id="home-q" name="q" type="search" placeholder="Tìm hội nghị, ví dụ ICSE" autocomplete="off">
-                <button type="submit" aria-label="Tìm"><svg class="ic" width="20" height="20" aria-hidden="true"><use href="#i-search"/></svg></button>
-            </form>
-            <a class="btn pri" href="lich-hoi-nghi.html">Xem lịch hội nghị</a>
-        </div>
+<section class="hero" aria-labelledby="home-h1"><div class="container hero-in">
+    <!--hero:head-->
+<h1 id="home-h1">Còn <span class="cap" data-hero-clock data-sec="187929"><span class="vh">2 ngày</span><span class="cap-face mono" data-cd aria-hidden="true">2 ngày 04:12:09</span></span> để nộp <a href="hoi-nghi.html">ICSE</a></h1>
+<p class="hero-sub">Nộp toàn văn lúc 18:59 ngày 11/10/2026, giờ Việt Nam.</p>
+<!--/hero:head-->
+    <div class="hero-find">
+        <form class="home-search" role="search" action="lich-hoi-nghi.html" method="get">
+            <label class="vh" for="home-q">Tìm hội nghị</label>
+            <input id="home-q" name="q" type="search" placeholder="Tìm hội nghị, ví dụ ICSE" autocomplete="off">
+            <button type="submit" aria-label="Tìm"><svg class="ic" width="20" height="20" aria-hidden="true"><use href="#i-search"/></svg></button>
+        </form>
+        <a class="btn pri" href="lich-hoi-nghi.html">Xem lịch hội nghị</a>
     </div>
-    <div class="tags-wrap" role="region" aria-label="Các hạn chót gần nhất">
-        <h2 class="vh">Ba hạn chót gần nhất</h2>
-        <!--tickets:hero-->
-<ul class="badge-list tags">
-<li>
-<article class="badge-card" data-level="c">
-    <button type="button" class="iconbtn" data-save="icse" aria-pressed="false" aria-label="Lưu hội nghị"><svg class="ic" width="20" height="20" aria-hidden="true"><use href="#i-star"/></svg></button>
-    <div class="bc-main">
-        <h3 class="bc-name"><a href="hoi-nghi.html">ICSE 2027</a></h3>
-        <p class="bc-full">IEEE/ACM International Conference on Software Engineering</p>
-        <div class="bc-meta"><span class="ribbon rb-a">CORE A*</span><span class="ribbon rb-b">CCF A</span><span class="bc-loc">Lisbon, Bồ Đào Nha · Hybrid</span></div>
-    </div>
-    <div class="bc-due">
-        <span class="bc-lab">Nộp toàn văn</span>
-        <time class="bc-date mono" datetime="2026-10-11T18:59:00+07:00">11/10<small>/2026</small></time>
-        <span class="bc-time mono">18:59</span>
-    </div>
-    <div class="bc-state"><span class="ub u-c"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-alert"/></svg><b>Gấp</b></span><span class="bc-cd mono">2 ngày 04:12</span></div>
-</article>
-</li>
+    <ul class="hero-fields" aria-label="Lĩnh vực">
+        <li><a class="chipbtn" href="lich-hoi-nghi.html"><span class="chip">Trí tuệ nhân tạo</span></a></li>
+        <li><a class="chipbtn" href="lich-hoi-nghi.html"><span class="chip">Kỹ thuật phần mềm</span></a></li>
+        <li><a class="chipbtn" href="lich-hoi-nghi.html"><span class="chip">Xử lý ngôn ngữ</span></a></li>
+        <li><a class="chipbtn" href="lich-hoi-nghi.html"><span class="chip">An toàn thông tin</span></a></li>
+        <li><a class="chipbtn" href="lich-hoi-nghi.html"><span class="chip">Tương tác người-máy</span></a></li>
+    </ul>
+    <nav class="hero-names" aria-labelledby="names-h">
+        <h2 id="names-h">Đang mở nộp bài</h2>
+        <!--hero:names-->
+<ul class="names">
+<li><a href="hoi-nghi.html" aria-label="ICSE 2027, hạn 11/10">ICSE</a></li>
+<li><a href="hoi-nghi-fse.html" aria-label="FSE 2027, hạn 14/10">FSE</a></li>
+<li><a href="hoi-nghi-acl.html" aria-label="ACL 2027, hạn 27/10">ACL</a></li>
+<li><a href="hoi-nghi-ase.html" aria-label="ASE 2027, hạn 19/11">ASE</a></li>
+<li><a href="hoi-nghi-iclr.html" aria-label="ICLR 2027, hạn 10/12">ICLR</a></li>
+</ul>
+<!--/hero:names-->
+    </nav>
+</div></section>
+
+<section class="sec" aria-labelledby="soon-h"><div class="container">
+    <h2 id="soon-h">Các hạn tiếp theo</h2>
+    <!--tickets:trang-chu-->
+<ul class="badge-list">
 <li>
 <article class="badge-card" data-level="s">
     <button type="button" class="iconbtn" data-save="fse" aria-pressed="false" aria-label="Lưu hội nghị"><svg class="ic" width="20" height="20" aria-hidden="true"><use href="#i-star"/></svg></button>
@@ -204,15 +207,6 @@
     <div class="bc-state"><span class="ub u-u"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-calendar"/></svg><b>Trong tháng</b></span><span class="bc-cd mono">18 ngày</span></div>
 </article>
 </li>
-</ul>
-<!--/tickets:hero-->
-    </div>
-</div></section>
-
-<section class="sec" aria-labelledby="soon-h"><div class="container">
-    <h2 id="soon-h">Các hạn tiếp theo</h2>
-    <!--tickets:trang-chu-->
-<ul class="badge-list">
 <li>
 <article class="badge-card" data-level="o">
     <button type="button" class="iconbtn" data-save="ase" aria-pressed="false" aria-label="Lưu hội nghị"><svg class="ic" width="20" height="20" aria-hidden="true"><use href="#i-star"/></svg></button>
@@ -274,6 +268,7 @@
 </main>
 <footer class="foot"><div class="container foot-in"><a class="brand" href="index.html">UIT <em>ConFinder</em></a><nav class="foot-nav" aria-label="Liên kết chân trang"><a href="index.html">Trang chủ</a><a href="lich-hoi-nghi.html">Lịch hội nghị</a><a href="da-luu.html">Đã lưu</a><a href="blog.html">Bài viết</a><a href="gioi-thieu.html">Giới thiệu</a><a href="lien-he.html">Liên hệ</a></nav><small>© 2026 UIT ConFinder. Dữ liệu hội nghị chỉ là minh hoạ cho đồ án. Hãy kiểm tra lại trên trang chính thức trước khi nộp bài.</small></div></footer>
 <script src="js/save.js"></script>
+<script src="js/hero-clock.js"></script>
 <script src="js/nav.js"></script>
 </body>
 </html>

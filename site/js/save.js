@@ -17,7 +17,7 @@
             b.querySelector('.ic')?.classList.toggle('fill', on);
             const text = b.querySelector('[data-save-text]');
             if (text) text.textContent = on ? 'Đã lưu' : 'Lưu hội nghị';
-            else if (b.classList.contains('iconbtn')) b.setAttribute('aria-label', on ? 'Bỏ lưu hội nghị' : 'Lưu hội nghị');
+            else if (b.classList.contains('iconbtn')) b.setAttribute('aria-label', `${on ? 'Bỏ lưu' : 'Lưu'} ${b.dataset.saveName || 'hội nghị'}`);
         });
         document.querySelectorAll('[data-saved-count]').forEach(n => { n.textContent = String(saved.length); });
         document.querySelectorAll('[data-saved-item]').forEach(li => { li.hidden = !saved.includes(li.dataset.savedItem); });

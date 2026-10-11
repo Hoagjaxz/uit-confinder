@@ -32,21 +32,21 @@ const card = c => {
 const list = (cs, li = c => '<li>', cls = 'badge-list') => `<ul class="${cls}">\n${cs.map(c => `${li(c)}\n${card(c)}\n</li>`).join('\n')}\n</ul>`;
 const byDue = (a, b) => Date.parse(nextDue(a).at) - Date.parse(nextDue(b).at);
 
-// Hero trang chủ: thẻ đeo lớn của hạn gần nhất (có đồng hồ chạy) và dòng meta cho hai hạn kế tiếp.
-const poster = c => {
+// Hero trang chủ: mỗi hội nghị đang mở một thẻ đeo lớn, chỉ thẻ đầu hiện; hero-clock.js chọn thẻ theo giờ thật.
+// Số trên đồng hồ để "--" vì chỉ trình duyệt biết giờ hiện tại.
+const poster = (c, i) => {
     const due = nextDue(c);
     const lv = urgency(daysLeft(due.at));
     const { time, date } = formatVN(due.at);
-    const { d, h, m, s = '00' } = c.next;
-    const cell = (u, v, lab, cls = '') => `<span class="ck${cls}"><b data-u="${u}">${v}</b><small>${lab}</small></span>`;
-    return `<article class="pcard" data-level="${lv}">
-    <button type="button" class="iconbtn" data-save="${c.slug}" aria-pressed="false" aria-label="Lưu hội nghị">${icon('i-star', 24)}</button>
+    const cell = (u, lab, cls = '') => `<span class="ck${cls}"><b data-u="${u}">--</b><small>${lab}</small></span>`;
+    return `<article class="pcard" data-level="${lv}"${i ? ' hidden' : ''}>
+    <button type="button" class="iconbtn" data-save="${c.slug}" data-save-name="${c.name} ${c.year}" aria-pressed="false" aria-label="Lưu ${c.name} ${c.year}">${icon('i-star', 24)}</button>
     <div class="pc-rib">${[c.core, c.ccf].filter(Boolean).map(ribbon).join('')}</div>
     <h3 class="pc-name"><a href="${c.file}">${c.name} ${c.year}</a></h3>
     <p class="pc-full">${c.full}</p>
     <div class="pc-clock">
-        <p class="vh">${c.next.text}</p>
-        <div class="clock mono" data-hero-clock data-d="${d}" data-h="${h}" data-m="${m}" data-s="${s}" aria-hidden="true">${cell('d', d, 'ngày')}<i class="sep">:</i>${cell('h', h, 'giờ')}<i class="sep">:</i>${cell('m', m, 'phút')}<i class="sep sep-s">:</i>${cell('s', s, 'giây', ' ck-s')}</div>
+        <p class="vh"></p>
+        <div class="clock mono" aria-hidden="true">${cell('d', 'ngày')}<i class="sep">:</i>${cell('h', 'giờ')}<i class="sep">:</i>${cell('m', 'phút')}<i class="sep sep-s">:</i>${cell('s', 'giây', ' ck-s')}</div>
     </div>
     <div class="pc-foot">
         <p class="pc-due"><span class="bc-lab">${due.name} trước</span><time class="mono" datetime="${due.at}">${time} ngày ${date}</time><span class="bc-tz">giờ Việt Nam</span></p>
@@ -54,24 +54,27 @@ const poster = c => {
     </div>
 </article>`;
 };
+const posterEmpty = hidden => `<article class="pcard pc-empty"${hidden ? ' hidden' : ''}>
+    <h3 class="pc-name">Chưa có hạn nào đang mở</h3>
+    <p class="pc-full">Mọi hội nghị trong danh sách đã qua hạn nộp bài. Xem lịch để biết đợt tiếp theo.</p>
+</article>`;
 // Dải chạy: một bản đọc được + ba bản nhân đôi (aria-hidden, không tab được) để vòng lặp translateX(-25%) liền mạch tới màn hình rất rộng.
+// Số "còn bao lâu" để trống: hero-clock.js điền từ hạn thật, nên HTML tĩnh không mang con số đã cũ.
 const tickItem = (c, hidden) => {
     const due = nextDue(c);
-    const left = c.next.text.replace(/ \d\d:\d\d$/, '').toLowerCase();
-    return `<li><a href="${c.file}"${hidden ? ' tabindex="-1"' : ''}><b>${c.name} ${c.year}</b> · ${c.core} · <time datetime="${due.at}">hạn ${formatVN(due.at).date.slice(0, 5)}</time> · <span class="tk-left">${left}</span></a></li>`;
+    return `<li><a href="${c.file}"${hidden ? ' tabindex="-1"' : ''}><b>${c.name} ${c.year}</b> · ${c.core} · <time datetime="${due.at}">hạn ${formatVN(due.at).date.slice(0, 5)}</time><span class="tk-left"></span></a></li>`;
 };
-const ticker = cs => `<div class="ticker" role="region" aria-label="Đang mở nhận bài"><div class="tk-track">
+const ticker = cs => `<div class="ticker" role="region" aria-label="Đang mở nhận bài"><button type="button" class="tk-toggle" aria-label="Dừng dải hội nghị" hidden>Dừng</button><div class="tk-view"><div class="tk-track">
 ${[false, true, true, true].map(h => `<ul${h ? ' aria-hidden="true"' : ''}>${cs.map(c => tickItem(c, h)).join('')}</ul>`).join('')}
-</div></div>`;
+</div></div></div>`;
 
-const HERO_N = 3; // trang chủ: hạn đầu thành thẻ lớn ở hero, phần "Các hạn tiếp theo" liệt kê phần còn lại
 const open = CONFERENCES.filter(c => !c.closed).sort(byDue);
 
 const TARGETS = {
     lich: { file: 'lich-hoi-nghi.html', html: list(CONFERENCES) },
-    'hero-big': { file: 'index.html', html: poster(open[0]) },
+    'hero-big': { file: 'index.html', html: [...open.map(poster), posterEmpty(open.length > 0)].join('\n') },
     'hero-ticker': { file: 'index.html', html: ticker(open) },
-    'trang-chu': { file: 'index.html', html: list(open.slice(HERO_N)) },
+    'trang-chu': { file: 'index.html', html: list(open.slice(1)) },
     'da-luu': { file: 'da-luu.html', html: list(CONFERENCES, c => `<li data-saved-item="${c.slug}" hidden>`) },
 };
 

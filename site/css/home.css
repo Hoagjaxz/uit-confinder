@@ -15,7 +15,8 @@
 .pcard .iconbtn { position: absolute; top: 14px; right: 6px; z-index: 2 }
 .pc-rib { display: flex; flex-wrap: wrap; gap: 6px 8px; padding-right: 44px }
 .pc-name { font-family: var(--serif); font-optical-sizing: auto; font-size: 9.5cqw; line-height: 1.05; font-weight: 700; letter-spacing: -.01em }
-.pc-name a { text-decoration: none }
+.pc-name a { display: flex; width: fit-content; min-height: 44px; align-items: center; margin-block: calc((1.05em - 44px) / 2); text-decoration: none }
+.pc-empty .pc-name { font-size: 7cqw }
 .pc-name a::after { content: ""; position: absolute; inset: 0; border-radius: var(--r) }
 .pc-name a:focus-visible { outline: none }
 .pcard:focus-within { outline: 2px solid var(--focus); outline-offset: 3px }
@@ -61,7 +62,12 @@
 }
 
 /* dải chạy: đảo màu so với trang (ink/paper); bốn bản sao xếp ngang rồi trượt đúng một bản (-25%) nên vòng lặp liền mạch */
-.ticker { --tk-bg: var(--ink); --tk-fg: var(--paper); --tk-hot: #ff8fb4; overflow-x: auto; overflow-y: clip; scrollbar-width: thin; background: var(--tk-bg); color: var(--tk-fg); font: 500 13.5px/1 var(--mono) }
+.ticker { --tk-bg: var(--ink); --tk-fg: var(--paper); --tk-hot: #ff8fb4; display: flex; background: var(--tk-bg); color: var(--tk-fg); font: 500 13.5px/1 var(--mono) }
+.tk-view { flex: 1; min-width: 0; overflow-x: auto; overflow-y: clip; scrollbar-width: thin }
+/* nút dừng/chạy (WCAG 2.2.2): vùng bấm 44px, chỉ hiện khi dải thật sự chuyển động */
+.tk-toggle { flex: none; min-width: 64px; min-height: 44px; margin: auto 0; padding: 0 16px; border: 0; border-right: 1px solid color-mix(in srgb, var(--tk-fg) 35%, transparent); background: none; color: inherit; font: 700 13.5px/1 var(--sans); cursor: pointer }
+.tk-toggle:hover { text-decoration: underline; text-underline-offset: 4px }
+.tk-toggle:focus-visible { outline: 2px solid var(--tk-fg); outline-offset: -4px }
 :root[data-theme="dark"] .ticker { --tk-hot: #b3174f }
 .tk-track { display: flex; width: max-content }
 .tk-track ul { display: flex; flex: none; list-style: none }
@@ -73,12 +79,13 @@
 .tk-track a:focus-visible { outline: 2px solid var(--tk-fg); outline-offset: -4px }
 .tk-track b { font-weight: 800 }
 .tk-left { font-weight: 700; color: var(--tk-hot) }
+.tk-left:not(:empty)::before { content: " · "; font-weight: 500; color: var(--tk-fg) }
 
 @media (prefers-reduced-motion: no-preference) {
-    .ticker { overflow-x: clip }
+    .tk-view { overflow-x: clip }
     .tk-track ul[aria-hidden] { display: flex }
     .tk-track { animation: tk 50s linear infinite }
-    .tk-track:hover, .tk-track:focus-within { animation-play-state: paused }
+    .tk-track:hover, .tk-track:focus-within, .is-paused .tk-track { animation-play-state: paused }
     .w { animation: rise .8s cubic-bezier(.2, .8, .2, 1) both }
     .w2 { animation-delay: .08s }
     .pcard { animation: swing 1.9s cubic-bezier(.3, .6, .3, 1) .15s both }
@@ -87,7 +94,11 @@
 @keyframes tk { to { transform: translateX(-25%) } }
 @keyframes rise { from { opacity: 0; transform: translateY(.16em) } }
 @keyframes swing { 0% { transform: rotate(-11deg) } 28% { transform: rotate(5deg) } 52% { transform: rotate(-4.2deg) } 76% { transform: rotate(-1.2deg) } 100% { transform: rotate(-2deg) } }
-/* giảm chuyển động: đồng hồ đứng yên nhưng vẫn hiện đủ cả cụm giây */
+/* giảm chuyển động: dải đứng yên (không cần nút dừng), đồng hồ bỏ cụm giây để số không nhảy mỗi giây */
+@media (prefers-reduced-motion: reduce) {
+    .tk-toggle { display: none }
+    .ck-s, .sep-s { display: none }
+}
 
 :root[data-theme="dark"] .pcard { box-shadow: 6px 6px 0 color-mix(in srgb, var(--lanyard) 30%, transparent) }
 

@@ -5,6 +5,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('../site/', import.meta.url));
+const PORT = Number(process.env.PORT) || 5173;
 const TYPES = {
     '.html': 'text/html; charset=utf-8',
     '.css': 'text/css; charset=utf-8',
@@ -25,4 +26,4 @@ createServer(async (req, res) => {
         if (page) res.writeHead(404, { 'content-type': TYPES['.html'] }).end(page);
         else res.writeHead(404).end('Not found');
     }
-}).listen(5173, () => console.log('http://localhost:5173'));
+}).listen(PORT, () => console.log(`http://localhost:${PORT}`));

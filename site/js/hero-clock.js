@@ -62,7 +62,7 @@
         const text = phrase(t);
         if (text !== lastText) {
             lastText = text;
-            orb.setAttribute('aria-label', `Mặt trời đếm ngược: ${name} ${text}`);
+            orb.setAttribute('aria-label', `Đếm ngược đến hạn nộp bài: ${name} ${text}`);
         }
         paneStates(panes.length, (+total - t) / 86400).forEach((st, i) => { if (panes[i].dataset.s !== st) panes[i].dataset.s = st; });
         if (!still) sec.style.transform = `rotate(${Math.floor(el) * 6}deg)`;

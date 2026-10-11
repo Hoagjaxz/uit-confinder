@@ -78,8 +78,7 @@
 @keyframes tk { to { transform: translateX(-25%) } }
 @keyframes rise { from { opacity: 0; transform: translateY(.16em) } }
 @keyframes swing { 0% { transform: rotate(-11deg) } 28% { transform: rotate(5deg) } 52% { transform: rotate(-4.2deg) } 76% { transform: rotate(-1.2deg) } 100% { transform: rotate(-2deg) } }
-/* giảm chuyển động: giữ giá trị tĩnh, bỏ cụm giây */
-@media (prefers-reduced-motion: reduce) { .ck-s, .sep-s { display: none } }
+/* giảm chuyển động: đồng hồ đứng yên nhưng vẫn hiện đủ cả cụm giây */
 
 :root[data-theme="dark"] .pcard { box-shadow: 6px 6px 0 color-mix(in srgb, var(--lanyard) 30%, transparent) }
 

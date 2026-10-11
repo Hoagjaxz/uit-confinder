@@ -1,4 +1,4 @@
-/* Trang chủ, hero "Mặt trời hạn chót": chữ nhẹ + một từ nghiêng bên trái, quả cầu đồng hồ bên phải.
+/* Trang chủ, hero "Mặt trời hạn chót": chữ nhẹ + một từ nghiêng bên trái, khối sáng đếm ngược bên phải.
    Chữ nghiêng nạp riêng cho trang chủ (chrome.mjs chỉ nạp Newsreader thẳng); Be Vietnam Pro 300 cho tiêu đề. */
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300&family=Newsreader:ital,opsz,wght@1,6..72,400..500&display=swap");
 
@@ -39,45 +39,69 @@
 .hero-open span { font-size: 12px; color: var(--mute) }
 .hero-open a:hover b { color: var(--accent); text-decoration: underline }
 
-/* Mặt trời đếm ngược: canvas vẽ cầu quay (15 dải kinh tuyến = 15 ngày), quầng sáng và tia nằm quanh cầu,
-   vòng ngoài = phần thời gian đã trôi (--p, %), chấm nhỏ chạy mỗi giây trên quỹ đạo nét đứt. Không JS: quả cầu CSS tĩnh + chữ từ HTML. */
-.orb-wrap { position: relative; width: min(100%, 460px); margin-inline: auto; min-width: 0 }
-.orb { position: relative; aspect-ratio: 1; container-type: inline-size }
+/* Mặt trời đếm ngược: khối sáng gradient trôi chậm sau 15 tấm kính đứng yên (mỗi tấm = một ngày): đã qua = kính đục, hôm nay = kính sáng viền phát sáng,
+   còn lại = kính trong. --heat (0..1, tính ở tools/build-lists.mjs và hero-clock.js) đổi ánh sáng từ lavender sang cam hồng nóng.
+   Vòng ngoài = phần thời gian đã trôi (--p, %), chấm nhỏ chạy mỗi giây trên quỹ đạo nét đứt. Không JS vẫn ra đủ hình và chữ. */
+.hero { --cold-1: #d8cbf7; --cold-2: #9a7fdc; --cold-3: #5a3a9a; --cold-4: #2c1a4a; --hot-1: #ffbe86; --hot-2: #ec4d84; --hot-3: #8a2c80; --hot-4: #3d1452 }
+.orb-wrap { min-width: 0 }
+.orb-main {
+    --h: calc(var(--heat, .9) * 100%);
+    --o1: color-mix(in oklab, var(--hot-1) var(--h), var(--cold-1)); --o2: color-mix(in oklab, var(--hot-2) var(--h), var(--cold-2));
+    --o3: color-mix(in oklab, var(--hot-3) var(--h), var(--cold-3)); --o4: color-mix(in oklab, var(--hot-4) var(--h), var(--cold-4));
+    width: min(100%, 440px); margin-inline: auto; display: grid; gap: 14px; min-width: 0;
+}
+.orb-fig { position: relative }
+.orb { position: relative; aspect-ratio: 1 }
 .orb > * { position: absolute; display: block }
-.orb-cv { inset: 0; width: 100%; height: 100% }
 .orb-orbit { inset: 0; border: 1px dashed var(--rule-2); border-radius: 50% }
 .orb-sec { inset: 0 }
-.orb-sec::before { content: ""; position: absolute; left: 50%; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--orb-a); box-shadow: 0 0 0 3px var(--hero-bg) }
-.orb-rays {
-    inset: 8%; border-radius: 50%; opacity: .55;
-    background:
-        repeating-conic-gradient(from 3deg, var(--orb-a) 0 1.2deg, transparent 1.2deg 7deg),
-        repeating-conic-gradient(from 11deg, var(--orb-b) 0 .8deg, transparent .8deg 11deg);
-    -webkit-mask-image: radial-gradient(closest-side, transparent 80%, #000 90%, transparent 100%);
-    mask-image: radial-gradient(closest-side, transparent 80%, #000 90%, transparent 100%);
-}
+.orb-sec::before { content: ""; position: absolute; left: 50%; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--o2); box-shadow: 0 0 0 3px var(--hero-bg) }
 .orb-ring { inset: 8%; width: 84%; height: 84%; transform: rotate(-90deg); fill: none }
 .orb-ring .trk { stroke: var(--rule-2); stroke-width: .25; opacity: .8 }
-.orb-ring .arc { stroke: var(--lanyard); stroke-width: .7; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: calc(100 - var(--p)) }
+.orb-ring .arc { stroke: var(--o2); stroke-width: .7; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: calc(100 - var(--p)) }
 .orb-sun { inset: 8%; transform: rotate(calc(var(--p) * 3.6deg)) }
-.orb-sun::before { content: ""; position: absolute; left: 50%; top: 0; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: var(--orb-hot); border: 4px solid var(--hero-bg); box-shadow: 0 0 0 1px var(--lanyard), 0 0 22px 6px rgb(255 154 95 / .55) }
-.orb-ball {
-    inset: 15%; border-radius: 50%;
-    background:
-        radial-gradient(circle at 27% 22%, var(--orb-a) 0, transparent 30%),
-        radial-gradient(circle at 36% 34%, var(--orb-b) 0, var(--orb-c) 62%, var(--orb-d) 100%);
-    box-shadow: 0 0 80px rgb(214 51 108 / .35);
+.orb-sun::before { content: ""; position: absolute; left: 50%; top: 0; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: var(--o1); border: 4px solid var(--hero-bg); box-shadow: 0 0 0 1px var(--o2), 0 0 22px 6px color-mix(in oklab, var(--o1) 60%, transparent) }
+/* quầng sáng mềm quanh khối, thở nhẹ */
+.orb-halo { inset: 8%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in oklab, var(--o2) 46%, transparent) 62%, transparent 100%); opacity: .8 }
+/* khối sáng: nền tím thẫm, ba vệt sáng trôi lệch pha bên trong; overflow cắt thành hình tròn */
+.orb-ball { inset: 15%; border-radius: 50%; overflow: hidden; isolation: isolate; background: radial-gradient(circle at 62% 72%, var(--o3), var(--o4) 100%); box-shadow: 0 30px 80px -30px color-mix(in oklab, var(--o2) 70%, transparent) }
+.lt { position: absolute; display: block; border-radius: 50%; will-change: transform }
+.lt-1 { inset: -8% 34% 26% -26%; background: radial-gradient(closest-side, var(--o1) 0, var(--o2) 46%, transparent 100%); transform: translate3d(2%, 0, 0) }
+.lt-2 { width: 46%; aspect-ratio: 1; left: 2%; top: 10%; background: radial-gradient(closest-side, #fff4e0 0, var(--o1) 34%, transparent 100%); opacity: .95; transform: translate3d(10%, 6%, 0) }
+.lt-3 { inset: 8% -24% 20% 46%; background: radial-gradient(closest-side, var(--o1) 0, var(--o2) 42%, transparent 100%); opacity: .95; transform: translate3d(-6%, 4%, 0) }
+/* 15 tấm kính thẳng đứng cùng hàng, cao bằng chiều cao khối nên bị tròn cắt thành các dây cung */
+.orb-panes { position: absolute; inset: 0; display: flex; gap: 2px }
+.pane { position: relative; flex: 1 1 0; min-width: 0; --a: calc(.64 - var(--i, 0) * .028) }
+.pane[data-s="past"] {
+    background: linear-gradient(180deg, rgb(250 246 255 / var(--a)), rgb(232 220 252 / calc(var(--a) * .85)));
+    -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+    box-shadow: inset 1px 0 rgb(255 255 255 / .35);
 }
-.has-cv .orb-ball { display: none }
-/* lớp tối mềm sau chữ để chữ trắng đọc rõ trên cầu đang quay (tương phản trên 7:1 kể cả khi dải sáng đi qua) */
-.orb-clock { position: absolute; inset: 15%; display: grid; place-content: center; justify-items: center; gap: 1.2cqi; padding-inline: 8%; color: #fff; text-align: center; isolation: isolate }
-.orb-clock::before { content: ""; position: absolute; z-index: -1; inset: 18% 3%; border-radius: 50%; background: radial-gradient(closest-side, rgb(30 14 52 / .8) 55%, rgb(30 14 52 / 0)) }
-.orb-name { font-family: var(--serif); font-size: 8cqi; font-weight: 500; line-height: 1; letter-spacing: -.01em; color: #fff; text-decoration: none; text-shadow: 0 1px 12px rgb(30 14 52 / .7) }
-.orb-name:hover { text-decoration: underline; text-underline-offset: 4px }
-.orb-name:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 4px }
-.orb-say { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 5.6cqi; line-height: 1.15; max-width: 14em; text-wrap: balance; color: var(--orb-now); text-shadow: 0 1px 10px rgb(30 14 52 / .7) }
-.orb-lab { margin-top: .6cqi; font-size: max(12px, 2.4cqi); color: rgb(255 255 255 / .94); text-shadow: 0 1px 8px rgb(30 14 52 / .7) }
-.orb-sats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px }
+.pane[data-s="today"] {
+    z-index: 1; background: linear-gradient(180deg, rgb(255 255 255 / .34), rgb(255 238 205 / .12));
+    -webkit-backdrop-filter: brightness(1.18) blur(1px); backdrop-filter: brightness(1.18) blur(1px);
+    box-shadow: 0 0 0 1.5px rgb(255 244 214 / .95), 0 0 18px 5px rgb(255 214 150 / .75), inset 0 0 14px rgb(255 255 255 / .55);
+}
+.pane[data-s="future"] {
+    background: linear-gradient(90deg, rgb(255 255 255 / .22), rgb(255 255 255 / 0) 45%, rgb(255 255 255 / .1));
+    -webkit-backdrop-filter: saturate(1.5) contrast(1.06); backdrop-filter: saturate(1.5) contrast(1.06);
+    box-shadow: inset 1px 0 rgb(255 255 255 / .55), inset -1px 0 rgb(255 255 255 / .16);
+}
+:root[data-theme="dark"] .hero { --cold-1: #b7a2ee; --cold-2: #7b58c8; --cold-3: #43267d; --cold-4: #1c0f34; --hot-3: #7a2a84; --hot-4: #2e0f45 }
+:root[data-theme="dark"] .orb-halo { opacity: 1 }
+:root[data-theme="dark"] .pane[data-s="past"] {
+    background: linear-gradient(180deg, rgb(84 58 140 / var(--a)), rgb(52 32 98 / calc(var(--a) * .9)));
+    box-shadow: inset 1px 0 rgb(255 255 255 / .16);
+}
+:root[data-theme="dark"] .pane[data-s="future"] { background: linear-gradient(90deg, rgb(255 255 255 / .14), rgb(255 255 255 / 0) 45%, rgb(255 255 255 / .06)); box-shadow: inset 1px 0 rgb(255 255 255 / .4), inset -1px 0 rgb(255 255 255 / .12) }
+
+/* chữ nằm ngoài quả cầu, ngay bên dưới */
+.orb-info { display: grid; justify-items: center; gap: 4px; text-align: center }
+.orb-name { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.2; color: var(--ink); text-decoration: none }
+.orb-name:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 4px }
+.orb-say { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(30px, 8vw, 42px); line-height: 1.12; padding-bottom: .06em; max-width: 14em; text-wrap: balance; color: var(--accent) }
+.orb-lab { font-size: 14px; color: var(--mute) }
+.orb-sats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px }
 .sat {
     display: grid; grid-template-columns: auto auto; column-gap: 6px; align-items: baseline; justify-items: start;
     min-height: 44px; padding: 5px 12px 6px; border: 1px solid var(--rule-2); border-radius: 12px; background: var(--card); color: var(--ink);
@@ -91,23 +115,39 @@
 .sat small { grid-column: 1 / -1; font-size: 12px; color: var(--mute) }
 .sat:hover { transform: scale(1.04); border-color: var(--dot, var(--accent)) }
 
+/* dưới 40rem: quả cầu, chữ, rồi vệ tinh nối tiếp */
+@media (max-width: 39.99rem) {
+    .orb-fig { display: contents }
+    .orb { order: 1 }
+    .orb-info { order: 2 }
+    .orb-sats { order: 3; margin-top: 4px }
+}
 @media (min-width: 40rem) {
     /* vệ tinh ghim vào hai góc đối diện của khung vuông, nằm ngoài vòng tiến độ (bán kính 42% cạnh) */
-    .orb-sats { position: absolute; inset: 0; margin: 0; display: block; pointer-events: none }
+    .orb-sats { position: absolute; inset: 0; display: block; pointer-events: none }
     .sat { position: absolute; pointer-events: auto }
     .sat-1 { top: 0; right: 0 }
     .sat-2 { bottom: 0; left: 0 }
 }
 @media (prefers-reduced-motion: no-preference) {
-    .orb-rays { animation: unspin 240s linear infinite }
+    .lt-1 { animation: drift-1 15s ease-in-out infinite alternate }
+    .lt-2 { animation: drift-2 13s ease-in-out infinite alternate }
+    .lt-3 { animation: drift-3 19s ease-in-out infinite alternate }
+    .orb-halo { animation: breathe 15s ease-in-out infinite alternate }
+    .pane[data-s="today"] { animation: glint 4.5s ease-in-out infinite alternate }
     .orb-sec { will-change: transform; transition: transform .45s cubic-bezier(.34, 1.56, .64, 1) }
     .orb-ring .arc { animation: draw 1.6s cubic-bezier(.16, 1, .3, 1) both }
     .orb-sun { animation: sweep 1.6s cubic-bezier(.16, 1, .3, 1) both }
 }
-@keyframes unspin { to { transform: rotate(-360deg) } }
+@keyframes drift-1 { to { transform: translate3d(46%, 12%, 0) scale(1.18) } }
+@keyframes drift-2 { to { transform: translate3d(150%, 90%, 0) scale(1.2) } }
+@keyframes drift-3 { to { transform: translate3d(-40%, 26%, 0) scale(1.16) } }
+@keyframes breathe { to { transform: scale(1.06); opacity: .62 } }
+@keyframes glint { to { opacity: .84 } }
 @keyframes draw { from { stroke-dashoffset: 100 } }
 @keyframes sweep { from { transform: rotate(0) } }
 @media (prefers-reduced-motion: reduce) { .orb-sec { display: none } }
+@media (prefers-reduced-transparency: reduce) { .pane[data-s="past"] { -webkit-backdrop-filter: none; backdrop-filter: none; --a: .78 } }
 
 /* các phần dưới hero */
 .sec { padding-top: 56px }
@@ -134,5 +174,5 @@
 @media (min-width: 64rem) {
     .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px }
     .hero h1 { font-size: clamp(56px, 5.6vw, 76px) }
-    .orb-wrap { width: min(100%, 580px) }
+    .orb-main { width: min(100%, 500px) }
 }

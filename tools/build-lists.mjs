@@ -8,7 +8,7 @@ import { CONFERENCES } from './conferences.mjs';
 import { icon, ub, ribbon } from './levels.mjs';
 import { formatVN, daysLeft, urgency, nextDue } from './time-vn.mjs';
 
-const { phrase } = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm đọc thời gian bằng chữ với trình duyệt
+const { phrase, paneStates, heat } = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm đọc thời gian bằng chữ với trình duyệt
 
 const card = c => {
     const due = nextDue(c);
@@ -55,27 +55,32 @@ const orb = () => {
     const { time, date } = formatVN(due.at);
     const total = windowSecs(c);
     const left = secs(c.next);
-    const p = Math.min(100, Math.max(0, (1 - left / total) * 100)).toFixed(1);
+    const ratio = Math.min(1, Math.max(0, 1 - left / total));
     const { d, h, m, s } = c.next;
     const say = phrase(left);
+    const panes = paneStates(Math.max(1, Math.round(total / 86400)), (total - left) / 86400)
+        .map((st, i) => `<span class="pane" data-s="${st}" style="--i:${i}"></span>`).join('');
     return `<h2 class="vh">Hạn chót gần nhất</h2>
 <p class="vh">${c.name} ${c.year} ${say} đến hạn ${due.name.toLowerCase()}, ${time} ngày ${date}, giờ Việt Nam.</p>
-<div class="orb" style="--p:${p}" data-hero-clock data-d="${+d}" data-h="${+h}" data-m="${+m}" data-s="${+s}" data-total="${total}">
-    <span class="orb-rays" aria-hidden="true"></span>
-    <span class="orb-orbit" aria-hidden="true"></span>
-    <span class="orb-sec" aria-hidden="true"></span>
-    <svg class="orb-ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="48"/><circle class="arc" cx="50" cy="50" r="48" pathLength="100"/></svg>
-    <span class="orb-sun" aria-hidden="true"></span>
-    <span class="orb-ball" aria-hidden="true"></span>
-    <canvas class="orb-cv" role="img" aria-label="Mặt trời đếm ngược: ${c.name} ${c.year} ${say}"></canvas>
-    <div class="orb-clock">
+<div class="orb-main" style="--p:${(ratio * 100).toFixed(1)};--heat:${heat(ratio).toFixed(3)}" data-hero-clock data-d="${+d}" data-h="${+h}" data-m="${+m}" data-s="${+s}" data-total="${total}">
+    <div class="orb-fig">
+        <div class="orb" role="img" aria-label="Mặt trời đếm ngược: ${c.name} ${c.year} ${say}">
+            <span class="orb-orbit"></span>
+            <span class="orb-sec"></span>
+            <svg class="orb-ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="48"/><circle class="arc" cx="50" cy="50" r="48" pathLength="100"/></svg>
+            <span class="orb-sun"></span>
+            <span class="orb-halo"></span>
+            <span class="orb-ball"><i class="lt lt-1"></i><i class="lt lt-2"></i><i class="lt lt-3"></i><span class="orb-panes">${panes}</span></span>
+        </div>
+        <div class="orb-sats">
+            ${rest.slice(0, HERO_N - 1).map(sat).join('\n            ')}
+        </div>
+    </div>
+    <div class="orb-info">
         <a class="orb-name" href="${c.file}">${c.name} ${c.year}</a>
         <p class="orb-say" aria-hidden="true">${say}</p>
-        <p class="orb-lab">${due.name} · ${date.slice(0, 5)} ${time}</p>
+        <p class="orb-lab">${due.name} · ${date.slice(0, 5)} ${time} giờ Việt Nam</p>
     </div>
-</div>
-<div class="orb-sats">
-    ${rest.slice(0, HERO_N - 1).map(sat).join('\n    ')}
 </div>`;
 };
 const openList = () => `<ul>

@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 
-const { viet, spoken, phrase, remainingAt, dayState, ribbon } = createRequire(import.meta.url)('../site/js/hero-clock.js');
+const { viet, spoken, phrase, remainingAt, dayState, paneStates, heat } = createRequire(import.meta.url)('../site/js/hero-clock.js');
 const DAY = 86400;
 
 test('đọc số bằng chữ: mười, mười lăm, hai mươi mốt, hai mươi lăm, bốn mươi', () => {
@@ -39,18 +39,21 @@ test('trạng thái ngày: đã qua, hôm nay, còn lại', () => {
     assert.equal(dayState(0, 0), 'today');
 });
 
-test('dải ở giữa mặt cầu rộng hơn dải sát mép, và dải quá mép thì khuất', () => {
-    const n = 15, step = 360 / n;
-    const centre = ribbon(0, n, 0), side = ribbon(0, n, 70), back = ribbon(0, n, 180);
-    assert.ok(centre.visible && side.visible);
-    assert.ok(centre.width > side.width * 2);
-    assert.equal(back.visible, false);
-    assert.ok(Math.abs(centre.light - 1) < 1e-9 && side.light < 0.4);
-    assert.ok(centre.lo < 0 && centre.hi > 0 && centre.hi - centre.lo < step);
+test('15 tấm kính: 12 đã qua, 1 hôm nay, 2 còn lại khi trôi 12,83 ngày', () => {
+    const st = paneStates(15, 12.83);
+    assert.equal(st.length, 15);
+    assert.deepEqual(['past', 'today', 'future'].map(k => st.filter(x => x === k).length), [12, 1, 2]);
+    assert.equal(st[12], 'today');
+    assert.deepEqual(paneStates(3, 0), ['today', 'future', 'future']);
+    assert.deepEqual(paneStates(3, 99), ['past', 'past', 'past']);
 });
 
-test('xoay một vòng 360 độ thì trở lại như cũ; số dải thấy được quanh 7-8', () => {
-    assert.deepEqual(ribbon(3, 15, 40), ribbon(3, 15, 400));
-    const seen = Array.from({ length: 15 }, (_, i) => ribbon(i, 15, 13).visible).filter(Boolean).length;
-    assert.ok(seen >= 7 && seen <= 9);
+test('độ nóng tăng đơn điệu 0..1 theo tỉ lệ đã trôi, ICSE (85,5%) ở trạng thái nóng', () => {
+    assert.equal(heat(0), 0);
+    assert.equal(heat(1), 1);
+    assert.equal(heat(-3), 0);
+    assert.ok(heat(0.855) > 0.9 && heat(0.855) < 1);
+    const xs = Array.from({ length: 21 }, (_, i) => heat(i / 20));
+    assert.ok(xs.every((v, i) => i === 0 || v >= xs[i - 1]));
+    assert.ok(heat(0.4) < 0.3);
 });

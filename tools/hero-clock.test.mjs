@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 
-const { viet, spoken, phrase, remainingAt, dayState, paneStates, heat, planetOrbit, clockParts } = createRequire(import.meta.url)('../site/js/hero-clock.js');
+const { viet, spoken, phrase, remaining, level, openItems, orbHtml, announce, dayState, paneStates, heat, planetOrbit, clockParts } = createRequire(import.meta.url)('../site/js/hero-clock.js');
 const DAY = 86400;
 
 test('đọc số bằng chữ: mười, mười lăm, hai mươi mốt, hai mươi lăm, bốn mươi', () => {
@@ -28,10 +28,55 @@ test('phrase thêm "còn", hết hạn thì "đã hết hạn"', () => {
     assert.equal(phrase(0), 'đã hết hạn');
 });
 
-test('thời gian còn lại làm tròn theo giây đã trôi, về 0 rồi đứng', () => {
-    assert.equal(remainingAt(100, 1.003), 99);
-    assert.equal(remainingAt(5, 5), 0);
-    assert.equal(remainingAt(5, 9999), 0);
+test('thời gian còn lại tính từ hạn ISO trừ giờ máy, làm tròn lên, về 0 khi hạn qua', () => {
+    assert.equal(remaining(10500, 0), 11);
+    assert.equal(remaining(5000, 5000), 0);
+    assert.equal(remaining(5000, 99999), 0);
+});
+
+test('số viết một cách: chữ cho trình đọc, chữ số cho dòng hiện', () => {
+    assert.equal(spoken(5 * DAY + 11 * 3600 + 30 * 60), 'năm ngày, mười một giờ');
+    assert.equal(spoken(5 * DAY + 11 * 3600 + 30 * 60, String), '5 ngày, 11 giờ');
+});
+
+test('mức khẩn theo ngày lịch giờ Việt Nam', () => {
+    const now = Date.parse('2026-10-11T08:00:00+07:00');
+    const at = iso => level(Date.parse(iso), now);
+    assert.deepEqual([at('2026-10-11T18:59:00+07:00'), at('2026-10-14T18:59:00+07:00'), at('2026-10-27T18:59:00+07:00'), at('2026-12-10T18:59:00+07:00'), at('2026-10-11T07:00:00+07:00')],
+        ['c', 's', 'u', 'o', 'x']);
+});
+
+const mk = (name, iso) => ({ name, short: name, href: name + '.html', label: 'Nộp bài', deadline: Date.parse(iso), opens: Date.parse(iso) - 30 * DAY * 1000 });
+const CONFS = [mk('ACL', '2026-10-27T18:59:00+07:00'), mk('ICSE', '2026-10-11T18:59:00+07:00'), mk('FSE', '2026-10-14T18:59:00+07:00')];
+
+test('quả cầu là hạn gần nhất còn mở; ICSE hết hạn thì sang FSE, hai hành tinh dịch theo', () => {
+    const before = Date.parse('2026-10-11T08:00:00+07:00'), after = Date.parse('2026-10-11T19:00:00+07:00');
+    const html = now => orbHtml(openItems(CONFS, now), now);
+    const a = html(before), b = html(after);
+    assert.match(a, /class="orb-name" href="ICSE.html"/);
+    assert.match(a, /ptk-1[\s\S]*FSE[\s\S]*ptk-2[\s\S]*ACL/);
+    assert.match(b, /class="orb-name" href="FSE.html"/);
+    assert.doesNotMatch(b, /ICSE/);
+    assert.match(b, /ptk-1[\s\S]*ACL/);
+    assert.doesNotMatch(b, /ptk-2/);
+});
+
+test('mức khẩn của hành tinh có chữ, nhãn đọc màn hình chỉ một câu thời gian', () => {
+    const now = Date.parse('2026-10-11T08:00:00+07:00'), html = orbHtml(openItems(CONFS, now), now);
+    assert.match(html, /<span>Trong tuần<\/span>/);
+    assert.match(html, /<span>Trong tháng<\/span>/);
+    assert.match(html, /aria-label="Hạn gần nhất còn mười giờ, năm mươi chín phút"/);
+    assert.doesNotMatch(html, /11:30|class="vh"/);
+});
+
+test('không còn hội nghị nào mở: câu thông báo, không có quả cầu', () => {
+    const now = Date.parse('2027-01-01T00:00:00+07:00');
+    assert.deepEqual(openItems(CONFS, now), []);
+    const html = orbHtml([], now);
+    assert.match(html, /chưa có hội nghị nào mở/);
+    assert.doesNotMatch(html, /orb-main/);
+    assert.match(announce(CONFS[1], null), /ICSE đã hết hạn nộp bài\. Hiện chưa có hội nghị nào mở/);
+    assert.match(announce(CONFS[1], CONFS[2]), /Hạn kế tiếp là FSE, ngày 14\/10/);
 });
 
 test('trạng thái ngày: đã qua, hôm nay, còn lại', () => {

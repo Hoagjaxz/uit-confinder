@@ -6,9 +6,9 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { CONFERENCES } from './conferences.mjs';
 import { icon, ub, ribbon } from './levels.mjs';
-import { formatVN, daysLeft, urgency, nextDue } from './time-vn.mjs';
+import { formatVN, daysLeft, urgency, nextDue, NOW, DAY } from './time-vn.mjs';
 
-const { phrase, paneStates, heat, planetOrbit } = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm đọc thời gian bằng chữ với trình duyệt
+const { orbHtml } = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm dựng quả cầu với trình duyệt
 
 const card = c => {
     const due = nextDue(c);
@@ -35,69 +35,31 @@ const card = c => {
 const list = (cs, li = c => '<li>', cls = 'badge-list') => `<ul class="${cls}">\n${cs.map(c => `${li(c)}\n${card(c)}\n</li>`).join('\n')}\n</ul>`;
 const byDue = (a, b) => Date.parse(nextDue(a).at) - Date.parse(nextDue(b).at);
 
-const HERO_N = 3; // trang chủ: hạn gần nhất là quả cầu đồng hồ, 2 hạn kế là vệ tinh; phần "Các hạn tiếp theo" liệt kê phần còn lại
+const HERO_N = 3; // trang chủ: hạn gần nhất là quả cầu đồng hồ, 2 hạn kế là hành tinh; phần "Các hạn tiếp theo" liệt kê phần còn lại
 const open = CONFERENCES.filter(c => !c.closed).sort(byDue);
 
 // Mặt trời đếm ngược ở hero: vòng đầy = phần thời gian đã trôi từ mốc trước đến hạn này (hạn thiếu mốc trước thì lấy 30 ngày).
-const secs = n => +n.d * 86400 + +n.h * 3600 + +n.m * 60 + +n.s;
-const windowSecs = c => {
+// HTML tĩnh tính ở mốc NOW; trình duyệt dựng lại từ data-deadline theo giờ máy (site/js/hero-clock.js).
+const windowMs = c => {
     const due = Date.parse(nextDue(c).at);
     const prev = Math.max(...c.milestones.filter(m => m.at && Date.parse(m.at) < due).map(m => Date.parse(m.at)));
-    return Number.isFinite(prev) ? (due - prev) / 1000 : 30 * 86400;
+    return Number.isFinite(prev) ? due - prev : 30 * DAY;
 };
-// Hành tinh: quỹ đạo tròn quanh mặt trời, bán kính theo số ngày còn lại; nhãn thẳng đứng, dòng đầy đủ hiện khi trỏ vào.
-const planet = (c, i, all) => {
-    const due = nextDue(c), days = daysLeft(due.at), dm = formatVN(due.at).date.slice(0, 5);
-    const { r, T, a0 } = planetOrbit(days, daysLeft(nextDue(all.at(-1)).at), i, all.length);
-    const left = c.next.text.replace(/^Còn /, '');
-    return `<div class="ptk ptk-${i + 1}" data-level="${urgency(days)}" style="--r:${r.toFixed(2)};--a0:${a0}deg;--T:${Math.round(T)}s">
-                <a class="pl" href="${c.file}" aria-label="${c.name} ${c.year}, hạn nộp bài ngày ${dm}, còn ${left}, mở trang hội nghị"><i class="pl-dot"></i><span class="pl-lab"><b>${c.name}</b><span>${dm}</span></span></a>
-            </div>
-            <p class="pl-rd rd-${i + 1}" aria-hidden="true">${c.name} ${c.year} · hạn ${dm} · còn ${left}</p>`;
-};
-const orb = () => {
-    const [c, ...rest] = open;
-    const due = nextDue(c);
-    const { time, date } = formatVN(due.at);
-    const total = windowSecs(c);
-    const left = secs(c.next);
-    const ratio = Math.min(1, Math.max(0, 1 - left / total));
-    const { d, h, m, s } = c.next;
-    const planets = rest.slice(0, HERO_N - 1);
-    const say = phrase(left);
-    const panes = paneStates(Math.max(1, Math.round(total / 86400)), (total - left) / 86400)
-        .map((st, i) => `<span class="pane" data-s="${st}" style="--i:${i}"></span>`).join('');
-    return `<h2 class="vh">Hạn gần nhất</h2>
-<p class="vh">${c.name} ${c.year}. ${due.name} trước ${time} ngày ${date} (giờ Việt Nam). ${say[0].toUpperCase()}${say.slice(1)}.</p>
-<div class="orb-main" style="--p:${(ratio * 100).toFixed(1)};--heat:${heat(ratio).toFixed(3)}" data-hero-clock data-d="${+d}" data-h="${+h}" data-m="${+m}" data-s="${+s}" data-total="${total}">
-    <div class="orb-fig">
-        <div class="orb" role="img" aria-label="Đếm ngược đến hạn gần nhất: ${c.name} ${c.year} ${say}">
-            <span class="orb-sec"></span>
-            <svg class="orb-ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="48"/><circle class="arc" cx="50" cy="50" r="48" pathLength="100"/></svg>
-            <span class="orb-sun"></span>
-            <span class="orb-halo"></span>
-            <span class="orb-ball"><i class="lt lt-1"></i><i class="lt lt-2"></i><i class="lt lt-3"></i><span class="orb-panes">${panes}</span></span>
-        </div>
-        <div class="orb-info">
-            <a class="orb-name" href="${c.file}">${c.name} ${c.year}</a>
-            <p class="orb-clock" aria-hidden="true">${[['d', 'ngày'], ['h', 'giờ'], ['m', 'phút'], ['s', 'giây']].map(([k, u]) => `<span class="ck ck-${k}"><b data-u="${k}">${String(+c.next[k]).padStart(2, '0')}</b><i>${u}</i></span>`).join('<span class="sp"></span>')}</p>
-            <p class="orb-lab">${due.name} trước ${time} ngày ${date} (giờ Việt Nam)</p>
-        </div>
-        <div class="orb-sats">
-            ${planets.map((c, i) => planet(c, i, planets)).join('\n            ')}
-        </div>
-    </div>
+const heroItem = c => ({ name: `${c.name} ${c.year}`, short: c.name, href: c.file, label: nextDue(c).name, deadline: Date.parse(nextDue(c).at), opens: Date.parse(nextDue(c).at) - windowMs(c) });
+const orb = () => `<h2 class="vh">Hạn gần nhất</h2>
+<p class="vh" role="status" data-hero-live></p>
+<div data-hero-orb>
+${orbHtml(open.map(heroItem), NOW)}
 </div>`;
-};
-const openList = () => `<ul>
-${open.map(c => `<li><a href="${c.file}"><b>${c.name}</b> <span>${c.core}</span></a></li>`).join('\n')}
+const openList = () => `<ul data-hero-list>
+${open.map(c => { const h = heroItem(c); return `<li data-deadline="${nextDue(c).at}" data-opens="${new Date(h.opens).toISOString()}" data-label="${h.label}" data-year="${c.year}"><a href="${c.file}"><b>${c.name}</b> <span>${c.core}</span></a></li>`; }).join('\n')}
 </ul>`;
 
 const TARGETS = {
     lich: { file: 'lich-hoi-nghi.html', html: list(CONFERENCES) },
     'hero:orb': { file: 'index.html', html: orb() },
     'hero:open': { file: 'index.html', html: openList() },
-    'trang-chu': { file: 'index.html', html: list(open.slice(HERO_N)) },
+    'trang-chu': { file: 'index.html', html: list(open, c => `<li data-deadline="${nextDue(c).at}"${open.indexOf(c) < HERO_N ? ' hidden' : ''}>`) }, // trình duyệt ẩn/hiện lại theo giờ máy
     'da-luu': { file: 'da-luu.html', html: list(CONFERENCES, c => `<li data-saved-item="${c.slug}" hidden>`) },
 };
 

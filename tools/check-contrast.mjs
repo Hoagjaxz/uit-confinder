@@ -28,7 +28,7 @@ const PAIRS = [
     ['accent', 'paper'], ['accent', 'card'], ['accent', 'badge'], ['accent', 'hover'], ['link', 'paper'], ['link', 'card'], ['focus', 'paper'],
     ['paper', 'ink'], ['paper', 'accent'],
     ['on-ribbon-a', 'ribbon-a'], ['on-ribbon', 'ribbon-b'], ['on-ribbon', 'ribbon-c'], ['on-ribbon', 'ribbon-d'],
-    ['c-fg', 'c-bg'], ['s-fg', 's-bg'], ['u-fg', 'u-bg'], ['o-fg', 'o-bg'], ['x-fg', 'x-bg'],
+    ['c-fg', 'card'], ['s-fg', 'card'], ['u-fg', 'card'], ['o-fg', 'card'], ['c-fg', 'c-bg'], ['s-fg', 's-bg'], ['u-fg', 'u-bg'], ['o-fg', 'o-bg'], ['x-fg', 'x-bg'],
 ];
 
 let bad = 0;

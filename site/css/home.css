@@ -14,7 +14,6 @@
 .hero-grid { display: grid; gap: 36px; align-items: center }
 .hero-copy { min-width: 0 }
 .hero h1 { font-family: var(--sans); font-weight: 300; font-size: clamp(38px, 11vw, 74px); line-height: 1.08; letter-spacing: -.03em; padding-bottom: .06em; text-wrap: balance }
-.hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.08em; letter-spacing: -.02em; color: var(--accent) }
 .hero-sub { margin-top: 18px; max-width: 40ch; color: var(--mute); font-size: 17px; text-wrap: pretty }
 .hero-act { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 18px; margin-top: 28px }
 .hero-cta {

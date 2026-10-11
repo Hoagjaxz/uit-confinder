@@ -8,7 +8,7 @@ import { CONFERENCES } from './conferences.mjs';
 import { icon, ub, ribbon } from './levels.mjs';
 import { formatVN, daysLeft, urgency, nextDue } from './time-vn.mjs';
 
-const { phrase, paneStates, heat } = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm đọc thời gian bằng chữ với trình duyệt
+const { phrase, paneStates, heat, planetOrbit } = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm đọc thời gian bằng chữ với trình duyệt
 
 const card = c => {
     const due = nextDue(c);
@@ -45,9 +45,15 @@ const windowSecs = c => {
     const prev = Math.max(...c.milestones.filter(m => m.at && Date.parse(m.at) < due).map(m => Date.parse(m.at)));
     return Number.isFinite(prev) ? (due - prev) / 1000 : 30 * 86400;
 };
-const sat = (c, i) => {
-    const due = nextDue(c);
-    return `<a class="sat sat-${i + 1}" data-level="${urgency(daysLeft(due.at))}" href="${c.file}"><b>${c.name}</b> <span class="mono">${formatVN(due.at).date.slice(0, 5)}</span><small>còn ${c.next.text.replace(/^Còn /, '')}</small></a>`;
+// Hành tinh: quỹ đạo tròn quanh mặt trời, bán kính theo số ngày còn lại; nhãn thẳng đứng, dòng đầy đủ hiện khi trỏ vào.
+const planet = (c, i, all) => {
+    const due = nextDue(c), days = daysLeft(due.at), dm = formatVN(due.at).date.slice(0, 5);
+    const { r, T, a0 } = planetOrbit(days, daysLeft(nextDue(all.at(-1)).at), i, all.length);
+    const left = c.next.text.replace(/^Còn /, '');
+    return `<div class="ptk ptk-${i + 1}" data-level="${urgency(days)}" style="--r:${r.toFixed(2)};--a0:${a0}deg;--T:${Math.round(T)}s">
+                <a class="pl" href="${c.file}" aria-label="${c.name} ${c.year}, hạn ${dm}, còn ${left}, mở trang hội nghị"><i class="pl-dot"></i><span class="pl-lab"><b>${c.name}</b><span>${dm}</span></span></a>
+            </div>
+            <p class="pl-rd rd-${i + 1}" aria-hidden="true">${c.name} ${c.year} · ${dm} · còn ${left}</p>`;
 };
 const orb = () => {
     const [c, ...rest] = open;
@@ -57,6 +63,7 @@ const orb = () => {
     const left = secs(c.next);
     const ratio = Math.min(1, Math.max(0, 1 - left / total));
     const { d, h, m, s } = c.next;
+    const planets = rest.slice(0, HERO_N - 1);
     const say = phrase(left);
     const panes = paneStates(Math.max(1, Math.round(total / 86400)), (total - left) / 86400)
         .map((st, i) => `<span class="pane" data-s="${st}" style="--i:${i}"></span>`).join('');
@@ -65,21 +72,20 @@ const orb = () => {
 <div class="orb-main" style="--p:${(ratio * 100).toFixed(1)};--heat:${heat(ratio).toFixed(3)}" data-hero-clock data-d="${+d}" data-h="${+h}" data-m="${+m}" data-s="${+s}" data-total="${total}">
     <div class="orb-fig">
         <div class="orb" role="img" aria-label="Mặt trời đếm ngược: ${c.name} ${c.year} ${say}">
-            <span class="orb-orbit"></span>
             <span class="orb-sec"></span>
             <svg class="orb-ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="trk" cx="50" cy="50" r="48"/><circle class="arc" cx="50" cy="50" r="48" pathLength="100"/></svg>
             <span class="orb-sun"></span>
             <span class="orb-halo"></span>
             <span class="orb-ball"><i class="lt lt-1"></i><i class="lt lt-2"></i><i class="lt lt-3"></i><span class="orb-panes">${panes}</span></span>
         </div>
-        <div class="orb-sats">
-            ${rest.slice(0, HERO_N - 1).map(sat).join('\n            ')}
+        <div class="orb-info">
+            <a class="orb-name" href="${c.file}">${c.name} ${c.year}</a>
+            <p class="orb-clock" aria-hidden="true">${[['d', 'ngày'], ['h', 'giờ'], ['m', 'phút'], ['s', 'giây']].map(([k, u]) => `<span class="ck ck-${k}"><b data-u="${k}">${String(+c.next[k]).padStart(2, '0')}</b><i>${u}</i></span>`).join('<span class="sp"></span>')}</p>
+            <p class="orb-lab">${due.name} · ${date.slice(0, 5)} ${time} giờ Việt Nam</p>
         </div>
-    </div>
-    <div class="orb-info">
-        <a class="orb-name" href="${c.file}">${c.name} ${c.year}</a>
-        <p class="orb-say" aria-hidden="true">${say}</p>
-        <p class="orb-lab">${due.name} · ${date.slice(0, 5)} ${time} giờ Việt Nam</p>
+        <div class="orb-sats">
+            ${planets.map((c, i) => planet(c, i, planets)).join('\n            ')}
+        </div>
     </div>
 </div>`;
 };

@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 
-const { viet, spoken, phrase, remainingAt, dayState, paneStates, heat } = createRequire(import.meta.url)('../site/js/hero-clock.js');
+const { viet, spoken, phrase, remainingAt, dayState, paneStates, heat, planetOrbit, clockParts } = createRequire(import.meta.url)('../site/js/hero-clock.js');
 const DAY = 86400;
 
 test('đọc số bằng chữ: mười, mười lăm, hai mươi mốt, hai mươi lăm, bốn mươi', () => {
@@ -56,4 +56,26 @@ test('độ nóng tăng đơn điệu 0..1 theo tỉ lệ đã trôi, ICSE (85,5
     const xs = Array.from({ length: 21 }, (_, i) => heat(i / 20));
     assert.ok(xs.every((v, i) => i === 0 || v >= xs[i - 1]));
     assert.ok(heat(0.4) < 0.3);
+});
+
+test('đồng hồ số: tách giây còn lại thành ngày, giờ, phút, giây; âm thì về 0', () => {
+    assert.deepEqual(clockParts(2 * DAY + 4 * 3600 + 12 * 60 + 9), { d: 2, h: 4, m: 12, s: 9 });
+    assert.deepEqual(clockParts(59.9), { d: 0, h: 0, m: 0, s: 59 });
+    assert.deepEqual(clockParts(-3), { d: 0, h: 0, m: 0, s: 0 });
+});
+
+test('quỹ đạo hành tinh: bán kính và chu kỳ tăng theo số ngày còn lại, trong khoảng cho phép', () => {
+    const fse = planetOrbit(5, 18, 0, 2), acl = planetOrbit(18, 18, 1, 2);
+    assert.ok(fse.r < acl.r && fse.T < acl.T);
+    assert.ok(fse.r > 39 && acl.r <= 45 && acl.r - fse.r > 3);
+    assert.ok(fse.T >= 90 && acl.T <= 140);
+    assert.equal(planetOrbit(0, 18, 0, 2).r, 39);
+    assert.equal(planetOrbit(99, 18, 0, 2).r, 45);
+    assert.equal(planetOrbit(5, 0, 0, 1).r, 45);
+});
+
+test('góc xuất phát rải đều và không trùng nhau', () => {
+    const a = [0, 1, 2].map(i => planetOrbit(5, 18, i, 3).a0);
+    assert.equal(new Set(a).size, 3);
+    assert.deepEqual([0, 1].map(i => planetOrbit(5, 18, i, 2).a0), [40, 220]);
 });

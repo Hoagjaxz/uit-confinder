@@ -162,7 +162,7 @@ Bảng Mận: nền xám ánh tím, mực tím đen, một nhấn tím mận và
 - **Gấp** đỏ (#a8200f trên #fde6e1), **Trong tuần** vàng nâu (#8a5200 trên #fdf0d3), **Trong tháng** lam (#1f4fae trên #e5edfb), **Còn rộng** lục (#3b6a12 trên #ecf3d6), **Đã hết hạn** xám lam (#586070 trên #eceef2). Mỗi mức có bản tối riêng trong site.css.
 
 ### Named Rules
-**The Lanyard Rule.** Hồng dây đeo chỉ là dải đỉnh trang, gạch nav hiện tại và dây trang chủ. Không tô nút, chữ hay nền bằng hồng.
+**The Lanyard Rule.** Hồng dây đeo chỉ là dải đỉnh trang, gạch nav hiện tại, dây trang chủ, gạch chân tên hội nghị khi chạm và vạch "hôm nay" của thanh mốc ngày ở hero. Không tô nút, chữ hay nền bằng hồng.
 **The No Warm Ribbon Rule.** Ruy-băng rank không bao giờ đỏ hay cam; đỏ và cam dành cho mức khẩn.
 
 ## Typography
@@ -209,6 +209,10 @@ Cao 22px, chữ 12px đậm, đuôi V; bốn màu theo hạng (xem Colors). Trê
 
 ### Nhãn mức khẩn (ub)
 Biểu tượng SVG 16px cộng chữ đậm, viền 1px cùng màu chữ, nền ngữ nghĩa, cao tối thiểu 28px, bo 3px. Năm mức: Gấp (dưới 3 ngày), Trong tuần (dưới 7), Trong tháng (dưới 30), Còn rộng (từ 30), Đã hết hạn.
+
+### Hero trang chủ (câu một nhịp)
+Một câu căn giữa, đồng hồ là chữ lớn nhất: "Còn [viên nang] để nộp ICSE", hai đầu câu chỉ 0,5em tiêu đề. Viên nang bo tròn hết cỡ (ngoại lệ có chủ đích của thang bo góc), mono 700, cỡ chữ tự vừa bề ngang nhờ `--n` (tối đa 76px; 64px khi câu nằm một hàng từ 64rem). Mỗi chữ số một ô cắt gọn, giây nhảy bằng cách số mới trượt lên thế chỗ số cũ (320ms; bỏ hẳn khi giảm chuyển động, số đổi thẳng). Số chạy `aria-hidden`, trình đọc màn hình nghe đơn vị lớn nhất. Dưới 24 giờ viên nang đổi sang đỏ khẩn (`--c-fg` trên `--c-bg`) và dòng phụ mở bằng nhãn "Sắp hết hạn".
+Dưới viên nang là thanh mốc ngày: 15 vạch mảnh 3px chia đều từ lúc mở nộp bài đến hạn; đã qua tím mận đặc, hôm nay hồng cao 22px, còn lại xám nhạt; dải này trang trí nên `aria-hidden`. Hàng tên hội nghị phía dưới giảm cỡ theo thứ tự hạn (100%, 89%, 78%, 67%, 56% của 46px, tối thiểu 17px), mỗi tên có chấm và nhãn chữ theo mức khẩn rồi đến ngày hạn. Dưới 40rem: hạn gần nhất chiếm cả hàng, các hạn còn lại hai cột.
 
 ### Buttons
 - **Shape:** bo 6px, cao 44px, đệm ngang 18px, chữ 14px đậm.

@@ -8,20 +8,30 @@
         radial-gradient(72% 38% at 50% 92%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 78%);
     -webkit-mask-image: linear-gradient(#000 72%, transparent);
     mask-image: linear-gradient(#000 72%, transparent) }
-.hero h1 { max-width: 17em; margin: 0 auto; font-size: clamp(36px, 7vw, 76px); line-height: 1.22; font-weight: 500; letter-spacing: -0.01em }
+.hero-in { container-type: inline-size }
+.hero h1 { --S: clamp(32px, 6.4vw, 60px); max-width: 17em; margin: 0 auto; font-size: var(--S); line-height: 1.15; font-weight: 500; letter-spacing: -0.01em }
 .hero h1 a { color: var(--accent); text-decoration: underline var(--lanyard); text-decoration-thickness: .07em; text-underline-offset: .14em; border-radius: var(--r-s) }
 .hero h1 a:hover { background: var(--hover) }
-/* viên nang: ngoại lệ có chủ đích của thang bo góc, vì nó là "một nhịp" nằm giữa câu */
-.cap { display: inline-block; padding: .04em .42em; border: .06em solid var(--accent); border-radius: 999px; background: color-mix(in srgb, var(--card) 78%, transparent); color: var(--accent); font-size: .44em; line-height: 1.45; vertical-align: .22em; white-space: nowrap }
-.cap-face { font-weight: 700; letter-spacing: -0.02em }
+/* khi có đồng hồ, cả câu thành chữ nhỏ bao quanh viên nang; hết hạn hoặc không còn hội nghị thì cả câu là chữ tiêu đề */
+[data-state=far] .hl, [data-state=soon] .hl { display: block; font-size: .5em; line-height: 1.3; color: var(--soft) }
+[data-state=far] .hl a, [data-state=soon] .hl a { font-weight: 600 }
+/* viên nang: ngoại lệ có chủ đích của thang bo góc. Cỡ chữ vừa khít bề ngang nhờ --n (số ký tự mono, do JS và build ghi). */
+.cap { display: block; width: fit-content; max-width: 100%; margin: .1em auto; padding: .02em .3em; border: .05em solid var(--accent); border-radius: 999px; background: color-mix(in srgb, var(--card) 78%, transparent); color: var(--accent); font-size: min(76px, calc(100cqw / (var(--n, 12) * .62 + .8))); line-height: 1.2; white-space: nowrap }
 .cap.is-urgent { border-color: var(--c-fg); background: var(--c-bg); color: var(--c-fg) }
-/* mỗi chữ số một ô cắt gọn để số mới trượt thế chỗ số cũ */
+.cap-face { display: inline-flex; align-items: baseline; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums }
+.cap-face .sp { white-space: pre }
+.cap-face .u { font-size: .46em; font-weight: 500; letter-spacing: 0 }
+/* mỗi chữ số một ô cắt gọn; số mới trượt lên thế chỗ số cũ (JS, chỉ khi không giảm chuyển động) */
 .dg { display: inline-grid; overflow: clip }
 .dg > span { grid-area: 1 / 1 }
-.ticks { display: none }
-.hero-sub .ub { display: flex; width: fit-content; margin: 0 auto 8px }
-.names li[hidden] { display: none }
+/* thanh mốc ngày: 15 vạch từ lúc mở nộp đến hạn; đã qua đặc, hôm nay hồng, còn lại mờ */
+.ticks { display: flex; justify-content: center; align-items: flex-end; gap: clamp(5px, 1.4vw, 9px); height: 22px; margin: 16px auto 0 }
+.ticks[hidden] { display: none }
+.ticks i { width: 3px; height: 12px; border-radius: var(--r-s); background: var(--rule-2) }
+.ticks .p { background: var(--accent) }
+.ticks .t { height: 22px; background: var(--lanyard) }
 .hero-sub { margin-top: 14px; font-size: 17px; color: var(--soft); text-wrap: balance }
+.hero-sub .ub { display: flex; width: fit-content; margin: 0 auto 8px }
 
 .hero-find { display: grid; gap: 10px; max-width: 520px; margin: 28px auto 0 }
 .hero-find .btn { min-height: 48px }
@@ -35,14 +45,31 @@
 .hero-fields { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 8px; margin-top: 18px; list-style: none }
 .hero-fields a { text-decoration: none }
 
-/* hàng tên hội nghị viết như logo: chữ serif hoa cách đều, gạch hồng hiện khi chạm */
-.hero-names { max-width: 760px; margin: 36px auto 0; padding-top: 22px; border-top: 1px solid var(--rule) }
-.hero-names h2 { margin: 0 0 2px; font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--soft) }
-.names { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 clamp(14px, 5vw, 48px); list-style: none }
-.names a { position: relative; display: inline-flex; align-items: center; min-height: 52px; padding: 0 2px; font-family: var(--serif); font-size: clamp(22px, 4.2vw, 36px); font-weight: 600; letter-spacing: .06em; color: var(--ink); text-decoration: none }
-.names a::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 8px; height: 3px; background: var(--lanyard); transform: scaleX(0); transform-origin: left; transition: transform .2s ease-out }
-.names a:hover::after, .names a:focus-visible::after { transform: scaleX(1) }
+/* hàng tên hội nghị: cỡ chữ giảm dần theo thứ tự hạn (--r), chấm và nhãn chữ theo mức khẩn, gạch hồng hiện khi chạm */
+.hero-names { max-width: 880px; margin: 36px auto 0; padding-top: 22px; border-top: 1px solid var(--rule) }
+.hero-names h2 { margin: 0 0 6px; font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--soft) }
+.names { --base: clamp(32px, 6vw, 46px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 8px; list-style: none }
+.names li[hidden] { display: none }
+.names li { --lv: var(--x-fg); font-size: max(17px, calc(var(--base) * (1 - var(--r, 0) * .11))) }
+.names li[data-level=c] { --lv: var(--c-fg) }
+.names li[data-level=s] { --lv: var(--s-fg) }
+.names li[data-level=u] { --lv: var(--u-fg) }
+.names li[data-level=o] { --lv: var(--o-fg) }
+.names li.is-closed { font-size: 22px }
+.names a { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-height: 56px; padding: 2px 6px 6px; color: var(--ink); text-decoration: none; border-radius: var(--r-s) }
+.nm-n { position: relative; display: inline-flex; align-items: center; gap: .28em; font-family: var(--serif); font-size: 1em; font-weight: 600; line-height: 1.1; letter-spacing: .06em }
+.nm-n::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 3px; background: var(--lanyard); transform: scaleX(0); transform-origin: left; transition: transform .2s ease-out }
+.names a:hover .nm-n::after, .names a:focus-visible .nm-n::after { transform: scaleX(1) }
 .names a:hover { color: var(--accent) }
+.nm-dot { flex: none; width: max(7px, .26em); height: max(7px, .26em); border-radius: 50%; background: var(--lv) }
+.nm-due { display: flex; gap: .4em; margin-top: 8px; font-family: var(--sans); font-size: 12.5px; line-height: 1.2; color: var(--soft); white-space: nowrap }
+.nm-lv { font-weight: 700; color: var(--lv) }
+/* dưới 40rem: hạn gần nhất chiếm cả hàng, các hạn còn lại xếp hai cột; lẻ một thì hạn cuối chiếm cả hàng */
+@media (max-width: 39.99rem) {
+    .names li:not(.is-closed):nth-child(1 of :not([hidden])) { grid-column: 1 / -1 }
+    .names li:not(.is-closed):nth-last-child(1 of :not([hidden])):nth-child(even of :not([hidden])) { grid-column: 1 / -1 }
+    .names li.is-closed:nth-last-child(1 of :not([hidden])):nth-child(odd of :not([hidden])) { grid-column: 1 / -1 }
+}
 
 /* các phần dưới hero */
 .sec { padding-top: 56px }
@@ -61,12 +88,16 @@
 .posts p { margin-top: 4px; max-width: 70ch; font-size: 14px; color: var(--mute); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden }
 
 @media (min-width: 40rem) {
+    .names { display: flex; justify-content: center; align-items: flex-end; gap: 8px clamp(14px, 3vw, 40px) }
     .posts li { grid-template-columns: 7.5rem minmax(0, 1fr); gap: 16px; align-items: baseline }
     .hero { padding: 64px 0 24px }
     .hero-sub { font-size: 18px }
     .hero-find { grid-template-columns: minmax(0, 1fr) auto; max-width: 600px }
 }
 @media (min-width: 64rem) {
+    /* đủ chỗ để câu nằm một hàng: chữ nhỏ - viên nang - chữ nhỏ */
+    [data-state=far] .hl, [data-state=soon] .hl { display: inline-block; vertical-align: middle }
+    .cap { display: inline-block; margin: 0 .1em; vertical-align: middle; font-size: min(64px, calc((100cqw - 340px) / (var(--n, 12) * .62 + .8))) }
     .hero { padding: 80px 0 24px }
     .hero-names { margin-top: 48px }
 }

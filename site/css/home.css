@@ -9,13 +9,15 @@
     -webkit-mask-image: linear-gradient(#000 72%, transparent);
     mask-image: linear-gradient(#000 72%, transparent) }
 .hero-in { container-type: inline-size }
-.hero h1 { max-width: 20em; margin: 0 auto 20px; font-size: clamp(22px, 4.4vw, 34px); line-height: 1.2; font-weight: 500; letter-spacing: -0.01em }
+.hero h1 { max-width: 20em; margin: 0 auto 10px; font-size: clamp(22px, 4.4vw, 34px); line-height: 1.2; font-weight: 500; letter-spacing: -0.01em; text-wrap: balance }
+.hero-lede { max-width: 34rem; margin: 0 auto 24px; font-size: 15px; line-height: 1.5; color: var(--soft); text-wrap: pretty }
 .hero-line { --S: clamp(32px, 6.4vw, 60px); max-width: 17em; margin: 0 auto; font-size: var(--S); line-height: 1.15; font-weight: 500; letter-spacing: -0.01em }
 .hero-line a { color: var(--accent); text-decoration: underline var(--lanyard); text-decoration-thickness: .07em; text-underline-offset: .14em; border-radius: var(--r-s) }
 .hero-line a:hover { background: var(--hover) }
 /* khi có đồng hồ, cả câu thành chữ nhỏ bao quanh viên nang; hết hạn hoặc không còn hội nghị thì cả câu là chữ tiêu đề */
 [data-state=far] .hl, [data-state=soon] .hl { display: block; font-size: .5em; line-height: 1.3; color: var(--soft) }
 [data-state=far] .hl a, [data-state=soon] .hl a { font-weight: 600 }
+[data-state=expired], [data-state=none] { text-wrap: balance }
 /* viên nang: ngoại lệ có chủ đích của thang bo góc. Cỡ chữ vừa khít bề ngang nhờ --n (số ký tự mono, do JS và build ghi). */
 .cap { display: block; width: fit-content; max-width: 100%; margin: .1em auto; padding: .02em .3em; border: .05em solid var(--accent); border-radius: 999px; background: color-mix(in srgb, var(--card) 78%, transparent); color: var(--accent); font-size: min(76px, calc(100cqw / (var(--n, 12) * .62 + .8))); line-height: 1.2; white-space: nowrap }
 .cap.is-urgent { border-color: var(--c-fg); background: var(--c-bg); color: var(--c-fg) }
@@ -32,7 +34,6 @@
 .ticks .p { background: var(--accent) }
 .ticks .t { height: 22px; background: var(--lanyard) }
 .hero-sub { margin-top: 14px; font-size: 17px; color: var(--soft); text-wrap: balance }
-.hero-sub .ub { display: flex; width: fit-content; margin: 0 auto 8px }
 
 .hero-find { display: grid; gap: 10px; max-width: 520px; margin: 28px auto 0 }
 .hero-find .btn { min-height: 48px }

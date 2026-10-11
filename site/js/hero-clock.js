@@ -59,7 +59,6 @@
         /\d/.test(p) ? `<span class="dg"><span>${p}</span></span>` : `<span class="sp${p.includes('ngày') ? ' u' : ''}">${p}</span>`).join('');
     // Độ rộng mặt số tính bằng "số ký tự mono", để CSS chọn cỡ chữ vừa khít chiều ngang.
     const faceWidth = sec => { const s = format(sec); return (s.match(/[\d:]/g) || []).length + (s.includes('ngày') ? 3 : 0); };
-    const WARN = '<span class="ub u-c"><svg class="ic" width="16" height="16" aria-hidden="true"><use href="#i-alert"/></svg><b>Sắp hết hạn</b></span>';
 
     // Nội dung ba vùng của hero cho một trạng thái. m: { phase, sec, name, href, label, iso, opensIso, deadline, opens, now, next }.
     function head(m) {
@@ -67,29 +66,28 @@
         if (m.phase === 'far' || m.phase === 'soon') {
             const due = vnParts(m.deadline);
             const cap = `<span class="cap${m.phase === 'soon' ? ' is-urgent' : ''}" data-deadline="${esc(m.iso)}" data-opens="${esc(m.opensIso)}" style="--n:${faceWidth(m.sec)}"><span class="vh">${spoken(m.sec)}</span><span class="cap-face mono" data-cd data-sig="${format(m.sec).replace(/\d/g, '#')}" aria-hidden="true">${faceHtml(m.sec)}</span></span>`;
+            const lead = m.phase === 'soon' ? `Sắp hết hạn: ${link} chỉ&nbsp;còn` : `Hạn gần nhất: ${link},&nbsp;còn`;
             return {
-                h1: `<span class="hl">Hạn nộp bài gần nhất: ${link}<span class="vh">, còn</span></span> ${cap}`,
+                h1: `<span class="hl">${lead}</span> ${cap}`,
                 ticks: ticks(m.opens, m.deadline, m.now).map(s => `<i${s === 'f' ? '' : ` class="${s}"`}></i>`).join(''),
-                sub: `${m.phase === 'soon' ? `${WARN} ` : ''}Hạn ${esc(m.label.replace(/^./, c => c.toLowerCase()))}: ${due.time} ngày ${due.date}, giờ Việt Nam.`,
+                sub: `${esc(m.label)} trước ${due.time} ngày ${due.date} (giờ Việt Nam)`,
             };
         }
         if (m.phase === 'expired') {
-            return {
-                h1: `<span class="hl">${link} đã hết hạn nộp&nbsp;bài</span>`, ticks: '',
-                sub: m.next ? `Hạn nộp bài kế tiếp: ${esc(m.next.name)}, ngày ${vnParts(m.next.deadline).dm}.` : 'Hiện chưa có hội nghị nào đang mở nộp bài.',
-            };
+            const next = m.next ? `Hạn&nbsp;kế&nbsp;tiếp là ${esc(m.next.name)},&nbsp;ngày&nbsp;${vnParts(m.next.deadline).dm}.` : 'Hiện chưa có hội nghị nào mở nhận&nbsp;bài.';
+            return { h1: `<span class="hl">${link} đã hết hạn nộp&nbsp;bài. ${next}</span>`, ticks: '', sub: '' };
         }
-        return { h1: '<span class="hl">Hiện chưa có hội nghị nào đang mở nộp bài</span>', ticks: '', sub: 'Xem lịch hội nghị để theo dõi các hạn nộp bài sắp tới.' };
+        return { h1: '<span class="hl">Hiện chưa có hội nghị nào mở nhận&nbsp;bài. Xem lịch để biết đợt tiếp&nbsp;theo.</span>', ticks: '', sub: '' };
     }
     // Khối HTML tĩnh (build-lists.mjs); trình duyệt dựng lại đúng ba vùng này khi đổi trạng thái.
     function block(m) {
         const v = head(m);
-        return `<p class="hero-line" data-hero-clock data-state="${m.phase}">${v.h1}</p>\n<div class="ticks"${v.ticks ? '' : ' hidden'} aria-hidden="true">${v.ticks}</div>\n<p class="hero-sub">${v.sub}</p>`;
+        return `<p class="hero-line" data-hero-clock data-state="${m.phase}">${v.h1}</p>\n<div class="ticks"${v.ticks ? '' : ' hidden'} aria-hidden="true">${v.ticks}</div>\n<p class="hero-sub"${v.sub ? '' : ' hidden'}>${v.sub}</p>`;
     }
     // Câu thông báo cho vùng aria-live khi trạng thái đổi.
     function announce(m) {
-        if (m.phase === 'soon') return `Sắp hết hạn nộp bài: ${m.name} còn dưới 24 giờ.`;
-        if (m.phase === 'expired') return `${m.name} đã hết hạn nộp bài. ${m.next ? `Hạn nộp bài kế tiếp: ${m.next.name}, ngày ${vnParts(m.next.deadline).dm}.` : 'Hiện chưa có hội nghị nào đang mở nộp bài.'}`;
+        if (m.phase === 'soon') return `Sắp hết hạn: ${m.name} còn dưới 24 giờ.`;
+        if (m.phase === 'expired') return `${m.name} đã hết hạn nộp bài. ${m.next ? `Hạn kế tiếp là ${m.next.name}, ngày ${vnParts(m.next.deadline).dm}.` : 'Hiện chưa có hội nghị nào mở nhận bài.'}`;
         return '';
     }
 
@@ -152,7 +150,7 @@
         const key = ph + (it ? it.iso : '');
         if (key !== shownKey) {
             const m = model(it, t, ph, next), v = head(m), was = shownKey;
-            h1.innerHTML = v.h1; ticksEl.innerHTML = v.ticks; ticksEl.hidden = !v.ticks; subEl.innerHTML = v.sub;
+            h1.innerHTML = v.h1; ticksEl.innerHTML = v.ticks; ticksEl.hidden = !v.ticks; subEl.innerHTML = v.sub; subEl.hidden = !v.sub;
             h1.dataset.state = ph;
             shownKey = key;
             if (ph === 'soon' && was === 'far' + it.iso) live.textContent = announce(m); // chỉ khi đổi trạng thái, không phải mỗi giây
@@ -163,7 +161,7 @@
         const sig = (none ? 'x' : 'o') + shown.map(i => i.n).join();
         if (sig !== namesSig) {
             namesSig = sig;
-            if (heading) heading.textContent = none ? 'Đã đóng nộp bài' : 'Đang mở nộp bài';
+            if (heading) heading.textContent = none ? 'Đã đóng nhận bài' : 'Đang mở nhận bài';
             items.forEach(i => { i.li.hidden = !shown.includes(i); });
             shown.forEach((i, k) => { list.append(i.li); i.li.style.setProperty('--r', none ? 3 : k); i.li.classList.toggle('is-closed', none); });
         }

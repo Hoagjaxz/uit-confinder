@@ -35,7 +35,7 @@
     }
     // Quỹ đạo hành tinh theo số ngày còn lại (nội suy tuyến tính, % cạnh khung): ngày gần quay trong, nhanh; ngày xa quay ngoài, chậm.
     // Góc xuất phát rải đều quanh tâm nên hai hành tinh không bao giờ khởi đầu chồng nhau.
-    const ORBIT = { r0: 39, r1: 45, t0: 90, t1: 140, a0: 40 };
+    const ORBIT = { r0: 41, r1: 46, t0: 90, t1: 140, a0: 40 };
     function planetOrbit(days, maxDays, i, n) {
         const u = maxDays > 0 ? Math.min(1, Math.max(0, days / maxDays)) : 1;
         return { r: ORBIT.r0 + (ORBIT.r1 - ORBIT.r0) * u, T: ORBIT.t0 + (ORBIT.t1 - ORBIT.t0) * u, a0: (ORBIT.a0 + (360 * i) / n) % 360 };
@@ -68,11 +68,21 @@
         if (!still) sec.style.transform = `rotate(${Math.floor(el) * 6}deg)`;
     }
 
+    // Hai hành tinh gần nhau thì tạm ẩn nhãn vướng (CSS .hide-1, .hide-2) để nhãn không chồng lên nhau hay lên chấm kia.
+    const labs = [...root.querySelectorAll('.pl-lab')], dots = [...root.querySelectorAll('.pl-dot')];
+    const near = (a, b) => a.left < b.right + 4 && b.left < a.right + 4 && a.top < b.bottom + 4 && b.top < a.bottom + 4;
+    function clash() {
+        if (labs.length < 2) return;
+        const [l1, l2] = labs.map(e => e.getBoundingClientRect()), [d1, d2] = dots.map(e => e.getBoundingClientRect());
+        root.classList.toggle('hide-1', near(l1, d2));
+        root.classList.toggle('hide-2', near(l1, l2) || near(l2, d1));
+    }
     const t0 = performance.now(); // đo bằng performance.now() nên không trôi khi tab ẩn rồi quay lại
     let timer = 0;
     function tick() {
         const el = (performance.now() - t0) / 1000, t = remainingAt(remaining, el);
         if (t !== lastT) sync(t, el);
+        clash();
     }
     sync(remaining, 0);
     if (still) return;

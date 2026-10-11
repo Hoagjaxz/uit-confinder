@@ -67,11 +67,11 @@ test('đồng hồ số: tách giây còn lại thành ngày, giờ, phút, giâ
 test('quỹ đạo hành tinh: bán kính và chu kỳ tăng theo số ngày còn lại, trong khoảng cho phép', () => {
     const fse = planetOrbit(5, 18, 0, 2), acl = planetOrbit(18, 18, 1, 2);
     assert.ok(fse.r < acl.r && fse.T < acl.T);
-    assert.ok(fse.r > 39 && acl.r <= 45 && acl.r - fse.r > 3);
+    assert.ok(fse.r > 41 && acl.r <= 46 && acl.r - fse.r > 3);
     assert.ok(fse.T >= 90 && acl.T <= 140);
-    assert.equal(planetOrbit(0, 18, 0, 2).r, 39);
-    assert.equal(planetOrbit(99, 18, 0, 2).r, 45);
-    assert.equal(planetOrbit(5, 0, 0, 1).r, 45);
+    assert.equal(planetOrbit(0, 18, 0, 2).r, 41);
+    assert.equal(planetOrbit(99, 18, 0, 2).r, 46);
+    assert.equal(planetOrbit(5, 0, 0, 1).r, 46);
 });
 
 test('góc xuất phát rải đều và không trùng nhau', () => {

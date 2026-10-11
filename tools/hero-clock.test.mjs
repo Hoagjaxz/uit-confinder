@@ -112,13 +112,14 @@ test('trạng thái dưới 24 giờ: viên nang khẩn kèm nhãn chữ "Sắp 
     const far = head({ ...base, phase: 'far', sec: 187929, now: NOW_AT });
     assert.doesNotMatch(far.h1, /is-urgent/);
     assert.match(far.h1, /<span class="vh">2 ngày<\/span>/);
-    assert.match(far.sub, /^Nộp toàn văn lúc 18:59 ngày 11\/10\/2026, giờ Việt Nam\.$/);
+    assert.match(far.h1, /^<span class="hl">Hạn nộp bài gần nhất: <a href="hoi-nghi.html">ICSE<\/a>/);
+    assert.match(far.sub, /^Hạn nộp toàn văn: 18:59 ngày 11\/10\/2026, giờ Việt Nam\.$/);
 });
 
 test('hết hạn khi đang xem: câu đổi sang "Đã hết hạn nộp ...", thông báo nêu hội nghị kế tiếp', () => {
     const m = { phase: 'expired', name: 'ICSE', href: 'hoi-nghi.html', next: { name: 'FSE', deadline: at('2026-10-14T18:59:00+07:00') } };
-    assert.match(head(m).h1, /Đã hết hạn nộp <a href="hoi-nghi.html">ICSE<\/a>/);
-    assert.equal(announce(m), 'Đã hết hạn nộp ICSE. Hội nghị kế tiếp: FSE, hạn 14/10.');
+    assert.match(head(m).h1, /<a href="hoi-nghi.html">ICSE<\/a> đã hết hạn nộp&nbsp;bài/);
+    assert.equal(announce(m), 'ICSE đã hết hạn nộp bài. Hạn nộp bài kế tiếp: FSE, ngày 14/10.');
     assert.match(announce({ ...m, next: null }), /Hiện chưa có hội nghị nào đang mở nộp bài\./);
     assert.match(announce({ phase: 'soon', name: 'ICSE' }), /^Sắp hết hạn/);
     assert.equal(announce({ phase: 'far', name: 'ICSE' }), ''); // trạng thái không đổi thì không đọc gì

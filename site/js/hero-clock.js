@@ -68,28 +68,28 @@
             const due = vnParts(m.deadline);
             const cap = `<span class="cap${m.phase === 'soon' ? ' is-urgent' : ''}" data-deadline="${esc(m.iso)}" data-opens="${esc(m.opensIso)}" style="--n:${faceWidth(m.sec)}"><span class="vh">${spoken(m.sec)}</span><span class="cap-face mono" data-cd data-sig="${format(m.sec).replace(/\d/g, '#')}" aria-hidden="true">${faceHtml(m.sec)}</span></span>`;
             return {
-                h1: `<span class="hl">Còn</span> ${cap} <span class="hl">để nộp ${link}</span>`,
+                h1: `<span class="hl">Hạn nộp bài gần nhất: ${link}<span class="vh">, còn</span></span> ${cap}`,
                 ticks: ticks(m.opens, m.deadline, m.now).map(s => `<i${s === 'f' ? '' : ` class="${s}"`}></i>`).join(''),
-                sub: `${m.phase === 'soon' ? `${WARN} ` : ''}${esc(m.label)} lúc ${due.time} ngày ${due.date}, giờ Việt Nam.`,
+                sub: `${m.phase === 'soon' ? `${WARN} ` : ''}Hạn ${esc(m.label.replace(/^./, c => c.toLowerCase()))}: ${due.time} ngày ${due.date}, giờ Việt Nam.`,
             };
         }
         if (m.phase === 'expired') {
             return {
-                h1: `<span class="hl">Đã hết hạn nộp ${link}</span>`, ticks: '',
-                sub: m.next ? `Tiếp theo: ${esc(m.next.name)}, hạn ${vnParts(m.next.deadline).dm}.` : 'Hiện chưa có hội nghị nào đang mở nộp bài.',
+                h1: `<span class="hl">${link} đã hết hạn nộp&nbsp;bài</span>`, ticks: '',
+                sub: m.next ? `Hạn nộp bài kế tiếp: ${esc(m.next.name)}, ngày ${vnParts(m.next.deadline).dm}.` : 'Hiện chưa có hội nghị nào đang mở nộp bài.',
             };
         }
-        return { h1: '<span class="hl">Hiện chưa có hội nghị nào đang mở nộp bài</span>', ticks: '', sub: 'Xem lịch để theo dõi các hạn nộp bài sắp tới.' };
+        return { h1: '<span class="hl">Hiện chưa có hội nghị nào đang mở nộp bài</span>', ticks: '', sub: 'Xem lịch hội nghị để theo dõi các hạn nộp bài sắp tới.' };
     }
     // Khối HTML tĩnh (build-lists.mjs); trình duyệt dựng lại đúng ba vùng này khi đổi trạng thái.
     function block(m) {
         const v = head(m);
-        return `<h1 id="home-h1" data-hero-clock data-state="${m.phase}">${v.h1}</h1>\n<div class="ticks"${v.ticks ? '' : ' hidden'} aria-hidden="true">${v.ticks}</div>\n<p class="hero-sub">${v.sub}</p>`;
+        return `<p class="hero-line" data-hero-clock data-state="${m.phase}">${v.h1}</p>\n<div class="ticks"${v.ticks ? '' : ' hidden'} aria-hidden="true">${v.ticks}</div>\n<p class="hero-sub">${v.sub}</p>`;
     }
     // Câu thông báo cho vùng aria-live khi trạng thái đổi.
     function announce(m) {
-        if (m.phase === 'soon') return `Sắp hết hạn: còn dưới 24 giờ để nộp ${m.name}.`;
-        if (m.phase === 'expired') return `Đã hết hạn nộp ${m.name}. ${m.next ? `Hội nghị kế tiếp: ${m.next.name}, hạn ${vnParts(m.next.deadline).dm}.` : 'Hiện chưa có hội nghị nào đang mở nộp bài.'}`;
+        if (m.phase === 'soon') return `Sắp hết hạn nộp bài: ${m.name} còn dưới 24 giờ.`;
+        if (m.phase === 'expired') return `${m.name} đã hết hạn nộp bài. ${m.next ? `Hạn nộp bài kế tiếp: ${m.next.name}, ngày ${vnParts(m.next.deadline).dm}.` : 'Hiện chưa có hội nghị nào đang mở nộp bài.'}`;
         return '';
     }
 

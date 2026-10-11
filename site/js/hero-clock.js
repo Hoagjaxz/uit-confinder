@@ -1,4 +1,4 @@
-// Hero trang chủ: câu tiêu đề "Còn [viên nang đồng hồ] để nộp ICSE", thanh mốc ngày và hàng tên hội nghị.
+// Hero trang chủ: câu tiêu đề "Hạn gần nhất: X, còn [viên nang đồng hồ]", thanh mốc ngày và hàng tên hội nghị.
 // Mọi thời gian tính từ hạn ISO có múi giờ (data-deadline) trừ đi giờ máy mỗi nhịp, nên tải lại trang hay mở tab lâu vẫn đúng.
 // data-server-now (tuỳ chọn, ISO) bù lệch giờ máy. Phần hàm thuần có test ở tools/hero-clock.test.mjs;
 // build-lists.mjs dùng lại chính các hàm này để HTML tĩnh khớp đúng thứ trình duyệt vẽ.

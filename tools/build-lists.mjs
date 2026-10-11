@@ -60,7 +60,7 @@ const heroNames = () => {
     const shown = noneOpen ? heroClosed : heroOpen, rest = heroItems.filter(i => !shown.includes(i));
     const li = (it, r, hidden) => {
         const lv = hero.level(it.deadline, NOW_AT), dm = formatVN(it.iso).date.slice(0, 5);
-        return `<li data-deadline="${it.iso}" data-opens="${it.opensIso}" data-label="${it.label}" data-level="${lv}"${noneOpen ? ' class="is-closed"' : ''}${hidden ? ' hidden' : ''} style="--r:${r}"><a href="${it.href}"><span class="nm-n"><i class="nm-dot" aria-hidden="true"></i><span class="nm-nm">${it.name}</span><span class="vh"> ${it.c.year}</span></span><span class="vh">,</span><span class="nm-due"><b class="nm-lv">${hero.LV[lv]}</b><span class="vh"> hạn</span> <span class="nm-d">${dm}</span></span></a></li>`;
+        return `<li data-deadline="${it.iso}" data-opens="${it.opensIso}" data-label="${it.label}" data-level="${lv}"${noneOpen ? ' class="is-closed"' : ''}${hidden ? ' hidden' : ''} style="--r:${r}"><a href="${it.href}"><span class="nm-n"><i class="nm-dot" aria-hidden="true"></i><span class="nm-nm">${it.name}</span><span class="vh"> ${it.c.year}</span></span><span class="vh">,</span><span class="nm-due"><span class="vh">hạn </span><span class="nm-d">${dm}</span><span class="vh">,</span><b class="nm-lv">${hero.LV[lv]}</b></span></a></li>`;
     };
     return `<h2 id="names-h">${noneOpen ? 'Đã đóng nhận bài' : 'Đang mở nhận bài'}</h2>
 <ul class="names" data-hero-list>

@@ -49,7 +49,7 @@ const poster = c => {
         <div class="clock mono" data-hero-clock data-d="${d}" data-h="${h}" data-m="${m}" data-s="${s}" aria-hidden="true">${cell('d', d, 'ngày')}<i class="sep">:</i>${cell('h', h, 'giờ')}<i class="sep">:</i>${cell('m', m, 'phút')}<i class="sep sep-s">:</i>${cell('s', s, 'giây', ' ck-s')}</div>
     </div>
     <div class="pc-foot">
-        <p class="pc-due"><span class="bc-lab">Hạn ${due.name[0].toLowerCase()}${due.name.slice(1)}</span><time class="mono" datetime="${due.at}">${time} ngày ${date}</time><span class="bc-tz">giờ Việt Nam</span></p>
+        <p class="pc-due"><span class="bc-lab">${due.name} trước</span><time class="mono" datetime="${due.at}">${time} ngày ${date}</time><span class="bc-tz">giờ Việt Nam</span></p>
         ${ub(lv)}
     </div>
 </article>`;
@@ -60,7 +60,7 @@ const tickItem = (c, hidden) => {
     const left = c.next.text.replace(/ \d\d:\d\d$/, '').toLowerCase();
     return `<li><a href="${c.file}"${hidden ? ' tabindex="-1"' : ''}><b>${c.name} ${c.year}</b> · ${c.core} · <time datetime="${due.at}">hạn ${formatVN(due.at).date.slice(0, 5)}</time> · <span class="tk-left">${left}</span></a></li>`;
 };
-const ticker = cs => `<div class="ticker" role="region" aria-label="Hội nghị đang mở nộp bài"><div class="tk-track">
+const ticker = cs => `<div class="ticker" role="region" aria-label="Đang mở nhận bài"><div class="tk-track">
 ${[false, true, true, true].map(h => `<ul${h ? ' aria-hidden="true"' : ''}>${cs.map(c => tickItem(c, h)).join('')}</ul>`).join('')}
 </div></div>`;
 

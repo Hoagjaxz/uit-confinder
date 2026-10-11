@@ -4,7 +4,7 @@
 .hero { position: relative; overflow: clip }
 .stage { --cw: min(100%, 22.5rem); container-type: inline-size; position: relative; display: grid; grid-template-columns: minmax(0, 1fr); padding-top: 20px; padding-bottom: 32px }
 .hero h1 { margin: 0 }
-.w { display: block; font-family: var(--serif); font-optical-sizing: auto; font-size: clamp(2.6rem, 13vw, 4.5rem); font-weight: 700; line-height: 1.02; letter-spacing: -.03em; color: var(--accent) }
+.w { display: block; font-family: var(--serif); font-optical-sizing: auto; white-space: nowrap; font-size: 12.9cqw; font-weight: 700; line-height: 1.02; letter-spacing: -.03em; color: var(--accent) }
 .w em { font-style: italic; font-weight: 600; padding-right: .06em; color: var(--lanyard) }
 
 .strap { display: none; width: 26px; z-index: 2; background: linear-gradient(to bottom, transparent 0 6px, color-mix(in srgb, var(--paper) 55%, transparent) 6px 10px) center / 2px 12px repeat-y, var(--lanyard) }
@@ -32,24 +32,33 @@
 .bc-tz { font-size: 12px; color: var(--mute) }
 
 
-/* nút chính là cuống vé: hai mép răng cưa, đường chấm đứt, khuyết bán nguyệt ở chỗ xé */
-.stub { position: relative; z-index: 10; justify-self: start; width: min(100%, 17rem); margin-top: 24px; text-decoration: none; color: var(--paper); transition: transform .15s }
-.stub:hover { transform: translateY(-2px) }
-.stub:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px }
-.stub-body { --tw: 52px; display: grid; grid-template-columns: 1fr var(--tw); height: 50px; background: var(--ink);
-    -webkit-mask: radial-gradient(circle 4px at 0 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y, radial-gradient(circle 4px at 100% 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y, radial-gradient(circle 8px at calc(100% - var(--tw)) 0, #0000 97%, #000), radial-gradient(circle 8px at calc(100% - var(--tw)) 100%, #0000 97%, #000);
-    -webkit-mask-composite: source-in, source-in, source-in;
-    mask: radial-gradient(circle 4px at 0 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y, radial-gradient(circle 4px at 100% 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y, radial-gradient(circle 8px at calc(100% - var(--tw)) 0, #0000 97%, #000), radial-gradient(circle 8px at calc(100% - var(--tw)) 100%, #0000 97%, #000);
-    mask-composite: intersect }
-.stub-main { display: flex; align-items: center; padding: 0 12px 0 24px; font-size: 15px; font-weight: 700; letter-spacing: .02em; white-space: nowrap }
-.stub-end { display: grid; place-items: center; background: var(--lanyard); border-left: 2px dashed color-mix(in srgb, var(--paper) 70%, transparent) }
-.stub-end .ic { transition: transform .15s }
-.stub:hover .stub-end .ic { transform: translateX(3px) }
-
-.pm-list { justify-self: start; width: min(100%, 17rem); list-style: none; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 22px; margin-top: 14px; font-size: 13px; color: var(--mute) }
-.pm-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 10px }
-.pm-list a { color: var(--ink); font-weight: 700; text-underline-offset: 3px }
-.pm-list a:hover { color: var(--accent) }
+/* nút chính là cuống vé: hai nửa răng cưa ghép nhau theo đường chấm đứt, khuyết bán nguyệt ở chỗ xé. Hover = xé: nửa mũi tên tách ra, nửa thân đổi tím. */
+.stub { --ease: cubic-bezier(.2, .8, .2, 1); --tw: 52px; --tooth: radial-gradient(circle 4px at var(--tx) 7px, #0000 97%, #000) 0 0 / 100% 14px repeat-y; position: relative; z-index: 10; justify-self: start; width: min(100%, 17rem); margin-top: 24px; text-decoration: none; color: var(--paper); transition: transform .22s var(--ease), filter .22s var(--ease) }
+.stub:hover, .stub:focus-visible { transform: translateY(-2px); filter: drop-shadow(0 3px 0 color-mix(in srgb, var(--ink) 28%, transparent)) }
+.stub:focus-visible { outline: 2px solid var(--focus); outline-offset: 10px }
+.stub:active { transform: scale(.98); filter: none; transition-duration: .1s }
+.stub-body { display: grid; grid-template-columns: 1fr var(--tw); height: 50px }
+.stub-main, .stub-end { -webkit-mask-composite: source-in; mask-composite: intersect }
+.stub-main { --tx: 0; display: flex; align-items: center; padding: 0 12px 0 24px; font-size: 15px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; background-color: var(--ink); transition: background-color .18s var(--ease);
+    -webkit-mask: var(--tooth), radial-gradient(circle 8px at 100% 0, #0000 97%, #000), radial-gradient(circle 8px at 100% 100%, #0000 97%, #000);
+    mask: var(--tooth), radial-gradient(circle 8px at 100% 0, #0000 97%, #000), radial-gradient(circle 8px at 100% 100%, #0000 97%, #000) }
+.stub-end { --tx: 100%; display: grid; place-items: center; background: var(--lanyard); transform-origin: 0 100%; transition: transform .24s var(--ease), filter .2s var(--ease);
+    -webkit-mask: var(--tooth), radial-gradient(circle 8px at 0 0, #0000 97%, #000), radial-gradient(circle 8px at 0 100%, #0000 97%, #000);
+    mask: var(--tooth), radial-gradient(circle 8px at 0 0, #0000 97%, #000), radial-gradient(circle 8px at 0 100%, #0000 97%, #000) }
+.stub-end::before { content: ""; position: absolute; inset: 0 auto 0 0; border-left: 2px dashed color-mix(in srgb, var(--paper) 70%, transparent) }
+.stub-end { position: relative }
+.stub-end .ic { transition: transform .24s var(--ease) }
+.stub:hover .stub-main, .stub:focus-visible .stub-main { background-color: var(--accent) }
+.stub:hover .stub-end, .stub:focus-visible .stub-end { transform: translateX(6px) rotate(3.5deg) }
+.stub:hover .stub-end .ic, .stub:focus-visible .stub-end .ic { transform: translateX(4px) }
+.stub:active .stub-end { transform: none; transition-duration: .1s }
+.stub:active .stub-end .ic { transform: none }
+@media (prefers-reduced-motion: reduce) {
+    .stub, .stub-end, .stub-end .ic { transition: none }
+    .stub:hover, .stub:focus-visible, .stub:active { transform: none; filter: none }
+    .stub:hover .stub-end, .stub:focus-visible .stub-end { transform: none; filter: brightness(.82) }
+    .stub:hover .stub-end .ic, .stub:focus-visible .stub-end .ic { transform: none }
+}
 
 /* dải chạy: đảo màu so với trang (ink/paper); bốn bản sao xếp ngang rồi trượt đúng một bản (-25%) nên vòng lặp liền mạch */
 .ticker { --tk-bg: var(--ink); --tk-fg: var(--paper); --tk-hot: #ff8fb4; overflow-x: auto; overflow-y: clip; scrollbar-width: thin; background: var(--tk-bg); color: var(--tk-fg); font: 500 13.5px/1 var(--mono) }
@@ -84,16 +93,14 @@
 
 @media (min-width: 48rem) {
     .stage { --cw: min(100%, 24rem); padding-top: 28px }
-    .w { font-size: clamp(3.6rem, 9vw, 5.5rem) }
 }
 @media (min-width: 64rem) {
     .stage { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 16px }
-    .hero h1 { grid-column: 1 / 9; grid-row: 1; align-self: center }
-    .w { font-size: clamp(3rem, 8.3cqw, 9rem); white-space: nowrap }
+    .hero h1 { grid-column: 1 / 9; grid-row: 1 / 3; align-self: center }
+    .w { font-size: min(8.3cqw, 9rem) }
     .strap { display: block; grid-column: 9 / 13; grid-row: 1; justify-self: center; align-self: stretch; margin-top: -28px }
     .pcard { grid-column: 9 / 13; grid-row: 1; justify-self: center; align-self: center; margin: 0 }
     .stub { grid-column: 9 / 13; grid-row: 2; justify-self: center; margin-top: 26px }
-    .pm-list { grid-column: 9 / 13; grid-row: 3; justify-self: center }
 }
 
 /* các phần dưới hero */

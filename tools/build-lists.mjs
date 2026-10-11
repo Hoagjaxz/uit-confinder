@@ -6,9 +6,9 @@ import { fileURLToPath } from 'node:url';
 import { CONFERENCES } from './conferences.mjs';
 import { icon, ub, ribbon } from './levels.mjs';
 import { createRequire } from 'node:module';
-import { formatVN, daysLeft, urgency, nextDue } from './time-vn.mjs';
+import { formatVN, daysLeft, urgency, nextDue, NOW_AT } from './time-vn.mjs';
 
-const { format, spoken } = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm với trình duyệt, nên HTML tĩnh khớp bản chạy
+const hero = createRequire(import.meta.url)('../site/js/hero-clock.js'); // cùng hàm với trình duyệt, nên HTML tĩnh khớp bản chạy
 
 const card = c => {
     const due = nextDue(c);
@@ -36,17 +36,37 @@ const list = (cs, li = c => '<li>', cls = 'badge-list') => `<ul class="${cls}">\
 const byDue = (a, b) => Date.parse(nextDue(a).at) - Date.parse(nextDue(b).at);
 
 const open = CONFERENCES.filter(c => !c.closed).sort(byDue);
-const [first] = open; // hạn gần nhất nằm trong câu tiêu đề hero; phần "Các hạn tiếp theo" liệt kê phần còn lại
 
-// Tiêu đề hero: "Còn [viên nang đồng hồ] để nộp ICSE". Giây còn lại lấy từ c.next (dữ liệu minh hoạ nhập tay).
-const heroHead = () => {
-    const { d, h, m, s } = first.next, sec = +d * 86400 + +h * 3600 + +m * 60 + +s;
-    const due = nextDue(first), { time, date } = formatVN(due.at);
-    return `<h1 id="home-h1">Còn <span class="cap" data-hero-clock data-sec="${sec}"><span class="vh">${spoken(sec)}</span><span class="cap-face mono" data-cd aria-hidden="true">${format(sec)}</span></span> để nộp <a href="${first.file}">${first.name}</a></h1>
-<p class="hero-sub">${due.name} lúc ${time} ngày ${date}, giờ Việt Nam.</p>`;
+// Hero: mỗi hội nghị đưa về một "hạn" (ms) giống dữ liệu backend sẽ gửi. Hội nghị đặt closed mà mốc còn ở tương lai thì coi như hạn vừa qua.
+const heroItem = c => {
+    const due = nextDue(c);
+    const iso = c.closed && Date.parse(due.at) > NOW_AT ? new Date(NOW_AT - 1000 + 7 * 36e5).toISOString().replace('.000Z', '+07:00') : due.at, deadline = Date.parse(iso);
+    const prev = c.milestones.filter(m => m.at && Date.parse(m.at) < deadline).at(-1); // mốc có hạn ngay trước đó = lúc mở nộp; thiếu thì hero tự đặt 30 ngày trước hạn
+    const opens = prev ? Date.parse(prev.at) : hero.defaultOpens(deadline);
+    return { c, iso, deadline, opens, opensIso: prev ? prev.at : new Date(opens + 7 * 36e5).toISOString().replace('.000Z', '+07:00'), name: c.name, href: c.file, label: due.name };
 };
-// Hàng tên hội nghị viết như logo, xếp theo hạn gần nhất.
-const heroNames = () => `<ul class="names">\n${open.map(c => `<li><a href="${c.file}" aria-label="${c.name} ${c.year}, hạn ${formatVN(nextDue(c).at).date.slice(0, 5)}">${c.name}</a></li>`).join('\n')}\n</ul>`;
+const heroItems = CONFERENCES.map(heroItem);
+const { open: heroOpen, closed: heroClosed } = hero.order(heroItems, NOW_AT);
+const noneOpen = !heroOpen.length;
+
+// Khối tiêu đề: trạng thái "còn từ 1 ngày" hoặc "dưới 24 giờ" cho hạn gần nhất, hoặc "không còn hội nghị nào mở".
+const heroHead = () => {
+    const [first] = heroOpen;
+    const sec = first ? hero.remaining(first.deadline, NOW_AT) : 0;
+    return hero.block({ ...first, phase: first ? hero.phase(sec) : 'none', sec, now: NOW_AT, next: null });
+};
+// Hàng tên hội nghị: cỡ chữ theo thứ tự hạn (--r), chấm và nhãn chữ theo mức khẩn. Hội nghị đã đóng vẫn có mặt (ẩn) để JS dùng khi hạn qua.
+const heroNames = () => {
+    const shown = noneOpen ? heroClosed : heroOpen, rest = heroItems.filter(i => !shown.includes(i));
+    const li = (it, r, hidden) => {
+        const lv = hero.level(it.deadline, NOW_AT), dm = formatVN(it.iso).date.slice(0, 5);
+        return `<li data-deadline="${it.iso}" data-opens="${it.opensIso}" data-label="${it.label}" data-level="${lv}"${noneOpen ? ' class="is-closed"' : ''}${hidden ? ' hidden' : ''} style="--r:${r}"><a href="${it.href}"><span class="nm-n"><i class="nm-dot" aria-hidden="true"></i><span class="nm-nm">${it.name}</span><span class="vh"> ${it.c.year}</span></span><span class="vh">,</span><span class="nm-due"><b class="nm-lv">${hero.LV[lv]}</b><span class="vh"> hạn</span> <span class="nm-d">${dm}</span></span></a></li>`;
+    };
+    return `<h2 id="names-h">${noneOpen ? 'Đã đóng nộp bài' : 'Đang mở nộp bài'}</h2>
+<ul class="names" data-hero-list>
+${[...shown.map((it, k) => li(it, noneOpen ? 3 : k, false)), ...rest.map(it => li(it, 0, true))].join('\n')}
+</ul>`;
+};
 
 const TARGETS = {
     'tickets:lich': { file: 'lich-hoi-nghi.html', html: list(CONFERENCES) },

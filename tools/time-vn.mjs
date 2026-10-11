@@ -2,6 +2,8 @@
 // Giờ Việt Nam (GMT+7) cho dữ liệu hội nghị. Hàm thuần, chỉ dùng UTC, không dùng múi giờ máy.
 export const DAY = 864e5;
 const HOUR = 36e5;
+// Thời điểm minh hoạ khi build HTML tĩnh: 14:46:51 ngày 09/10/2026 (+07:00), khớp "Còn 2 ngày 04:12:09" của ICSE trong dữ liệu minh hoạ.
+export const NOW_AT = Date.parse("2026-10-09T14:46:51+07:00");
 export const NOW = Date.UTC(2026, 9, 9); // 09/10/2026: mốc tính "Còn N ngày", dùng chung mọi công cụ sinh trang
 
 const pad = n => String(n).padStart(2, '0');
@@ -24,5 +26,5 @@ export const urgency = days => (days < 0 ? 'x' : days < 3 ? 'c' : days < 7 ? 's'
 
 // Mốc đang đếm ngược: hội nghị đã đóng thì mốc `closedLabel`, còn lại là mốc có hạn đầu tiên chưa qua.
 export const nextDue = c => c.closed
-    ? c.milestones.find(m => m.name === c.closedLabel)
+    ? c.milestones.find(m => m.name === c.closedLabel) ?? c.milestones.find(m => m.at) // đặt tạm `closed` mà thiếu closedLabel thì lấy mốc có hạn đầu tiên
     : c.milestones.find(m => m.at && daysLeft(m.at) >= 0);

@@ -14,6 +14,13 @@
 /* viên nang: ngoại lệ có chủ đích của thang bo góc, vì nó là "một nhịp" nằm giữa câu */
 .cap { display: inline-block; padding: .04em .42em; border: .06em solid var(--accent); border-radius: 999px; background: color-mix(in srgb, var(--card) 78%, transparent); color: var(--accent); font-size: .44em; line-height: 1.45; vertical-align: .22em; white-space: nowrap }
 .cap-face { font-weight: 700; letter-spacing: -0.02em }
+.cap.is-urgent { border-color: var(--c-fg); background: var(--c-bg); color: var(--c-fg) }
+/* mỗi chữ số một ô cắt gọn để số mới trượt thế chỗ số cũ */
+.dg { display: inline-grid; overflow: clip }
+.dg > span { grid-area: 1 / 1 }
+.ticks { display: none }
+.hero-sub .ub { display: flex; width: fit-content; margin: 0 auto 8px }
+.names li[hidden] { display: none }
 .hero-sub { margin-top: 14px; font-size: 17px; color: var(--soft); text-wrap: balance }
 
 .hero-find { display: grid; gap: 10px; max-width: 520px; margin: 28px auto 0 }

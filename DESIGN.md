@@ -228,6 +228,41 @@ Masthead dính đỉnh, nền thẻ trắng, dải hồng 4px phía trên. Wordm
 ### Trạng thái danh sách (state-box)
 Khung trắng viền 1px, bo 6px, căn giữa, đệm 32x24px, tiêu đề 20px; lỗi dùng biểu tượng đỏ. Đang tải dùng khung xương nhấp nháy opacity (tắt khi giảm chuyển động). Dải xem thử `?state=` là khung viền mảnh phía trên danh sách.
 
+## Hợp đồng dữ liệu: hạn nộp bài ở hero trang chủ
+
+Giao diện chỉ đọc các trường dưới đây; số "Còn ..." không bao giờ nhập tay. Trình duyệt lấy hạn trừ giờ máy mỗi nhịp nên tải lại trang hay để tab mở lâu vẫn đúng.
+
+```json
+{
+  "serverNow": "2026-10-09T14:46:51+07:00",
+  "conferences": [
+    { "name": "ICSE", "year": "2027", "href": "hoi-nghi.html",
+      "milestone": "Nộp toàn văn",
+      "deadline": "2026-10-11T18:59:00+07:00",
+      "opensAt": "2026-09-26T18:59:00+07:00" }
+  ]
+}
+```
+
+- **`deadline`** (bắt buộc): ISO 8601 có múi giờ, ví dụ `2026-10-11T18:59:00+07:00`. Thiếu múi giờ hoặc sai định dạng thì hội nghị đó bị bỏ qua. Là mốc đang đếm ngược (mốc chưa qua gần nhất của hội nghị).
+- **`milestone`** (bắt buộc): tên mốc, hiện ở dòng phụ ("Nộp toàn văn lúc 18:59 ngày 11/10/2026, giờ Việt Nam"). Giờ hiển thị luôn quy về giờ Việt Nam (+07:00).
+- **`opensAt`** (tuỳ chọn): ISO có múi giờ, lúc mở nộp bài. Vạch thanh mốc ngày chia đều khoảng `opensAt` đến `deadline`. Vắng thì giao diện lấy 30 ngày trước hạn.
+- **`serverNow`** (tuỳ chọn): ISO tại lúc máy chủ dựng trang. Giao diện tính độ lệch = `serverNow` trừ giờ máy lúc tải rồi cộng vào mọi phép so sánh; vắng hoặc sai thì độ lệch 0.
+- **Cờ đóng**: không có cờ riêng. Hội nghị là "đã đóng" khi `deadline` không còn ở tương lai. Hội nghị đóng sớm hơn hạn thì backend gửi `deadline` bằng thời điểm đóng; hội nghị đã đóng hẳn gửi hạn của mốc nộp cuối cùng.
+- **Thứ tự**: giao diện tự sắp tăng dần theo `deadline` (hạn gần nhất lên đầu), backend không cần sắp. Hội nghị đã đóng chỉ hiện khi không còn hội nghị nào mở.
+- **Gắn vào HTML**: mỗi hội nghị là một `<li data-deadline data-opens data-label>` trong `ul[data-hero-list]` (xem `hero:names` trong `tools/build-lists.mjs`); `serverNow` là `data-server-now` trên `h1[data-hero-clock]`. Khối HTML tĩnh dựng từ cùng hàm với trình duyệt (`site/js/hero-clock.js`), nên server render đúng khuôn đó thì tắt JS vẫn hợp lý.
+
+Bốn trạng thái, tính từ giây còn lại của hội nghị đầu danh sách còn mở:
+
+| Còn lại | Hiển thị |
+|---|---|
+| từ 1 ngày | "Còn 2 ngày 04:12:09 để nộp ICSE" |
+| dưới 24 giờ | bỏ phần ngày, viên nang đỏ khẩn, nhãn "Sắp hết hạn" ở dòng phụ |
+| bằng 0 hoặc đã qua khi đang xem | "Đã hết hạn nộp ICSE" 4 giây, rồi tự chuyển sang hội nghị kế tiếp còn mở |
+| không còn hội nghị mở | "Hiện chưa có hội nghị nào đang mở nộp bài", hàng tên chuyển sang các hội nghị đã đóng |
+
+Vùng `aria-live="polite"` (`[data-hero-live]`) chỉ đọc khi trạng thái đổi (sang dưới 24 giờ, hết hạn), không đọc mỗi giây. Tên và liên kết từ dữ liệu được thoát ký tự HTML trước khi chèn.
+
 ## Do's and Don'ts
 
 ### Do:

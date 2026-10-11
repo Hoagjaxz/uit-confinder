@@ -48,6 +48,6 @@ export const savedHtml = prefix =>
 // Bộ chữ: Be Vietnam Pro (giao diện), Newsreader upright (tiêu đề, tên), JetBrains Mono (ngày giờ). Chèn trước site.css.
 export const FONTS_HTML =
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n    ' +
-    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">';
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&display=swap">';
 
 export const faviconHtml = '<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 32 32\'%3E%3Crect width=\'32\' height=\'32\' rx=\'6\' fill=\'%235b2d9b\'/%3E%3Ctext x=\'16\' y=\'23\' font-size=\'20\' text-anchor=\'middle\' fill=\'%23ffffff\' font-family=\'system-ui,sans-serif\' font-weight=\'700\'%3EC%3C/text%3E%3C/svg%3E">';

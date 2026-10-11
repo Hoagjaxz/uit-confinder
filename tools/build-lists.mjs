@@ -32,12 +32,42 @@ const card = c => {
 const list = (cs, li = c => '<li>', cls = 'badge-list') => `<ul class="${cls}">\n${cs.map(c => `${li(c)}\n${card(c)}\n</li>`).join('\n')}\n</ul>`;
 const byDue = (a, b) => Date.parse(nextDue(a).at) - Date.parse(nextDue(b).at);
 
-const HERO_N = 3; // trang chủ: 3 hạn gần nhất treo ở hero, phần "Các hạn tiếp theo" liệt kê phần còn lại
+// Hero trang chủ: thẻ đeo lớn của hạn gần nhất (có đồng hồ chạy) và dòng meta cho hai hạn kế tiếp.
+const poster = c => {
+    const due = nextDue(c);
+    const lv = urgency(daysLeft(due.at));
+    const { time, date } = formatVN(due.at);
+    const { d, h, m, s = '00' } = c.next;
+    const cell = (u, v, lab, cls = '') => `<span class="ck${cls}"><b data-u="${u}">${v}</b><small>${lab}</small></span>`;
+    return `<article class="pcard" data-level="${lv}">
+    <button type="button" class="iconbtn" data-save="${c.slug}" aria-pressed="false" aria-label="Lưu hội nghị">${icon('i-star', 24)}</button>
+    <div class="pc-rib">${[c.core, c.ccf].filter(Boolean).map(ribbon).join('')}</div>
+    <h3 class="pc-name"><a href="${c.file}">${c.name} ${c.year}</a></h3>
+    <p class="pc-full">${c.full}</p>
+    <div class="pc-clock">
+        <p class="vh">${c.next.text}</p>
+        <div class="clock mono" data-hero-clock data-d="${d}" data-h="${h}" data-m="${m}" data-s="${s}" aria-hidden="true">${cell('d', d, 'ngày')}<i class="sep">:</i>${cell('h', h, 'giờ')}<i class="sep">:</i>${cell('m', m, 'phút')}<i class="sep sep-s">:</i>${cell('s', s, 'giây', ' ck-s')}</div>
+    </div>
+    <div class="pc-foot">
+        <p class="pc-due"><span class="bc-lab">${due.name}</span><time class="mono" datetime="${due.at}">${time} ${date}</time><span class="bc-tz">giờ Việt Nam</span></p>
+        ${ub(lv)}
+    </div>
+</article>`;
+};
+const heroNext = cs => `<ul class="pm-list" aria-label="Hai hạn chót kế tiếp">
+${cs.map(c => {
+    const due = nextDue(c);
+    return `<li><a href="${c.file}">${c.name} ${c.year}</a><time class="mono" datetime="${due.at}">${formatVN(due.at).date.slice(0, 5)}</time><span class="mono">${c.next.text.replace(/^Còn /, '')}</span></li>`;
+}).join('\n')}
+</ul>`;
+
+const HERO_N = 3; // trang chủ: hạn đầu thành thẻ lớn, hai hạn kế tiếp thành dòng meta ở hero, phần "Các hạn tiếp theo" liệt kê phần còn lại
 const open = CONFERENCES.filter(c => !c.closed).sort(byDue);
 
 const TARGETS = {
     lich: { file: 'lich-hoi-nghi.html', html: list(CONFERENCES) },
-    hero: { file: 'index.html', html: list(open.slice(0, HERO_N), undefined, 'badge-list tags') },
+    'hero-big': { file: 'index.html', html: poster(open[0]) },
+    hero: { file: 'index.html', html: heroNext(open.slice(1, HERO_N)) },
     'trang-chu': { file: 'index.html', html: list(open.slice(HERO_N)) },
     'da-luu': { file: 'da-luu.html', html: list(CONFERENCES, c => `<li data-saved-item="${c.slug}" hidden>`) },
 };
